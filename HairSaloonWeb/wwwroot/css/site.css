@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lavishly+Yours&family=League+Spartan:wght@100..900&display=swap');
 :root {
     --bs-body-font-family: "League Spartan", sans-serif;
 }
@@ -7,9 +8,22 @@ a {
     cursor:pointer;
 }
 /*Navbar*/
-.navbar-dark .navbar-nav .nav-link:hover{
+.navbar-light .navbar-nav .nav-link:hover{
     color:gold;
     cursor:pointer;
+}
+
+.font-labella {
+    font-family: "Lavishly Yours", cursive;
+    font-weight: 400;
+    font-style: normal;
+}
+.font-labella span {
+    color: gold;
+}
+.text-white-75 {
+    --bs-text-opacity: 1;
+    color: rgba(255, 255, 255, 0.75) !important;
 }
 
 html {
