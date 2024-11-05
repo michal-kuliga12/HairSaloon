@@ -4,15 +4,17 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - HairSaloonWeb</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />*@
     <link rel="stylesheet" href="~/HairSaloonWeb.styles.css" asp-append-version="true" />
+	<link rel="stylesheet" href="~/sass/StyleSheet.min.css" />
+	<link href="~/lib/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />
+	<link href="~/lib/bootstrap-icons/font/bootstrap-icons.min.css" rel="stylesheet" />
 </head>
 <body>
-    <header class="bg-white sticky-top box-">
+    <header class="bg-white sticky-top shadow">
         <nav class="container-md navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom border-bottom-0">
             <div class="container-fluid">
-                <a class="navbar-brand fs-2 font-labella" asp-area="" asp-controller="Home" asp-action="Index"><span>La</span>Bella</a>
+                <a class="navbar-brand fs-2 font-labella" asp-controller="Home" asp-action="Index"><span class="font-gold">La</span>Bella</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -20,10 +22,10 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1 justify-content-end">
                         <li class="nav-item">
-                            <a class="nav-link fs-4" asp-area="" asp-controller="Home" asp-action="Index">Rezerwacja</a>
+                            <a class="nav-link fs-4" asp-controller="Appointment" asp-action="Index">Rezerwacja</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link fs-4" asp-area="" asp-controller="Home" asp-action="Privacy">Aktualności</a>
+                            <a class="nav-link fs-4"  asp-controller="Blog" asp-action="Index">Blog</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link fs-4" asp-area="" asp-controller="Home" asp-action="Privacy">Galeria</a>
@@ -40,7 +42,7 @@
         </nav>
     </header>
     <div class="">
-        <main role="main" class="pb-3 bg-black">
+        <main role="main" style="background-color: black;">
             @RenderBody()
         </main>
     </div>
