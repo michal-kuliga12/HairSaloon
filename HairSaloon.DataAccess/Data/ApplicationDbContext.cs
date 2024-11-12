@@ -1,4 +1,6 @@
 ﻿using HairSaloon.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
 using System;
@@ -9,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace HairSaloon.DataAccess.Data;
 
-public class ApplicationDbContext : DbContext
+public class ApplicationDbContext : IdentityDbContext<IdentityUser>
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
     {
@@ -21,6 +23,8 @@ public class ApplicationDbContext : DbContext
 
 	protected override void OnModelCreating(ModelBuilder modelBuilder)
 	{
+        base.OnModelCreating(modelBuilder); // Jest potrzebne jako konfiguracja do IdentityDbContext
+
         modelBuilder.Entity<Service>().HasData(
             new Service { Id = 1, Name = "Strzyżenie męskie", Category = "Stylizacja włosów", Price = 50},
             new Service { Id = 2, Name = "Strzyżenie damskie", Category = "Stylizacja włosów", Price = 50},
@@ -34,5 +38,12 @@ public class ApplicationDbContext : DbContext
             new Appointment { Id = 3, ServiceId = 3, Date = DateTime.Now },
             new Appointment { Id = 4, ServiceId = 4, Date = DateTime.Now }
             );
+
+		modelBuilder.Entity<Employee>().HasData(
+			new Employee { Id = 1, Name="Krzysztof", ImageUrl=""},
+			new Employee { Id = 2, Name = "Barbara", ImageUrl = "" },
+			new Employee { Id = 3, Name = "Piotr" , ImageUrl = "" },
+			new Employee { Id = 4, Name = "Michał" , ImageUrl = "" }
+			);
 	}
 }

@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33801.468
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HairSaloonWeb", "HairSaloonWeb.csproj", "{C6F9F1B3-A882-45E8-863D-2E19EA7D17B4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HairSaloonWeb", "HairSaloonWeb.csproj", "{C6F9F1B3-A882-45E8-863D-2E19EA7D17B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HairSaloon.Models", "..\HairSaloon.Models\HairSaloon.Models.csproj", "{83B26E45-B309-42A4-9445-C246043B3F12}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HairSaloon.Models", "..\HairSaloon.Models\HairSaloon.Models.csproj", "{83B26E45-B309-42A4-9445-C246043B3F12}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HairSaloon.DataAccess", "..\HairSaloon.DataAccess\HairSaloon.DataAccess.csproj", "{6E73E11E-8A9D-49F1-8BC1-B17842FE8032}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HairSaloon.DataAccess", "..\HairSaloon.DataAccess\HairSaloon.DataAccess.csproj", "{6E73E11E-8A9D-49F1-8BC1-B17842FE8032}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HairSaloon.Utility", "..\HairSaloon.Utility\HairSaloon.Utility.csproj", "{BD8662C0-CC86-45B4-8DA2-15FC8E8FB492}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{6E73E11E-8A9D-49F1-8BC1-B17842FE8032}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6E73E11E-8A9D-49F1-8BC1-B17842FE8032}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6E73E11E-8A9D-49F1-8BC1-B17842FE8032}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD8662C0-CC86-45B4-8DA2-15FC8E8FB492}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD8662C0-CC86-45B4-8DA2-15FC8E8FB492}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD8662C0-CC86-45B4-8DA2-15FC8E8FB492}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD8662C0-CC86-45B4-8DA2-15FC8E8FB492}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
