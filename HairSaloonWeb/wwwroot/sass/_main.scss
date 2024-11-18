@@ -1,16 +1,30 @@
 ﻿@import url('https://fonts.googleapis.com/css2?family=Aboreto&family=Lavishly+Yours&family=League+Spartan&display=swap');
 @import "_variables.scss";
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
 body {
     font-family: $font-family-sans-serif;
+    margin-bottom: 0 !important;
 }
 a {
     cursor: pointer;
 }
 /*Navbar*/
 .navbar-light .navbar-nav .nav-link:hover {
-    color: gold;
+    color: gold!important;
     cursor: pointer;
 }
+
+.nav-link:hover {
+    color: gold !important;
+    cursor: pointer;
+}
+
+
 .font-aboreto{
     font-family: "Aboreto", system-ui;
     font-weight: 400;
@@ -24,6 +38,11 @@ a {
 
 .font-gold {
     color: $special-font-color;
+}
+
+.link-primary{
+    color: black;
+    cursor:pointer;
 }
 
 .text-white-75 {
@@ -45,11 +64,62 @@ html {
     box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
-html {
-    position: relative;
-    min-height: 100%;
+/*=== SIDEBAR ===*/
+.justify-between-important
+{
+    justify-content: space-between!important;
+}
+.sidebar-custom {
+    position: fixed;
+    top: 0;
+    left: -280px;
+    transition: 0.2s;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    &.responsive-active {
+        left: 0px;
+    }
+
+
+    @media (min-width: 991.98px) {
+        left: 0px;
+    }
+
+
+    .sidebar-toggle-btn {
+        position: absolute;
+        left: 280px;
+        border: none;
+        background-color: transparent;
+        z-index: 1000;
+        color: black !important;
+        cursor: pointer;
+        transition: 0.2s;
+
+
+        &.responsive-active {
+            left: 220px;
+            color: white !important;
+        }
+
+        :hover {
+            color: gold !important;
+            transition: 0.2s;
+        }
+
+        @media (min-width: 991.98px) {
+            visibility: hidden;
+        }
+    }
 }
 
-body {
-    margin-bottom: 60px;
+.dashboard {
+    @media (min-width: 991.98px) {
+        padding-left: 280px;
+    }
 }
+
+
+

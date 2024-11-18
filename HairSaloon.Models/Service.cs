@@ -7,12 +7,15 @@ using System.Threading.Tasks;
 
 namespace HairSaloon.Models;
 
-public class Employee
+public class Service
 {
     [Required]
     public int Id { get; set; }
     [Required]
     public string Name { get; set; }
-    public string ImageUrl { get; set; }
+    [Required]
+    public string Category { get; set; }
+    [Required]
+	public int Price { get; set; }
     //public int DurationInMinutes { get; set; }
 }

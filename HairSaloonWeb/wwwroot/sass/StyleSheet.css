@@ -9741,8 +9741,14 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+html {
+  position: relative;
+  min-height: 100%;
+}
+
 body {
   font-family: "League Spartan", sans-serif;
+  margin-bottom: 0 !important;
 }
 
 a {
@@ -9751,7 +9757,12 @@ a {
 
 /*Navbar*/
 .navbar-light .navbar-nav .nav-link:hover {
-  color: gold;
+  color: gold !important;
+  cursor: pointer;
+}
+
+.nav-link:hover {
+  color: gold !important;
   cursor: pointer;
 }
 
@@ -9769,6 +9780,11 @@ a {
 
 .font-gold {
   color: gold;
+}
+
+.link-primary {
+  color: black;
+  cursor: pointer;
 }
 
 .text-white-75 {
@@ -9789,11 +9805,54 @@ html {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
-html {
-  position: relative;
-  min-height: 100%;
+/*=== SIDEBAR ===*/
+.justify-between-important {
+  justify-content: space-between !important;
 }
 
-body {
-  margin-bottom: 60px;
+.sidebar-custom {
+  position: fixed;
+  top: 0;
+  left: -280px;
+  transition: 0.2s;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.sidebar-custom.responsive-active {
+  left: 0px;
+}
+@media (min-width: 991.98px) {
+  .sidebar-custom {
+    left: 0px;
+  }
+}
+.sidebar-custom .sidebar-toggle-btn {
+  position: absolute;
+  left: 280px;
+  border: none;
+  background-color: transparent;
+  z-index: 1000;
+  color: black !important;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.sidebar-custom .sidebar-toggle-btn.responsive-active {
+  left: 220px;
+  color: white !important;
+}
+.sidebar-custom .sidebar-toggle-btn :hover {
+  color: gold !important;
+  transition: 0.2s;
+}
+@media (min-width: 991.98px) {
+  .sidebar-custom .sidebar-toggle-btn {
+    visibility: hidden;
+  }
+}
+
+@media (min-width: 991.98px) {
+  .dashboard {
+    padding-left: 280px;
+  }
 }

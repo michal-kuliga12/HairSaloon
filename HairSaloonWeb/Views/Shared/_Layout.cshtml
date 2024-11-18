@@ -30,16 +30,7 @@
                                 <a class="nav-link fs-4" asp-controller="Blog" asp-action="Index">Blog</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link fs-4" asp-area="" asp-controller="Home" asp-action="Privacy">Galeria</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link fs-4" asp-area="" asp-controller="Home" asp-action="Privacy">Sklep</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link fs-4" asp-area="" asp-controller="Home" asp-action="Privacy">Lokalizacja</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link fs-4" asp-area="" asp-controller="Dashboard" asp-action="Index">Panel</a>
+                                <a class="nav-link fs-4" asp-area="Admin" asp-controller="Service" asp-action="Index">Panel</a>
                             </li>
                         </ul>
                         <partial name="_LoginPartial.cshtml"/>
@@ -48,22 +39,21 @@
             </nav>
         </header>
     }
-    else
-    {
-        
-    }
-
     <div class="">
         <main role="main" style="background-color: black;">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - HairSaloonWeb - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
+    @if (@ViewData["Title"] != "Dashboard")
+    {
+        <footer class="border-top footer text-muted">
+            <div class="container">
+                &copy; 2024 - HairSaloonWeb - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            </div>
+        </footer>
+    }
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

@@ -1,0 +1,70 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div style="background-color:rgb(230,230,230); min-height:100vh;" class="vh-100 d-flex flex-column">
+    <header class="d-flex justify-content-end p-3">Welcome Michał!</header>
+    <main class="dashboard w-full h-full">
+        <div class="p-4 m-4 bg-light shadow rounded-2">
+            <table class="table table-bordered table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nazwa</th>
+                        <th scope="col">Kategoria</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </main>
+    <aside class="sidebar-custom flex-shrink-0 p-2 bg-dark vh-100 shadow" style="width:280px">
+        <div class="d-flex align-items-center justify-between-important px-2">
+            <a href="/" class="d-flex align-items-center text-white text-decoration-none font-labella fs-1">
+                <span class="font-gold">La</span>Bella
+            </a>
+            <button class="d-flex align-items-center sidebar-toggle-btn" onclick="toggleResponsiveSidebar()">
+                <i class="bi bi-grid" style="font-size:1.75rem;"></i>
+            </button>
+        </div>
+        <div class="d-flex flex-column sidebar-content">
+            <hr style="background-color: white;">
+            <ul class="navbar-dark flex-column bg-dark align-items-start mb-auto p-2">
+                <li class="nav-item">
+                    <a class="nav-link text-light fs-4" asp-area="" asp-controller="Dashboard" asp-action="Service">
+                        <i class="bi bi-scissors mx-3" style="font-size: 1.5rem;"></i>usługi
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link fs-4 text-light" asp-area="" asp-controller="Dashboard" asp-action="Service">
+                        <i class="bi bi-calendar-date mx-3" style="font-size: 1.5rem;"></i>rezerwacje
+                    </a>
+                <li class="nav-item ">
+                    <a class="nav-link fs-4 text-light" asp-area="" asp-controller="Dashboard" asp-action="Service">
+                        <i class="bi bi-key mx-3" style="font-size: 1.5rem;"></i>uprawnienia
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link fs-4 text-light" asp-area="" asp-controller="Dashboard" asp-action="Service">
+                        <i class="bi bi-people mx-3" style="font-size: 1.5rem;"></i>użytkownicy
+                    </a>
+                </li>
+            </ul>
+            <hr style="background-color: white;">
+        </div>
+    </aside>
+</div>
+
+<script>
+    const toggleResponsiveSidebar = () => {
+        if ($(".sidebar-custom").hasClass("responsive-active")) {
+            $(".sidebar-custom").removeClass("responsive-active");
+            $(".sidebar-toggle-btn").removeClass("responsive-active");
+        }
+        else {
+            $(".sidebar-custom").addClass("responsive-active");
+            $(".sidebar-toggle-btn").addClass("responsive-active");
+        }
+    }
+
+</script>
