@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using HairSaloon.Utility;
+using HairSaloon.DataAccess.Repository.IRepository;
+using HairSaloon.DataAccess.Repository;
 
 namespace HairSaloonWeb;
 
@@ -21,6 +23,7 @@ public class Program
 		builder.Services.AddRazorPages();
 
 		builder.Services.AddScoped<IEmailSender, EmailSender>();
+		builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 		var app = builder.Build();
 
