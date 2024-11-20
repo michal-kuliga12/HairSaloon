@@ -4,6 +4,7 @@ using HairSaloon.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -28,6 +29,12 @@ public class ServiceRepository : IServiceRepository
 		_db.Services.Remove(entity);
 	}
 
+	public Service Get(Expression<Func<Service, bool>> filter) 
+	{
+		Service obj = _db.Services.FirstOrDefault(filter);
+
+		return obj;
+	}
 	public IEnumerable<Service> GetAll()
 	{
 		IQueryable<Service> query = _db.Services.AsQueryable();

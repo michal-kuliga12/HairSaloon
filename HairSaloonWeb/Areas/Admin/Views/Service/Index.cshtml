@@ -3,77 +3,47 @@
     ViewData["Title"] = "Dashboard";
 }
 
-<div style="background-color:rgb(230,230,230); min-height:100vh;" class="vh-100 d-flex flex-column">
-    <header class="d-flex justify-content-end p-3">Welcome Michał!</header>
+<div style="background-color:rgb(240,240,240); min-height:100vh;" class="vh-100 d-flex flex-column">
     <main class="dashboard w-full h-full">
         <div class="p-4 m-4 bg-light shadow rounded-2">
 			<div class="p-2 d-flex justify-content-between">
                 <h2>Lista usług:</h2>
-                <a class="btn btn-success d-flex gap-1 align-items-center"><i class="bi bi-plus-circle align h-100 d-flex align-items-center"></i>Dodaj usługe</a>
+                <a asp-controller="Service" asp-action="Create" asp-area="Admin" class="btn btn-secondary d-flex gap-1 align-items-center"><i class="bi bi-plus-circle align h-100 d-flex align-items-center"></i>Dodaj usługe</a>
             </div>
-            <table class="table table-bordered table-striped">
-                <thead class="thead-dark">
-                    <tr>
-                        <th scope="col">Id</th>
-                        <th scope="col">Nazwa</th>
-                        <th scope="col">Kategoria</th>
-                        <th scope ="col" style="max-width:256px;"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var service in Model)
-                    {
+            <div style="overflow-x:auto;">
+                <table class="table table-bordered table-striped">
+                    <thead class="thead-dark">
                         <tr>
-							<td class="col-1">@service.Id</td>
-                            <td class="col-4">@service.Name</td>
-							<td class="col-4">@service.Category</td>
-                            <td class="col-3">
-								<div class="btn-group w-100 gap-2">
-                                    <a class="d-flex gap-1 w-50 justify-content-center align-items-center btn btn-secondary"><i class="bi bi-pen"> Edytuj</i></a>
-                                    <a class="d-flex gap-1 w-50 justify-content-center align-items-center btn btn-danger"><i class="bi bi-trash"> Usuń</i></a>
-                                </div>
-                            </td>
+                            <th class="align-text-top" scope="col">Id</th>
+                            <th class="align-text-top" scope="col">Nazwa</th>
+                            <th class="align-text-top" scope="col">Kategoria</th>
+                            <th class="align-text-top" scope="col">Cena [zł]</th>
+                            <th class="align-text-top" scope="col">Czas trwania [min]</th>
+                            <th class="align-text-top" scope="col" style="max-width:256px;"></th>
                         </tr>
-                    }
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @foreach (var obj in Model)
+                        {
+                            <tr>
+                                <td class="col-1">@obj.Id</td>
+                                <td class="col-3">@obj.Name</td>
+                                <td class="col-3">@obj.Category</td>
+                                <td class="col-1">@obj.Price</td>
+                                <td class="col-1">@obj.DurationInMinutes</td>
+                                <td class="col-3">
+                                    <div class="btn-group w-100 gap-2">
+                                        <a class="d-flex gap-1 w-50 justify-content-center align-items-center btn btn-dark"><i class="bi bi-pen"> Edytuj</i></a>
+                                        <a asp-controller="Service" asp-action="Delete" asp-route-id="@obj.Id" class="d-flex gap-1 w-50 justify-content-center align-items-center btn btn-danger"><i class="bi bi-trash"> Usuń</i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
         </div>
     </main>
-    <aside class="sidebar-custom flex-shrink-0 p-2 bg-dark vh-100 shadow-lg" style="width:280px">
-        <div class="d-flex align-items-center justify-between-important px-2">
-            <a href="/" class="d-flex align-items-center text-white text-decoration-none font-labella fs-1">
-                <span class="font-gold">La</span>Bella
-            </a>
-            <button class="d-flex align-items-center sidebar-toggle-btn" onclick="toggleResponsiveSidebar()">
-                <i class="bi bi-grid" style="font-size:1.75rem;"></i>
-            </button>
-        </div>
-        <div class="d-flex flex-column sidebar-content">
-            <hr style="background-color: white;">
-            <ul class="navbar-dark flex-column bg-dark align-items-start mb-auto p-2">
-                <li class="nav-item">
-                    <a class="nav-link text-light fs-4" asp-area="" asp-controller="Dashboard" asp-action="Service">
-                        <i class="bi bi-scissors mx-3" style="font-size: 1.5rem;"></i>usługi
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link fs-4 text-light" asp-area="" asp-controller="Dashboard" asp-action="Service">
-                        <i class="bi bi-calendar-date mx-3" style="font-size: 1.5rem;"></i>rezerwacje
-                    </a>
-                <li class="nav-item ">
-                    <a class="nav-link fs-4 text-light" asp-area="" asp-controller="Dashboard" asp-action="Service">
-                        <i class="bi bi-key mx-3" style="font-size: 1.5rem;"></i>uprawnienia
-                    </a>
-                </li>
-                <li class="nav-item ">
-                    <a class="nav-link fs-4 text-light" asp-area="" asp-controller="Dashboard" asp-action="Service">
-                        <i class="bi bi-people mx-3" style="font-size: 1.5rem;"></i>użytkownicy
-                    </a>
-                </li>
-            </ul>
-            <hr style="background-color: white;">
-        </div>
-    </aside>
 </div>
 
 <script>

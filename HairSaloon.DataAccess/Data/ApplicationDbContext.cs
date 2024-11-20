@@ -26,10 +26,10 @@ public class ApplicationDbContext : IdentityDbContext<IdentityUser>
         base.OnModelCreating(modelBuilder); // Jest potrzebne jako konfiguracja do IdentityDbContext
 
         modelBuilder.Entity<Service>().HasData(
-            new Service { Id = 1, Name = "Strzyżenie męskie", Category = "Stylizacja włosów", Price = 50},
-            new Service { Id = 2, Name = "Strzyżenie damskie", Category = "Stylizacja włosów", Price = 50},
-            new Service { Id = 3, Name = "Farbowanie włosów", Category = "Stylizacja włosów", Price = 50},
-            new Service { Id = 4, Name = "Depilacja", Category = "Pielęgnacja", Price = 50}
+            new Service { Id = 1, Name = "Strzyżenie męskie", Category = "Strzyżenie", Price = 50,DurationInMinutes=60,Description=""},
+            new Service { Id = 2, Name = "Strzyżenie damskie", Category = "Farbowanie", Price = 50,DurationInMinutes=90,Description=""},
+            new Service { Id = 3, Name = "Farbowanie włosów", Category = "Pakiety", Price = 50,DurationInMinutes=30,Description=""},
+            new Service { Id = 4, Name = "Depilacja", Category = "Pielęgnacja", Price = 50, DurationInMinutes = 30, Description = "" }
             );
 
         modelBuilder.Entity<Appointment>().HasData(

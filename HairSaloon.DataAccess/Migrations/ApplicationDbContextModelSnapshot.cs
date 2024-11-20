@@ -41,25 +41,25 @@ namespace HairSaloon.DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            Date = new DateTime(2024, 11, 12, 22, 27, 53, 230, DateTimeKind.Local).AddTicks(196),
+                            Date = new DateTime(2024, 11, 20, 21, 40, 56, 443, DateTimeKind.Local).AddTicks(2312),
                             ServiceId = 1
                         },
                         new
                         {
                             Id = 2,
-                            Date = new DateTime(2024, 11, 12, 22, 27, 53, 230, DateTimeKind.Local).AddTicks(230),
+                            Date = new DateTime(2024, 11, 20, 21, 40, 56, 443, DateTimeKind.Local).AddTicks(2352),
                             ServiceId = 2
                         },
                         new
                         {
                             Id = 3,
-                            Date = new DateTime(2024, 11, 12, 22, 27, 53, 230, DateTimeKind.Local).AddTicks(232),
+                            Date = new DateTime(2024, 11, 20, 21, 40, 56, 443, DateTimeKind.Local).AddTicks(2354),
                             ServiceId = 3
                         },
                         new
                         {
                             Id = 4,
-                            Date = new DateTime(2024, 11, 12, 22, 27, 53, 230, DateTimeKind.Local).AddTicks(233),
+                            Date = new DateTime(2024, 11, 20, 21, 40, 56, 443, DateTimeKind.Local).AddTicks(2355),
                             ServiceId = 4
                         });
                 });
@@ -123,6 +123,13 @@ namespace HairSaloon.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("DurationInMinutes")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -138,21 +145,27 @@ namespace HairSaloon.DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            Category = "Stylizacja włosów",
+                            Category = "Strzyżenie",
+                            Description = "",
+                            DurationInMinutes = 60,
                             Name = "Strzyżenie męskie",
                             Price = 50
                         },
                         new
                         {
                             Id = 2,
-                            Category = "Stylizacja włosów",
+                            Category = "Farbowanie",
+                            Description = "",
+                            DurationInMinutes = 90,
                             Name = "Strzyżenie damskie",
                             Price = 50
                         },
                         new
                         {
                             Id = 3,
-                            Category = "Stylizacja włosów",
+                            Category = "Pakiety",
+                            Description = "",
+                            DurationInMinutes = 30,
                             Name = "Farbowanie włosów",
                             Price = 50
                         },
@@ -160,6 +173,8 @@ namespace HairSaloon.DataAccess.Migrations
                         {
                             Id = 4,
                             Category = "Pielęgnacja",
+                            Description = "",
+                            DurationInMinutes = 30,
                             Name = "Depilacja",
                             Price = 50
                         });

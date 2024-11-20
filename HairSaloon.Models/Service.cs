@@ -17,5 +17,7 @@ public class Service
     public string Category { get; set; }
     [Required]
 	public int Price { get; set; }
-    //public int DurationInMinutes { get; set; }
+    [Required]
+    public int DurationInMinutes { get; set; }
+    public string Description { get; set; }
 }
