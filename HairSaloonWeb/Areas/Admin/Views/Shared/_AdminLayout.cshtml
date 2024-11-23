@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - HairSaloonWeb</title>
+    @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />*@
+    <link rel="stylesheet" href="~/HairSaloonWeb.styles.css" asp-append-version="true" />
+	<link rel="stylesheet" href="~/sass/StyleSheet.min.css" />
+	<link href="~/lib/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />
+	<link href="~/lib/bootstrap-icons/font/bootstrap-icons.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css" />
+</head>
+<body>
+
+    <header class="d-flex justify-content-end p-3 bg-light shadow-lg sticky-top">Welcome Michał!</header>
+    <aside class="sidebar-custom flex-shrink-0 p-2 bg-dark vh-100 shadow-lg" style="width:280px">
+        <div class="d-flex align-items-center justify-between-important px-2">
+            <a href="/" class="d-flex align-items-center text-white text-decoration-none font-labella fs-1">
+                <span class="font-gold">La</span>Bella
+            </a>
+            <button class="d-flex align-items-center sidebar-toggle-btn" onclick="toggleResponsiveSidebar()">
+                <i class="bi bi-grid" style="font-size:1.75rem;"></i>
+            </button>
+        </div>
+        <div class="d-flex flex-column sidebar-content">
+            <hr style="background-color: white;">
+            <ul class="navbar-dark flex-column bg-dark align-items-start mb-auto p-2">
+                <li class="nav-item">
+                    <a class="nav-link text-light fs-4" asp-area="" asp-controller="Dashboard" asp-action="Service">
+                        <i class="bi bi-scissors mx-3" style="font-size: 1.5rem;"></i>usługi
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link fs-4 text-light" asp-area="" asp-controller="Dashboard" asp-action="Service">
+                        <i class="bi bi-calendar-date mx-3" style="font-size: 1.5rem;"></i>rezerwacje
+                    </a>
+                <li class="nav-item ">
+                    <a class="nav-link fs-4 text-light" asp-area="" asp-controller="Dashboard" asp-action="Service">
+                        <i class="bi bi-key mx-3" style="font-size: 1.5rem;"></i>uprawnienia
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link fs-4 text-light" asp-area="" asp-controller="Dashboard" asp-action="Service">
+                        <i class="bi bi-people mx-3" style="font-size: 1.5rem;"></i>użytkownicy
+                    </a>
+                </li>
+            </ul>
+            <hr style="background-color: white;">
+        </div>
+    </aside>
+
+    <div class="">
+        <main role="main" style="background-color: black;">
+            @RenderBody()
+        </main>
+    </div>
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/dashboard.js" asp-append-version="true"></script>
+    <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

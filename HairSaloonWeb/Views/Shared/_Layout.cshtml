@@ -4,94 +4,49 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - HairSaloonWeb</title>
-    @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />*@
     <link rel="stylesheet" href="~/HairSaloonWeb.styles.css" asp-append-version="true" />
 	<link rel="stylesheet" href="~/sass/StyleSheet.min.css" />
 	<link href="~/lib/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />
 	<link href="~/lib/bootstrap-icons/font/bootstrap-icons.min.css" rel="stylesheet" />
 </head>
 <body>
-    @if (@ViewData["Title"] != "Dashboard")
-    {
-        <header class="bg-white sticky-top shadow">
-            <nav class="container-md navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom border-bottom-0">
-                <div class="container-fluid">
-                    <a class="navbar-brand fs-2 font-labella" asp-controller="Home" asp-action="Index"><span class="font-gold">La</span>Bella</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                            aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                        <ul class="navbar-nav flex-grow-1 justify-content-end">
-                            <li class="nav-item">
-                                <a class="nav-link fs-4" asp-controller="Appointment" asp-action="Index">Rezerwacja</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link fs-4" asp-controller="Blog" asp-action="Index">Blog</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link fs-4" asp-area="Admin" asp-controller="Service" asp-action="Index">Panel</a>
-                            </li>
-                        </ul>
-                        <partial name="_LoginPartial.cshtml"/>
-                    </div>
-                </div>
-            </nav>
-        </header>
-    }
-    @if (ViewData["Title"] == "Dashboard")
-    {
-        <header class="d-flex justify-content-end p-3 bg-light shadow-lg sticky-top">Welcome Michał!</header>
-        <aside class="sidebar-custom flex-shrink-0 p-2 bg-dark vh-100 shadow-lg" style="width:280px">
-            <div class="d-flex align-items-center justify-between-important px-2">
-                <a href="/" class="d-flex align-items-center text-white text-decoration-none font-labella fs-1">
-                    <span class="font-gold">La</span>Bella
-                </a>
-                <button class="d-flex align-items-center sidebar-toggle-btn" onclick="toggleResponsiveSidebar()">
-                    <i class="bi bi-grid" style="font-size:1.75rem;"></i>
+    <header class="bg-white sticky-top shadow">
+        <nav class="container-md navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom border-bottom-0">
+            <div class="container-fluid">
+                <a class="navbar-brand fs-2 font-labella" asp-controller="Home" asp-action="Index"><span class="font-gold">La</span>Bella</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
                 </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1 justify-content-end">
+                        <li class="nav-item">
+                            <a class="nav-link fs-4" asp-controller="Appointment" asp-action="Index">Rezerwacja</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fs-4" asp-controller="Blog" asp-action="Index">Blog</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fs-4" asp-area="Admin" asp-controller="Service" asp-action="Index">Panel</a>
+                        </li>
+                    </ul>
+                    <partial name="_LoginPartial.cshtml"/>
+                </div>
             </div>
-            <div class="d-flex flex-column sidebar-content">
-                <hr style="background-color: white;">
-                <ul class="navbar-dark flex-column bg-dark align-items-start mb-auto p-2">
-                    <li class="nav-item">
-                        <a class="nav-link text-light fs-4" asp-area="" asp-controller="Dashboard" asp-action="Service">
-                            <i class="bi bi-scissors mx-3" style="font-size: 1.5rem;"></i>usługi
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link fs-4 text-light" asp-area="" asp-controller="Dashboard" asp-action="Service">
-                            <i class="bi bi-calendar-date mx-3" style="font-size: 1.5rem;"></i>rezerwacje
-                        </a>
-                    <li class="nav-item ">
-                        <a class="nav-link fs-4 text-light" asp-area="" asp-controller="Dashboard" asp-action="Service">
-                            <i class="bi bi-key mx-3" style="font-size: 1.5rem;"></i>uprawnienia
-                        </a>
-                    </li>
-                    <li class="nav-item ">
-                        <a class="nav-link fs-4 text-light" asp-area="" asp-controller="Dashboard" asp-action="Service">
-                            <i class="bi bi-people mx-3" style="font-size: 1.5rem;"></i>użytkownicy
-                        </a>
-                    </li>
-                </ul>
-                <hr style="background-color: white;">
-            </div>
-        </aside>
-    }
+        </nav>
+    </header>
+
     <div class="">
         <main role="main" style="background-color: black;">
             @RenderBody()
         </main>
     </div>
 
-    @if (@ViewData["Title"] != "Dashboard")
-    {
-        <footer class="border-top footer text-muted">
-            <div class="container">
-                &copy; 2024 - HairSaloonWeb - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-            </div>
-        </footer>
-    }
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2024 - HairSaloonWeb - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

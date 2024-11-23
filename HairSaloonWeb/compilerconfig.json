@@ -10,5 +10,9 @@
   {
     "outputFile": "wwwroot/lib/bootstrap/scss/bootstrap.css",
     "inputFile": "wwwroot/lib/bootstrap/scss/bootstrap.scss"
+  },
+  {
+    "outputFile": "Areas/Admin/Views/Shared/_AdminLayout.cshtml.css",
+    "inputFile": "Areas/Admin/Views/Shared/_AdminLayout.cshtml.scss"
   }
 ]
