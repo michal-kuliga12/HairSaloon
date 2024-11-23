@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,15 +11,20 @@ namespace HairSaloon.Models;
 
 public class Service
 {
-    [Required]
+    [Key]
     public int Id { get; set; }
-    [Required]
-    public string Name { get; set; }
-    [Required]
-    public string Category { get; set; }
-    [Required]
-	public int Price { get; set; }
-    [Required]
-    public int DurationInMinutes { get; set; }
-    public string Description { get; set; }
+    [Required(ErrorMessage = "Nazwa jest wymagana.")]
+    [StringLength(50,ErrorMessage = "Nazwa usługi nie może przekraczać 50 znaków")]
+    public string? Name { get; set; }
+    [Required(ErrorMessage = "Kategoria jest wymagana.")]
+    [StringLength(50, ErrorMessage = "Kategoria usługi nie może przekraczać 50 znaków")]
+    public string? Category { get; set; }
+    [Required(ErrorMessage = "Cena jest wymagana.")]
+    [Range(1, 999, ErrorMessage = "Cena usługi musi mieścić się w przedziale 1-999")]
+    public int? Price { get; set; }
+    [Required(ErrorMessage = "Czas trwania jest wymagany.")]
+    [Range(1, 999, ErrorMessage = "Czas trwania musi mieścić się w przedziale 1-999")]
+    public int? DurationInMinutes { get; set; }
+    [StringLength(500)]
+    public string? Description { get; set; }
 }

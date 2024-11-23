@@ -41,25 +41,25 @@ namespace HairSaloon.DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            Date = new DateTime(2024, 11, 20, 21, 40, 56, 443, DateTimeKind.Local).AddTicks(2312),
+                            Date = new DateTime(2024, 11, 23, 10, 58, 8, 332, DateTimeKind.Local).AddTicks(4709),
                             ServiceId = 1
                         },
                         new
                         {
                             Id = 2,
-                            Date = new DateTime(2024, 11, 20, 21, 40, 56, 443, DateTimeKind.Local).AddTicks(2352),
+                            Date = new DateTime(2024, 11, 23, 10, 58, 8, 332, DateTimeKind.Local).AddTicks(4758),
                             ServiceId = 2
                         },
                         new
                         {
                             Id = 3,
-                            Date = new DateTime(2024, 11, 20, 21, 40, 56, 443, DateTimeKind.Local).AddTicks(2354),
+                            Date = new DateTime(2024, 11, 23, 10, 58, 8, 332, DateTimeKind.Local).AddTicks(4761),
                             ServiceId = 3
                         },
                         new
                         {
                             Id = 4,
-                            Date = new DateTime(2024, 11, 20, 21, 40, 56, 443, DateTimeKind.Local).AddTicks(2355),
+                            Date = new DateTime(2024, 11, 23, 10, 58, 8, 332, DateTimeKind.Local).AddTicks(4763),
                             ServiceId = 4
                         });
                 });
@@ -121,20 +121,24 @@ namespace HairSaloon.DataAccess.Migrations
 
                     b.Property<string>("Category")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
-                    b.Property<int>("DurationInMinutes")
+                    b.Property<int?>("DurationInMinutes")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("Price")
+                    b.Property<int?>("Price")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.HasKey("Id");

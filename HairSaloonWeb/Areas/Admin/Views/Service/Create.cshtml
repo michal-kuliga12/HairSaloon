@@ -1,4 +1,4 @@
-﻿@model Service
+﻿@model ServiceVM
 @{
     ViewData["Title"] = "Dashboard";
 }
@@ -16,11 +16,11 @@
             <div class="p-4 bg-light shadow">
                 <form method="post" class="row">
                     <div class="p-3">
-                        @*<div asp-validation-summary="None"></div>*@
+                        <div asp-validation-summary="None"></div>
                         <div class=" py-2 col-12">
-                            <label asp-for="Name">Nazwa usługi</label>
+                            <label asp-for="Name" class="ms-2">Nazwa usługi</label>
                             <input asp-for="Name" class="form-control border-1" value="" />
-                            <span asp-validation-for="Name" class="text-danger;"></span>
+                            <span asp-validation-for="Name" class="text-danger"></span>
                         </div>
                         <div class=" py-2 col-12">
                             <label asp-for="Category" class="ms-2">Kategoria</label>
@@ -40,13 +40,13 @@
                             <span asp-validation-for="Price" class="text-danger"></span>
                         </div>
                         <div class=" py-2 col-12">
-                            <label asp-for="Price" class="ms-2">Czas trwania [min]</label>
-                            <input asp-for="Price" class="form-control border-1" value="" />
-                            <span asp-validation-for="Price" class="text-danger"></span>
+                            <label asp-for="DurationInMinutes" class="ms-2">Czas trwania [min]</label>
+                            <input asp-for="DurationInMinutes" class="form-control border-1" value="" />
+                            <span asp-validation-for="DurationInMinutes" class="text-danger"></span>
                         </div>
                         <div class="py-2 col-12">
-                            <label asp-for="Description">Opis usługi</label>
-                            <textarea asp-for="Description" class="form-control border-1 text-muted"></textarea>
+                            <label asp-for="Description" class="ms-2">Opis usługi</label>
+                            <textarea asp-for="Description" class="form-control border-1 text-muted" style="max-height:100px;"></textarea>
                         </div>
                         <div class="row pt-2">
                             <div class="col-6 col-md-3">

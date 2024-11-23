@@ -9811,6 +9811,7 @@ html {
 }
 
 .sidebar-custom {
+  z-index: 1030;
   position: fixed;
   top: 0;
   left: -280px;

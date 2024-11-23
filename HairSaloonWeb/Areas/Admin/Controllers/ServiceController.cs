@@ -1,6 +1,8 @@
 ﻿using HairSaloon.DataAccess.Repository.IRepository;
 using HairSaloon.Models;
+using HairSaloon.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel;
 
 namespace HairSaloonWeb.Areas.Admin.Controllers;
 
@@ -20,6 +22,10 @@ public class ServiceController : Controller
         return View(services);
     }
 
+    public IActionResult Create()
+        => View(new ServiceVM());
+
+    [HttpPost, ActionName("Create")]
     public IActionResult Create(Service obj) 
     {
         if (ModelState.IsValid)
