@@ -38,30 +38,28 @@ public class ServiceController : Controller
         return View();
     }
 
-    public IActionResult Delete(int? id) 
-    {
-        if (id == null || id == 0)
-            return NotFound();
+    #region API CALLS
 
-        Service serviceFromDb = _unitOfWork.Services.Get(s => s.Id == id);
-
-        if (serviceFromDb == null)
-            return NotFound();
-
-        return View(serviceFromDb);
+    [HttpGet]
+    public IActionResult GetAll() {
+        List<Service> serviceList = _unitOfWork.Services.GetAll().ToList();
+        return Json(new {data = serviceList});
     }
 
-    [HttpPost, ActionName("Delete")]
+    [HttpDelete, ActionName("Delete")]
     public IActionResult Delete(int id)
     {
         Service? serviceFromDb = _unitOfWork.Services.Get(s => s.Id == id);
-        
+
         if (serviceFromDb == null)
-            return NotFound();
+            return Json(new { success = false , message = "Wystąpił problem usuwania"});
 
         _unitOfWork.Services.Delete(serviceFromDb);
         _unitOfWork.Save();
-        return RedirectToAction("Index");
+
+        return Json(new { success = true, message = "Pomyślnie usunięto element" });
     }
+
+    #endregion
 
 }

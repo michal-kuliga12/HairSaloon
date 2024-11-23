@@ -4,7 +4,6 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - HairSaloonWeb</title>
-    @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />*@
     <link rel="stylesheet" href="~/HairSaloonWeb.styles.css" asp-append-version="true" />
 	<link rel="stylesheet" href="~/sass/StyleSheet.min.css" />
 	<link href="~/lib/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />
@@ -51,7 +50,7 @@
     </aside>
 
     <div class="">
-        <main role="main" style="background-color: black;">
+        <main role="main" style="background-color:rgb(240,240,240); min-height:100vh;" class="vh-100 d-flex flex-column dashboard">
             @RenderBody()
         </main>
     </div>

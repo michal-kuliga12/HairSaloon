@@ -29,7 +29,13 @@ public class ApplicationDbContext : IdentityDbContext<IdentityUser>
             new Service { Id = 1, Name = "Strzyżenie męskie", Category = "Strzyżenie", Price = 50,DurationInMinutes=60,Description=""},
             new Service { Id = 2, Name = "Strzyżenie damskie", Category = "Farbowanie", Price = 50,DurationInMinutes=90,Description=""},
             new Service { Id = 3, Name = "Farbowanie włosów", Category = "Pakiety", Price = 50,DurationInMinutes=30,Description=""},
-            new Service { Id = 4, Name = "Depilacja", Category = "Pielęgnacja", Price = 50, DurationInMinutes = 30, Description = "" }
+            new Service { Id = 4, Name = "Depilacja", Category = "Pielęgnacja", Price = 50, DurationInMinutes = 30, Description = "" },
+            new Service { Id = 5, Name = "Strzyżenie męskie", Category = "Strzyżenie", Price = 50, DurationInMinutes = 60, Description = "" },
+            new Service { Id = 6, Name = "Strzyżenie damskie", Category = "Farbowanie", Price = 50, DurationInMinutes = 90, Description = "" },
+            new Service { Id = 7, Name = "Farbowanie włosów", Category = "Pakiety", Price = 50, DurationInMinutes = 30, Description = "" },
+            new Service { Id = 8, Name = "Depilacja", Category = "Pielęgnacja", Price = 50, DurationInMinutes = 30, Description = "" },
+            new Service { Id = 9, Name = "Depilacja", Category = "Pielęgnacja", Price = 50, DurationInMinutes = 30, Description = "" },
+            new Service { Id = 10, Name = "Depilacja", Category = "Pielęgnacja", Price = 50, DurationInMinutes = 30, Description = "" }
             );
 
         modelBuilder.Entity<Appointment>().HasData(

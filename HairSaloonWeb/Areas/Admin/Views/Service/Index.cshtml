@@ -3,45 +3,25 @@
     ViewData["Title"] = "Dashboard";
 }
 
-<div style="background-color:rgb(240,240,240); min-height:100vh;" class="vh-100 d-flex flex-column">
-    <main class="dashboard w-full h-full">
-        <div class="p-4 m-4 bg-light shadow rounded-2">
-			<div class="p-2 d-flex justify-content-between">
-                <h2>Lista usług:</h2>
-                <a asp-controller="Service" asp-action="Create" asp-area="Admin" class="btn btn-secondary d-flex gap-3 align-items-center"><i class="bi bi-plus-circle align h-100 d-flex align-items-center"></i>Dodaj usługe</a>
-            </div>
-            <div style="overflow-x:auto;">
-                <table class="table table-bordered table-striped">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th class="align-text-top" scope="col">Id</th>
-                            <th class="align-text-top" scope="col">Nazwa</th>
-                            <th class="align-text-top" scope="col">Kategoria</th>
-                            <th class="align-text-top" scope="col">Cena [zł]</th>
-                            <th class="align-text-top" scope="col">Czas trwania [min]</th>
-                            <th class="align-text-top" scope="col" style="max-width:256px;"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var obj in Model)
-                        {
-                            <tr>
-                                <td class="col-1">@obj.Id</td>
-                                <td class="col-3">@obj.Name</td>
-                                <td class="col-3">@obj.Category</td>
-                                <td class="col-1">@obj.Price</td>
-                                <td class="col-1">@obj.DurationInMinutes</td>
-                                <td class="col-3">
-                                    <div class="btn-group w-100 gap-2">
-                                        <a class="d-flex gap-1 w-50 justify-content-center align-items-center btn btn-dark"><i class="bi bi-pen"> Edytuj</i></a>
-                                        <a asp-controller="Service" asp-action="Delete" asp-route-id="@obj.Id" class="d-flex gap-1 w-50 justify-content-center align-items-center btn btn-danger"><i class="bi bi-trash"> Usuń</i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </main>
+<div class="p-4 m-4 bg-light shadow rounded-2">
+	<div class="p-2 d-flex justify-content-between">
+        <h2>Lista usług:</h2>
+        <a asp-controller="Service" asp-action="Create" asp-area="Admin" class="btn btn-secondary d-flex gap-3 align-items-center"><i class="bi bi-plus-circle align h-100 d-flex align-items-center"></i>Dodaj usługe</a>
+    </div>
+    <div style="overflow-x:auto;">
+        <table id="tblData" class="table table-bordered table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Nazwa</th>
+                    <th>Kategoria</th>
+                    <th>Cena</th>
+                    <th></th>
+                </tr>
+            </thead>
+        </table>
+    </div>
 </div>
+
+  @section Scripts {
+      <script src="~/js/service.js"></script>
+  }
