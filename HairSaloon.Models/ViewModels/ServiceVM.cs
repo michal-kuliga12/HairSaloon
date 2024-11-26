@@ -35,4 +35,14 @@ public class ServiceVM
     {
         Description = "";
     }
+
+    public ServiceVM(Service service)
+    {
+        Id = service.Id;
+        Name = service.Name;
+        Category = service.Category;
+        Price = service.Price;
+        DurationInMinutes = service.DurationInMinutes;
+        Description = service.Description;
+    }
 }

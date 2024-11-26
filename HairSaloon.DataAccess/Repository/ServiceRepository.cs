@@ -24,14 +24,14 @@ public class ServiceRepository : IServiceRepository
 		_db.Services.Add(entity);
 	}
 
-	public void Delete(Service entity)
+	public void Remove(Service entity)
 	{
 		_db.Services.Remove(entity);
 	}
 
 	public Service Get(Expression<Func<Service, bool>> filter) 
 	{
-		Service obj = _db.Services.FirstOrDefault(filter);
+		Service? obj = _db.Services.FirstOrDefault(filter);
 
 		return obj;
 	}
@@ -41,10 +41,8 @@ public class ServiceRepository : IServiceRepository
 		return query.ToList();
 	}
 
-
-
 	public void Update(Service entity)
 	{
-		throw new NotImplementedException();
+		_db.Services.Update(entity);
 	}
 }
