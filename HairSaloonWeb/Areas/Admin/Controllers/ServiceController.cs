@@ -1,12 +1,15 @@
 ﻿using HairSaloon.DataAccess.Repository.IRepository;
 using HairSaloon.Models;
 using HairSaloon.Models.ViewModels;
+using HairSaloon.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel;
 
 namespace HairSaloonWeb.Areas.Admin.Controllers;
 
 [Area("Admin")]
+[Authorize(Roles = SD.Role_Admin)]
 public class ServiceController : Controller
 {
     private readonly IUnitOfWork _unitOfWork;

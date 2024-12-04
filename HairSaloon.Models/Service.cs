@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace HairSaloon.Models;
 
@@ -14,7 +7,7 @@ public class Service
     [Key]
     public int Id { get; set; }
     [Required(ErrorMessage = "Nazwa jest wymagana.")]
-    [StringLength(50,ErrorMessage = "Nazwa usługi nie może przekraczać 50 znaków")]
+    [StringLength(50, ErrorMessage = "Nazwa usługi nie może przekraczać 50 znaków")]
     public string? Name { get; set; }
     [Required(ErrorMessage = "Kategoria jest wymagana.")]
     [StringLength(50, ErrorMessage = "Kategoria usługi nie może przekraczać 50 znaków")]

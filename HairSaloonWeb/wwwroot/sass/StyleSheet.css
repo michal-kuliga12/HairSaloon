@@ -9751,8 +9751,26 @@ body {
   margin-bottom: 0 !important;
 }
 
+.flex-1 {
+  flex: 1;
+}
+
 a {
   cursor: pointer;
+}
+
+.bg-light-primary {
+  background-color: rgb(240, 240, 240);
+}
+
+.bg-register-custom {
+  background-image: url("/images/register.jpg");
+  background-color: rgba(30, 28, 0, 0.65);
+  overflow: hidden;
+  background-blend-mode: overlay;
+  background-size: cover;
+  background-position: center;
+  position: relative;
 }
 
 /*Navbar*/

@@ -1,9 +1,11 @@
 ﻿using HairSaloon.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
 namespace HairSaloonWeb.Areas.Customer.Controllers;
 [Area("Customer")]
+[AllowAnonymous]
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;

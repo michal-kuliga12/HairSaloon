@@ -11,7 +11,8 @@ using System.Threading.Tasks;
 
 namespace HairSaloon.DataAccess.Data;
 
-public class ApplicationDbContext : IdentityDbContext<IdentityUser>
+public class ApplicationDbContext : IdentityDbContext<IdentityUser> 
+    // Zamienione z DbContext, IdentityDbContext jest funkcjonalnością wymaganą do .NET identity
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
     {

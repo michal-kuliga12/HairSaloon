@@ -9,11 +9,11 @@
 	<link href="~/lib/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />
 	<link href="~/lib/bootstrap-icons/font/bootstrap-icons.min.css" rel="stylesheet" />
 </head>
-<body>
+<body class="min-vh-100 d-flex flex-column">
     <header class="bg-white sticky-top shadow">
         <nav class="container-md navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom border-bottom-0">
             <div class="container-fluid">
-                <a class="navbar-brand fs-2 font-labella" asp-controller="Home" asp-action="Index"><span class="font-gold">La</span>Bella</a>
+                <a class="navbar-brand fs-2 font-labella" href="/"><span class="font-gold">La</span>Bella</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -26,9 +26,13 @@
                         <li class="nav-item">
                             <a class="nav-link fs-4" asp-controller="Blog" asp-action="Index">Blog</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link fs-4" asp-area="Admin" asp-controller="Service" asp-action="Index">Panel</a>
-                        </li>
+                        @if (User.IsInRole(SD.Role_Admin))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link fs-4" asp-area="Admin" asp-controller="Service" asp-action="Index">Panel</a>
+                            </li>
+                        }
+
                     </ul>
                     <partial name="_LoginPartial.cshtml"/>
                 </div>
@@ -36,13 +40,12 @@
         </nav>
     </header>
 
-    <div class="">
-        <main role="main" style="background-color: black;">
-            @RenderBody()
-        </main>
-    </div>
+    <main role="main" class="d-flex flex-column">
+        @RenderBody()
+    </main>
 
-    <footer class="border-top footer text-muted">
+
+    <footer class="border-top footer text-muted bg-light">
         <div class="container">
             &copy; 2024 - HairSaloonWeb - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>

@@ -10,9 +10,27 @@ body {
     font-family: $font-family-sans-serif;
     margin-bottom: 0 !important;
 }
+.flex-1 {
+    flex:1;
+}
 a {
     cursor: pointer;
 }
+
+.bg-light-primary {
+    background-color: $bg_primary;
+}
+
+.bg-register-custom {
+    background-image: url('/images/register.jpg');
+    background-color: rgba(30, 28, 0, 0.65);
+    overflow:hidden;
+    background-blend-mode: overlay;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
 /*Navbar*/
 .navbar-light .navbar-nav .nav-link:hover {
     color: gold!important;
