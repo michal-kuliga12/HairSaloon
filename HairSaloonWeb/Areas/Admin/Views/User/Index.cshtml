@@ -1,0 +1,28 @@
+﻿@model IEnumerable<ApplicationUser>
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="py-4 m-0 p-md-4 m-md-4 bg-light shadow rounded-2">
+	<div class="p-2 d-flex justify-content-between border-bottom">
+        <h2>Lista usług:</h2>
+        <a asp-controller="Service" asp-action="Create" asp-area="Admin" class="btn btn-secondary d-flex gap-3 align-items-center"><i class="bi bi-plus-circle align h-100 d-flex align-items-center"></i>Dodaj usługe</a>
+    </div>
+    <div style="overflow-x:auto;">
+        <table id="tblData" class="table table-bordered table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Email</th>
+                    <th>Imie</th>
+                    <th>Nazwisko</th>
+					<th>Rola</th>
+                    <th></th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
+  @section Scripts {
+      <script src="~/js/user.js"></script>
+  }

@@ -41,25 +41,25 @@ namespace HairSaloon.DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            Date = new DateTime(2024, 11, 23, 14, 19, 23, 355, DateTimeKind.Local).AddTicks(3091),
+                            Date = new DateTime(2024, 12, 6, 13, 55, 8, 98, DateTimeKind.Local).AddTicks(4425),
                             ServiceId = 1
                         },
                         new
                         {
                             Id = 2,
-                            Date = new DateTime(2024, 11, 23, 14, 19, 23, 355, DateTimeKind.Local).AddTicks(3129),
+                            Date = new DateTime(2024, 12, 6, 13, 55, 8, 98, DateTimeKind.Local).AddTicks(4469),
                             ServiceId = 2
                         },
                         new
                         {
                             Id = 3,
-                            Date = new DateTime(2024, 11, 23, 14, 19, 23, 355, DateTimeKind.Local).AddTicks(3132),
+                            Date = new DateTime(2024, 12, 6, 13, 55, 8, 98, DateTimeKind.Local).AddTicks(4470),
                             ServiceId = 3
                         },
                         new
                         {
                             Id = 4,
-                            Date = new DateTime(2024, 11, 23, 14, 19, 23, 355, DateTimeKind.Local).AddTicks(3133),
+                            Date = new DateTime(2024, 12, 6, 13, 55, 8, 98, DateTimeKind.Local).AddTicks(4472),
                             ServiceId = 4
                         });
                 });
@@ -302,6 +302,10 @@ namespace HairSaloon.DataAccess.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -353,6 +357,10 @@ namespace HairSaloon.DataAccess.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
+
+                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -434,6 +442,21 @@ namespace HairSaloon.DataAccess.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("HairSaloon.Models.ApplicationUser", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasDiscriminator().HasValue("ApplicationUser");
                 });
 
             modelBuilder.Entity("HairSaloon.Models.Appointment", b =>

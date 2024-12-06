@@ -9,23 +9,33 @@
     <div class="container p-md-3 w-100" style="max-width:1000px;">
         <div class="d-flex flex-column-reverse row flex-md-row bg-white p-0 p-md-3 justify-content-center shadow-lg rounded-3">
             <div class="col col-md-6 p-3">
-                <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                <form id="registerForm" class="row" asp-route-returnUrl="@Model.ReturnUrl" method="post">
                     <h2>Utwórz konto pracownika.</h2>
                     <hr />
                     <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                    <div class="form-floating mb-3 col-6">
+                        <input asp-for="Input.FirstName" class="form-control" autocomplete="firstname" aria-required="true" placeholder="name@example.com" />
+                        <label asp-for="Input.FirstName" class="mx-2">Imię</label>
+                        <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+                    </div>
+                    <div class="form-floating mb-3 col-6">
+                        <input asp-for="Input.LastName" class="form-control" autocomplete="lastname" aria-required="true" placeholder="name@example.com" />
+                        <label asp-for="Input.LastName" class="mx-2">Nazwisko</label>
+                        <span asp-validation-for="Input.LastName" class="text-danger"></span>
+                    </div>
                     <div class="form-floating mb-3">
                         <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
-                        <label asp-for="Input.Email">Email</label>
+                        <label asp-for="Input.Email" class="mx-2">Adres E-mail</label>
                         <span asp-validation-for="Input.Email" class="text-danger"></span>
                     </div>
                     <div class="form-floating mb-3">
                         <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
-                        <label asp-for="Input.Password">Password</label>
+                        <label asp-for="Input.Password" class="mx-2">Hasło</label>
                         <span asp-validation-for="Input.Password" class="text-danger"></span>
                     </div>
                     <div class="form-floating mb-3">
                         <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
-                        <label asp-for="Input.ConfirmPassword">Confirm Password</label>
+                        <label asp-for="Input.ConfirmPassword" class="mx-2">Powtórz hasło</label>
                         <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
                     </div>
                     <div class="form-floating mb-3">
