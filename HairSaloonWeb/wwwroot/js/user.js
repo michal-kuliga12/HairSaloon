@@ -26,7 +26,7 @@ const loadDataTable = () => {
                                     <button onClick=Update('/Admin/User/Update?id=${data.id}') class="d-flex gap-1 w-50 justify-content-center align-items-center btn btn-dark">
                                         <i class="bi bi-pen"> Edytuj</i>
                                     </button>
-                                    <button onClick=Delete('/Admin/User/Delete?id=${data.id}') class="d-flex gap-1 w-50 justify-content-center align-items-center btn btn-danger">
+                                    <button onClick=Delete('${data.id}') class="d-flex gap-1 w-50 justify-content-center align-items-center btn btn-danger">
                                         <i class="bi bi-trash"> Usuń</i>
                                     </button>
                                 </div>`
@@ -38,7 +38,7 @@ const loadDataTable = () => {
                                     <button onClick=Update('/Admin/User/Update?id=${data.id}') class="d-flex gap-1 w-50 justify-content-center align-items-center btn btn-dark">
                                         <i class="bi bi-pen"> Edytuj</i>
                                     </button>
-                                    <button onClick=Delete('/Admin/User/Delete?id=${data.id}') class="d-flex gap-1 w-50 justify-content-center align-items-center btn btn-danger">
+                                    <button onClick=Delete('${data.id}') class="d-flex gap-1 w-50 justify-content-center align-items-center btn btn-danger">
                                         <i class="bi bi-trash"> Usuń</i>
                                     </button>
                                 </div>`
@@ -65,12 +65,17 @@ const LockUnlock = (id) => {
     })
 }
 
-const Delete = (url) => {
+const Delete = (id) => {
     $.ajax({
-        url: url,
         type: 'DELETE',
+        url: '/Admin/User/Delete',
+        data: JSON.stringify(id),
+        contentType: "application/json",
         success: (data) => {
-            dataTable.ajax.reload();
+            if (data.success) {
+                console.log("Deleting success");
+                dataTable.ajax.reload();
+            }
         }
     }) 
 }

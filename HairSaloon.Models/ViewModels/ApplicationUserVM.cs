@@ -6,6 +6,7 @@ namespace HairSaloon.Models.ViewModels;
 public class ApplicationUserVM
 {
     [Required]
+    [ValidateNever]
     public string Id { get; set; }
     [ValidateNever]
     [Display(Name = "Adres email")]

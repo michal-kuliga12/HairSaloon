@@ -33,12 +33,12 @@
                     <span asp-validation-for="LastName" class="text-danger"></span>
                 </div>
                 <div class="py-2 col-6 form-check">
-                    <input name="Role" type="radio" value="Admin" @(Model.Role == null || Model.Role == "Employee" ? "" : "checked") class="form-check-input" />
+                    <input name="Role" type="radio" value="@(SD.Role_Admin)" @(Model.Role == null || Model.Role == "Employee" ? "" : "checked") class="form-check-input" />
                     <label class="form-check-label">Admin</label>
                     <span asp-validation-for="Role" class="text-danger"></span>
                 </div>                    
                 <div class="py-2 col-6 form-check">
-                    <input name="Role" type="radio" value="Employee" @(Model.Role == null || Model.Role == "Admin" ? "" : "checked") class="form-check-input" />
+                    <input name="Role" type="radio" value="@(SD.Role_Employee)" @(Model.Role == null || Model.Role == "Admin" ? "" : "checked") class="form-check-input" />
                     <label class="form-check-label">Pracownik</label>
                     <span asp-validation-for="Role" class="text-danger"></span>
                 </div>

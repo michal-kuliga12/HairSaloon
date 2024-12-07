@@ -33,6 +33,63 @@ public class UserController : Controller
         return View();
     }
 
+    [HttpGet]
+    public IActionResult Create()
+        => View(new CreateApplicationUserVM());
+
+    [HttpPost, ActionName("Create")]
+    public async Task<IActionResult> Create(CreateApplicationUserVM AppUserVM)
+    {
+        if (!ModelState.IsValid)
+            return View(AppUserVM);
+
+        var user = CreateUser();
+
+        if (!String.IsNullOrEmpty(AppUserVM.Email))
+        {
+            user.Email = AppUserVM.Email;
+        }
+        else
+        {
+            user.Email = $"{AppUserVM.FirstName[0]}{AppUserVM.LastName}@example.com";
+        }
+
+        user.UserName = user.Email.ToLower();
+        user.FirstName = AppUserVM.FirstName;
+        user.LastName = AppUserVM.LastName;
+
+        var result = await _userManager.CreateAsync(user, AppUserVM.Password);
+
+        if (result.Succeeded)
+        {
+            if (!String.IsNullOrEmpty(AppUserVM.Role))
+            {
+                await _userManager.AddToRoleAsync(user, AppUserVM.Role);
+            }
+            else
+            {
+                await _userManager.AddToRoleAsync(user, SD.Role_Employee);
+            }
+        }
+
+        return RedirectToAction("Index");
+    }
+
+    private ApplicationUser CreateUser()
+    {
+        try
+        {
+            return Activator.CreateInstance<ApplicationUser>();
+        }
+        catch
+        {
+            throw new InvalidOperationException($"Can't create an instance of '{nameof(IdentityUser)}'. " +
+                $"Ensure that '{nameof(IdentityUser)}' is not an abstract class and has a parameterless constructor, or alternatively " +
+                $"override the register page in /Areas/Identity/Pages/Account/Register.cshtml");
+        }
+    }
+
+    [HttpGet]
     public IActionResult Update(string? id)
     {
 
@@ -61,10 +118,7 @@ public class UserController : Controller
         if (oldRole != userVM.Role)
         {
             _userManager.RemoveFromRoleAsync(AppUser, oldRole).GetAwaiter().GetResult();
-            if (userVM.Role == SD.Role_Admin)
-                _userManager.AddToRoleAsync(AppUser, SD.Role_Admin).GetAwaiter().GetResult();
-            else
-                _userManager.AddToRoleAsync(AppUser, SD.Role_Employee).GetAwaiter().GetResult();
+            _userManager.AddToRoleAsync(AppUser, userVM.Role).GetAwaiter().GetResult();
         }
 
         // Modyfikacja pozostalych pol
@@ -123,17 +177,22 @@ public class UserController : Controller
     }
 
     [HttpDelete, ActionName("Delete")]
-    public IActionResult Delete(string id)
+    public async Task<IActionResult> Delete([FromBody] string id)
     {
-        //ApplicationUser userFromDb = _db.ApplicationUsers.FirstOrDefault(u => u.Id == id);
-
-        //if (userFromDb == null)
-        //    return Json(new { success = false, message = "Wystąpił problem usuwania" });
-
-        //_db.ApplicationUsers.Remove(userFromDb);
-        //_db.ApplicationUsers.save
-
-        return Json(new { success = true, message = "Pomyślnie usunięto element" });
+        //First Fetch the User you want to Delete
+        var user = await _userManager.FindByIdAsync(id);
+        if (user == null)
+        {
+            return Json(new { success = false, message = "Nie znaleziono użytkownika" });
+        }
+        else
+        {
+            var result = await _userManager.DeleteAsync(user);
+            if (result.Succeeded)
+                return Json(new { success = true, message = "Użytkownik został pomyślnie usunięty" });
+            else
+                return Json(new { success = false, message = "Wystąpił problem usuwania" });
+        }
     }
 
     #endregion
