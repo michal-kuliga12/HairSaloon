@@ -22,49 +22,83 @@ namespace HairSaloon.DataAccess.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("HairSaloon.Models.Appointment", b =>
+            modelBuilder.Entity("HairSaloon.Models.ApplicationUser", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ServiceId")
-                        .HasColumnType("int");
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Appointments");
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
 
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Date = new DateTime(2024, 12, 6, 13, 55, 8, 98, DateTimeKind.Local).AddTicks(4425),
-                            ServiceId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Date = new DateTime(2024, 12, 6, 13, 55, 8, 98, DateTimeKind.Local).AddTicks(4469),
-                            ServiceId = 2
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Date = new DateTime(2024, 12, 6, 13, 55, 8, 98, DateTimeKind.Local).AddTicks(4470),
-                            ServiceId = 3
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Date = new DateTime(2024, 12, 6, 13, 55, 8, 98, DateTimeKind.Local).AddTicks(4472),
-                            ServiceId = 4
-                        });
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("HairSaloon.Models.Employee", b =>
+            modelBuilder.Entity("HairSaloon.Models.Appointment", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -72,42 +106,69 @@ namespace HairSaloon.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("ImageUrl")
+                    b.Property<string>("CustomerEmail")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("CustomerFirstName")
                         .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("CustomerLastName")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CustomerPhoneNumber")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("EmployeeId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("ServiceId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Employee");
+                    b.HasIndex("EmployeeId");
+
+                    b.HasIndex("ServiceId");
+
+                    b.ToTable("Appointments");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
-                            ImageUrl = "",
-                            Name = "Krzysztof"
+                            CustomerEmail = "test@gmail.com",
+                            CustomerFirstName = "Michal",
+                            CustomerPhoneNumber = 222666111,
+                            Date = new DateTime(2024, 12, 9, 21, 20, 39, 807, DateTimeKind.Local).AddTicks(3505),
+                            EmployeeId = "b9fd838c-5e26-49f9-953a-c00e3b34b9da",
+                            ServiceId = 6
                         },
                         new
                         {
                             Id = 2,
-                            ImageUrl = "",
-                            Name = "Barbara"
+                            CustomerEmail = "test1@gmail.com",
+                            CustomerFirstName = "Michal1",
+                            CustomerPhoneNumber = 222666111,
+                            Date = new DateTime(2024, 12, 9, 21, 20, 39, 807, DateTimeKind.Local).AddTicks(3541),
+                            EmployeeId = "ae06c675-dbfb-4f62-b546-02cc6e8a1d09",
+                            ServiceId = 5
                         },
                         new
                         {
                             Id = 3,
-                            ImageUrl = "",
-                            Name = "Piotr"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            ImageUrl = "",
-                            Name = "Michał"
+                            CustomerEmail = "test2@gmail.com",
+                            CustomerFirstName = "Michal2",
+                            CustomerPhoneNumber = 222666111,
+                            Date = new DateTime(2024, 12, 9, 21, 20, 39, 807, DateTimeKind.Local).AddTicks(3542),
+                            EmployeeId = "ae06c675-dbfb-4f62-b546-02cc6e8a1d09",
+                            ServiceId = 2
                         });
                 });
 
@@ -235,6 +296,96 @@ namespace HairSaloon.DataAccess.Migrations
                             DurationInMinutes = 30,
                             Name = "Depilacja",
                             Price = 50
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Category = "Strzyżenie",
+                            Description = "",
+                            DurationInMinutes = 60,
+                            Name = "Strzyżenie męskie",
+                            Price = 50
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Category = "Farbowanie",
+                            Description = "",
+                            DurationInMinutes = 90,
+                            Name = "Strzyżenie damskie",
+                            Price = 50
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Category = "Pakiety",
+                            Description = "",
+                            DurationInMinutes = 30,
+                            Name = "Farbowanie włosów",
+                            Price = 50
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Category = "Pielęgnacja",
+                            Description = "",
+                            DurationInMinutes = 30,
+                            Name = "Depilacja",
+                            Price = 50
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Category = "Strzyżenie",
+                            Description = "",
+                            DurationInMinutes = 60,
+                            Name = "Strzyżenie męskie",
+                            Price = 50
+                        },
+                        new
+                        {
+                            Id = 16,
+                            Category = "Farbowanie",
+                            Description = "",
+                            DurationInMinutes = 90,
+                            Name = "Strzyżenie damskie",
+                            Price = 50
+                        },
+                        new
+                        {
+                            Id = 17,
+                            Category = "Pakiety",
+                            Description = "",
+                            DurationInMinutes = 30,
+                            Name = "Farbowanie włosów",
+                            Price = 50
+                        },
+                        new
+                        {
+                            Id = 18,
+                            Category = "Pielęgnacja",
+                            Description = "",
+                            DurationInMinutes = 30,
+                            Name = "Depilacja",
+                            Price = 50
+                        },
+                        new
+                        {
+                            Id = 19,
+                            Category = "Pielęgnacja",
+                            Description = "",
+                            DurationInMinutes = 30,
+                            Name = "Depilacja",
+                            Price = 50
+                        },
+                        new
+                        {
+                            Id = 20,
+                            Category = "Pielęgnacja",
+                            Description = "",
+                            DurationInMinutes = 30,
+                            Name = "Depilacja",
+                            Price = 50
                         });
                 });
 
@@ -288,79 +439,6 @@ namespace HairSaloon.DataAccess.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetRoleClaims", (string)null);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("UserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedEmail")
-                        .HasDatabaseName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasDatabaseName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.ToTable("AspNetUsers", (string)null);
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
-
-                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -444,28 +522,21 @@ namespace HairSaloon.DataAccess.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("HairSaloon.Models.ApplicationUser", b =>
-                {
-                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasDiscriminator().HasValue("ApplicationUser");
-                });
-
             modelBuilder.Entity("HairSaloon.Models.Appointment", b =>
                 {
-                    b.HasOne("HairSaloon.Models.Service", "Service")
+                    b.HasOne("HairSaloon.Models.ApplicationUser", "Employee")
                         .WithMany()
-                        .HasForeignKey("Id")
+                        .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("HairSaloon.Models.Service", "Service")
+                        .WithMany()
+                        .HasForeignKey("ServiceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Employee");
 
                     b.Navigation("Service");
                 });
@@ -481,7 +552,7 @@ namespace HairSaloon.DataAccess.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("HairSaloon.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -490,7 +561,7 @@ namespace HairSaloon.DataAccess.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("HairSaloon.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -505,7 +576,7 @@ namespace HairSaloon.DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("HairSaloon.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -514,7 +585,7 @@ namespace HairSaloon.DataAccess.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("HairSaloon.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

@@ -1,16 +1,41 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using HairSaloon.DataAccess.Data;
+using HairSaloon.DataAccess.Repository.IRepository;
+using HairSaloon.Models;
+using HairSaloon.Models.ViewModels;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 
 namespace HairSaloonWeb.Areas.Customer.Controllers;
 [Area("Customer")]
 public class AppointmentController : Controller
 {
-    public IActionResult Index()
-    {
-        return View();
-    }
+	private readonly IUnitOfWork _unitOfWork;
+	//private readonly UserManager<ApplicationUser> _userManager; TODO
+	private readonly UserManager<ApplicationUser> _userManager;
+	private readonly ApplicationDbContext _db;
 
-    public IActionResult Create()
-    {
-        return View();
-    }
+	public AppointmentController(IUnitOfWork unitOfWork, /*UserManager<ApplicationUser> userManager,*/UserManager<ApplicationUser> userManager, ApplicationDbContext db)
+	{
+		_unitOfWork = unitOfWork;
+		_userManager = userManager;
+		_db = db;
+	}
+
+	public async Task<IActionResult> Index()
+	{
+		IEnumerable<Service> services = _unitOfWork.Services.GetAll();
+		//IEnumerable<ApplicationUser> employees = _db.Users.ToList(); // TODO - możliwa zamiana wszystkich IdentityUser na ApplicationUser?
+		IEnumerable<ApplicationUser> employees = await _userManager.GetUsersInRoleAsync("Employee"); // Możliwe usunięcie wszystkich rekordów z bazy danych
+		CombinedAppointmentVM appointmentVM = new()
+		{
+			Services = services,
+			Employees = employees,
+		};
+		return View(appointmentVM);
+	}
+
+	//public IActionResult Create()
+	//{
+	//    return View();
+	//}
 }

@@ -1,27 +1,108 @@
-﻿<div class="bg-white">
-    <h1>Appointment</h1>
-	<div class="container">
-		<div class="row col-md">
-			<div class="col-md col-md-8">
-				<div class="" style="position:relative; height:400px; width:100%;"><img style="object-fit:cover;" height="500" width="100%" src="~/images/appointment-main.jpeg" /></div>
-			</div>
-			<div class="col-sm d-flex flex-column  col-md-4">
-				<div style="max-height:300px;">
-					<iframe style="width:100%;height:100%;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2576261.8250187887!2d18.214098274224497!3d50.90742373145165!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x473cfbb7252d8e71%3A0xc12adba96683eeb6!2sLa%20Bella!5e0!3m2!1spl!2spl!4v1731359788522!5m2!1spl!2spl" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-				</div>
-				<div class="bg-secondary">
-					<p>Salon labella</p>
-					<p>Akademicka 2, 35-084 Rzeszów</p>
-				</div>
-				<p>+48 511 322 899</p>
-				<p> Zamknięte</p>
-				<div>
-					<p>Zespół</p>
+﻿@model CombinedAppointmentVM
+@{
+	ViewData["Title"] = "Dashboard";
+}
 
+<div class="bg-white">
+	<div class="container p-2 p-md-4">
+		<div class="row d-flex flex-row-reverse">
+			@*Informacje o kontakcie*@
+			<div class="col col-12 col-md-4 my-3 my-md-0">
+				<div class="p-2 bg-light border rounded">
+					<div class="d-flex flex-column">
+						<div style="max-height:300px;">
+							<iframe class="w-100 h-100" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11409.91473838927!2d23.94074206061593!3d50.974110952015174!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x473cfbb7252d8e71%3A0xc12adba96683eeb6!2sLa%20Bella!5e1!3m2!1spl!2spl!4v1733663567949!5m2!1spl!2spl" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+						</div>
+						<p class="text-gray">Akademicka 2, 35-084 Rzeszów</p>
+						<p class="mb-1 font-aboreto" style="font-size:0.9rem;">Kontakt i godziny otwarcia</p>
+						<div class="d-flex align-items-center justify-content-between py-3 border-top border-bottom">
+							<p class="m-0 text-gray"><i class="bi bi-phone" style="margin-right: 5px;"></i>+48 511 322 899</p>
+							<button class="btn btn-secondary">Zadzwoń</button>
+						</div>
+						<div class="py-2">
+							<p class="d-flex justify-content-between text-gray mb-1">
+								<span>Poniedziałek</span>
+								<span>08:00 - 19:00</span>
+							</p>
+							<p class="d-flex justify-content-between text-gray mb-1">
+								<span>Wtorek</span>
+								<span>08:00 - 19:00</span>
+							</p>
+							<p class="d-flex justify-content-between text-gray mb-1">
+								<span>Środa</span>
+								<span>08:00 - 19:00</span>
+							</p>
+							<p class="d-flex justify-content-between text-gray mb-1">
+								<span>Czwartek</span>
+								<span>08:00 - 19:00</span>
+							</p>
+							<p class="d-flex justify-content-between text-gray mb-1">
+								<span>Piątek</span>
+								<span>08:00 - 19:00</span>
+							</p>
+							<p class="d-flex justify-content-between text-gray mb-1">
+								<span>Sobota</span>
+								<span>08:00 - 16:00</span>
+							</p>
+							<p class="d-flex justify-content-between text-gray mb-1">
+								<span>Niedziela</span>
+								<span>Zamknięte</span>
+							</p>
+						</div>
+						<p class="mb-1 font-aboreto" style="font-size:0.9rem;">Media społecznościowe</p>
+						<div class="d-flex align-items-center justify-content-center gap-3 py-3 border-top">
+							<i class="bi bi-facebook text-gray" style="font-size:32px;"></i>
+							<i class="bi bi-instagram text-gray" style="font-size:32px;"></i>
+							<i class="bi bi-twitter-x text-gray" style="font-size:32px;"></i>	
+						</div>
+					</div>
+				</div>
+			</div>
+			@*Pracownicy, usługi itd.*@
+			<div class="col col-12 col-md-8">
+				<div class="px-2">
+					<h3 class="text-gray font-aboreto px-1">Pracownicy</h3>
+					<div class="d-flex flex-wrap gap-4 p-3 justify-content-start border-top">
+						@foreach (var employee in Model.Employees)
+						{
+							<div class="d-flex flex-column align-items-center">
+								<div class="relative" style="width:80px;height:80px;">
+									<img src="/images/fryzjer1.jpg" class="rounded-circle shadow-4-strong object-fit-cover w-100 h-100" alt="" />
+								</div>
+								<span class="text-center">@employee.FirstName</span>
+							</div>
+						}
+					</div>
+				</div>
+				<div class="d-flex justify-content-between align-items-center p-2 py-3 ">
+					<h3 class="text-gray m-0 font-aboreto px-1">Usługi</h3>
+					<div class="input-group m-0" style="width:300px;">
+						<div class="input-group-prepend">
+							<button class="btn btn-outline-secondary h-100" type="button"><i class="bi bi-search d-flex align-items-center"></i></button>
+						</div>
+						<input type="text" class="form-control m-0" placeholder="" aria-label="" aria-describedby="basic-addon1">
+					</div>
+					
+				</div>
+				<div>
+					@foreach (var service in Model.Services)
+					{
+						<div class="d-flex justify-content-between border-top p-3">
+							<div class="d-flex flex-column">
+								<p class="header-1 m-0">@service.Name</p>
+								<p class="header-2 text-gray">@service.Category</p>
+							</div>
+							<div class="d-flex align-items-center gap-5">
+								<div class="d-flex flex-column align-items-end">
+									<span class="header-1">@service.Price zł</span>
+									<span class="header-2 text-gray"><i class="bi bi-clock" style="margin-right: 5px;"></i>@service.DurationInMinutes min</span>
+								</div>
+								<button class="btn btn-primary">Umów</button>
+							</div>
+						</div>
+					}
 				</div>
 			</div>
 		</div>
 	</div>
-	<input type="datetime-local" value="" />
-	<button class="btn btn-primary">Zarezerwuj wizyte</button>
 </div>
