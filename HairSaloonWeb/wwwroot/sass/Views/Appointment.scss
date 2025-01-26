@@ -1,0 +1,49 @@
+﻿@import "../_variables.scss";
+
+.employee-select.selected .image-overlay {
+    background: rgba(0, 128, 255, 0.5); /* Niebieski półprzezroczysty overlay */
+    width: 100%;
+    height: 100%;
+}
+
+/* Wyróżnienie wybranej usługi */
+.service-select.selected {
+    background: rgba(0, 128, 255, 0.1); /* Jasnoniebieskie tło */
+    border-color: rgba(0, 128, 255, 0.5); /* Podkreślenie */
+}
+
+.employee-select .image-overlay {
+    display: none; /* Domyślnie ukryty overlay */
+}
+
+.selected-employee .image-overlay {
+    position: absolute; /* Overlay na zdjęcie */
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(250, 176, 0, 0.33); /* Półprzezroczysty czarny overlay */
+    border-radius: 50%; /* Dopasowanie do okrągłego zdjęcia */
+    display: block; /* Pokazanie overlay */
+    z-index: 10; /* Na wierzchu zdjęcia */
+}
+
+.hours {
+    .hour {
+        width: 60px;
+        text-align: center;
+        text-decoration: none;
+        border-radius: 20px;
+        color: black;
+        padding: 4px;
+    }
+
+    .occupied {
+        background-color: lightgray;
+        text-decoration: line-through;
+    }
+
+    .open {
+        background-color: lightyellow;
+    }
+}

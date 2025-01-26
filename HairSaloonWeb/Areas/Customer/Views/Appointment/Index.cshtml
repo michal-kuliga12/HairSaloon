@@ -1,11 +1,22 @@
 ﻿@model CombinedAppointmentVM
 @{
 	ViewData["Title"] = "Dashboard";
-}
 
+	Dictionary<string, string> workingSchedule = new Dictionary<string, string>()
+	{
+		 {"Poniedziałek", "08:00 - 19:00"},
+		 {"Wtorek", "08:00 - 19:00"},
+		 {"Środa", "08:00 - 19:00"},
+		 {"Czwartek", "08:00 - 19:00"},
+		 {"Piątek", "08:00 - 19:00"},
+		 {"Sobota", "08:00 - 16:00"},
+		 {"Niedziela", "Zamknięte"}
+	};
+}
 <div class="bg-white">
 	<div class="container p-2 p-md-4">
 		<div class="row d-flex flex-row-reverse">
+
 			@*Informacje o kontakcie*@
 			<div class="col col-12 col-md-4 my-3 my-md-0">
 				<div class="p-2 bg-light border rounded">
@@ -20,34 +31,12 @@
 							<button class="btn btn-secondary">Zadzwoń</button>
 						</div>
 						<div class="py-2">
-							<p class="d-flex justify-content-between text-gray mb-1">
-								<span>Poniedziałek</span>
-								<span>08:00 - 19:00</span>
-							</p>
-							<p class="d-flex justify-content-between text-gray mb-1">
-								<span>Wtorek</span>
-								<span>08:00 - 19:00</span>
-							</p>
-							<p class="d-flex justify-content-between text-gray mb-1">
-								<span>Środa</span>
-								<span>08:00 - 19:00</span>
-							</p>
-							<p class="d-flex justify-content-between text-gray mb-1">
-								<span>Czwartek</span>
-								<span>08:00 - 19:00</span>
-							</p>
-							<p class="d-flex justify-content-between text-gray mb-1">
-								<span>Piątek</span>
-								<span>08:00 - 19:00</span>
-							</p>
-							<p class="d-flex justify-content-between text-gray mb-1">
-								<span>Sobota</span>
-								<span>08:00 - 16:00</span>
-							</p>
-							<p class="d-flex justify-content-between text-gray mb-1">
-								<span>Niedziela</span>
-								<span>Zamknięte</span>
-							</p>
+							@foreach(KeyValuePair<string,string> kvp in workingSchedule){
+								<p class="d-flex justify-content-between text-gray mb-1">
+									<span>@kvp.Key</span>
+									<span>@kvp.Value</span>
+								</p>
+							}
 						</div>
 						<p class="mb-1 font-aboreto" style="font-size:0.9rem;">Media społecznościowe</p>
 						<div class="d-flex align-items-center justify-content-center gap-3 py-3 border-top">
@@ -58,6 +47,7 @@
 					</div>
 				</div>
 			</div>
+
 			@*Pracownicy, usługi itd.*@
 			<div class="col col-12 col-md-8">
 				<div class="px-2">
@@ -65,12 +55,13 @@
 					<div class="d-flex flex-wrap gap-4 p-3 justify-content-start border-top">
 						@foreach (var employee in Model.Employees)
 						{
-							<div class="d-flex flex-column align-items-center">
-								<div class="relative" style="width:80px;height:80px;">
-									<img src="/images/fryzjer1.jpg" class="rounded-circle shadow-4-strong object-fit-cover w-100 h-100" alt="" />
+							<a data-employee-id="@employee.Id" class="d-flex flex-column employee-select align-items-center gap-2 text-decoration-none text-dark" style="max-width:80px;">
+								<div class="position-relative ">
+									<img src="/images/fryzjer1.jpg" class="img-fluid rounded-circle selected" style="height:80px!important;" alt="" />
+									<div class="image-overlay"></div>
 								</div>
-								<span class="text-center">@employee.FirstName</span>
-							</div>
+								<span class="text-center" style="">@employee.FirstName</span>
+							</a>
 						}
 					</div>
 				</div>
@@ -82,7 +73,6 @@
 						</div>
 						<input type="text" class="form-control m-0" placeholder="" aria-label="" aria-describedby="basic-addon1">
 					</div>
-					
 				</div>
 				<div>
 					@foreach (var service in Model.Services)
@@ -97,12 +87,143 @@
 									<span class="header-1">@service.Price zł</span>
 									<span class="header-2 text-gray"><i class="bi bi-clock" style="margin-right: 5px;"></i>@service.DurationInMinutes min</span>
 								</div>
-								<button class="btn btn-primary">Umów</button>
+								<button data-service-name="@service.Name" class="btn btn-primary service-select">Umów</button>
 							</div>
 						</div>
 					}
 				</div>
 			</div>
+
 		</div>
 	</div>
 </div>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Rezerwacja wizyty</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form method="post" asp-action="Create" class="row">
+					<div class="d-flex gap-2">
+						@foreach (var employee in Model.Employees)
+						{
+							<a data-employee-id="@employee.Id" class="d-flex flex-column employee-select align-items-center gap-2 text-decoration-none text-dark" role="button" style="max-width:60px;">
+								<div class="position-relative ">
+									<img src="/images/fryzjer1.jpg" class="img-fluid rounded-circle" style="height:60px!important;" alt="" />
+									<div class="image-overlay"></div>
+								</div>
+								<span class="text-center" style="">@employee.FirstName</span>
+							</a>
+						}
+					</div>
+					<div class="d-flex flex-column">
+						<div class="container">
+							<header class="d-flex justify-content-between align-items-center bg-dark rounded text-white p-2">
+								<p class="current-date m-0"></p>
+								<div class="icons">
+									<span id="prev" class="material-symbols-rounded icon"><</span>
+									<span id="next" class="material-symbols-rounded icon">></span>
+								</div>
+							</header>
+							<div class="calendar d-flex flex-column align-center p-0">
+								<input asp-for="Appointment.Date" value="" type="hidden" />
+
+								<ul class="row w-100 p-0 font-weight-bold">
+									<li class="col">Pn</li>
+									<li class="col">Wt</li>
+									<li class="col">Śr</li>
+									<li class="col">Czw</li>
+									<li class="col">Pt</li>
+									<li class="col">Sob</li>
+									<li class="col">Nd</li>
+								</ul>
+								<div class="weeks row w-100">
+									@* => generated days *@
+								</div>
+							</div>
+						</div>
+						<div class="hours d-flex flex-wrap gap-1 w-100">
+							@* => generated hours *@
+						</div>
+					</div>
+					<div class="col-6 col-md-3">
+						<button type="submit" class="btn btn-primary form-control">Zatwierdź</button>
+					</div>
+					<div class="col-6 col-md-3">
+						<a asp-controller="Appointment" asp-action="Create" asp-area="Customer" class="btn btn-outline-secondary border form-control">
+							Wstecz
+						</a>
+					</div>
+				</form>	
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Anuluj</button>
+				<button type="button" class="btn btn-primary">Zarezerwuj wizyte</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+@section Scripts {
+	<script>
+		$(document).ready(() => {
+
+			const selectedEmployeeId = localStorage.getItem('selectedEmployeeId');
+			if (selectedEmployeeId) {
+				$(`.employee-select[data-employee-id="${selectedEmployeeId}"]`).addClass('selected-employee');
+			}
+
+			$(".employee-select").on("click", function (event) {
+				event.preventDefault();
+				const employeeId = $(this).data("employee-id");
+				localStorage.setItem("selectedEmployeeId", employeeId);
+				$('.employee-select').removeClass('selected-employee');
+				$(this).addClass('selected-employee');
+				console.log(`Employee ID ${employeeId} saved in localStorage.`);
+			});
+
+			$(".service-select").on("click", function(event) {
+				const serviceName = $(this).data('service-name');
+				event.preventDefault();
+				toggleModal();
+			})
+
+		const daySelectors = document.querySelectorAll('.day-selector');
+		daySelectors.forEach((day) => {
+			day.addEventListener('click', (event) => {
+				let date = new Date(currYear, currMonth, event.target.innerText)
+				renderAvailableHours(date);
+			});
+		});
+
+			$(".hour").on("click", function(event) {
+				console.log("hour clicked");
+			})
+
+				const today = new Date();
+				const formattedDate = today.toISOString(); // "YYYY-MM-DDTHH:MM:SS.sssZ"
+
+			$("form").on("submit", function () {
+				$("#Appointment_Date").val(formattedDate);
+				console.log($("#Appointment_Date").val());
+				this.submit();
+				
+			});
+		});
+
+		const toggleModal = () => {
+			const selectedEmployeeId = localStorage.getItem('selectedEmployeeId');
+			$('#exampleModal').modal('show')
+			if (selectedEmployeeId) {
+				$(`.employee-select[data-employee-id="${selectedEmployeeId}"]`).addClass('selected-employee');
+			}
+		}
+	</script>
+	<script src="~/js/calendar.js"></script>
+}
+
+

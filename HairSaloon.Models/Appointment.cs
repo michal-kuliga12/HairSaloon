@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace HairSaloon.Models;
 
@@ -14,12 +14,12 @@ public class Appointment
     [ForeignKey("ServiceId")]
     [ValidateNever]
     public Service Service { get; set; }
-    [Display(Name = "Employee Id")]
-    [Required]
-    public string EmployeeId { get; set; }
-    [ForeignKey("EmployeeId")]
-    [ValidateNever]
-    public ApplicationUser Employee { get; set; }
+    //[Display(Name = "Employee Id")]
+    //[Required]
+    //public string EmployeeId { get; set; }
+    //[ForeignKey("EmployeeId")]
+    //[ValidateNever]
+    //public ApplicationUser Employee { get; set; }
     [Required]
     [DataType(DataType.PhoneNumber)]
 

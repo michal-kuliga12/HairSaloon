@@ -7,6 +7,9 @@
  * Copyright 2011-2021 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
+@import url("https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lavishly+Yours&family=League+Spartan:wght@100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Aboreto&family=Lavishly+Yours&family=League+Spartan&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Lavishly+Yours&family=League+Spartan:wght@100..900&display=swap");
@@ -9741,6 +9744,164 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+.employee-select.selected .image-overlay {
+  background: rgba(0, 128, 255, 0.5); /* Niebieski półprzezroczysty overlay */
+  width: 100%;
+  height: 100%;
+}
+
+/* Wyróżnienie wybranej usługi */
+.service-select.selected {
+  background: rgba(0, 128, 255, 0.1); /* Jasnoniebieskie tło */
+  border-color: rgba(0, 128, 255, 0.5); /* Podkreślenie */
+}
+
+.employee-select .image-overlay {
+  display: none; /* Domyślnie ukryty overlay */
+}
+
+.selected-employee .image-overlay {
+  position: absolute; /* Overlay na zdjęcie */
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(250, 176, 0, 0.33); /* Półprzezroczysty czarny overlay */
+  border-radius: 50%; /* Dopasowanie do okrągłego zdjęcia */
+  display: block; /* Pokazanie overlay */
+  z-index: 10; /* Na wierzchu zdjęcia */
+}
+
+.hours .hour {
+  width: 60px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 20px;
+  color: black;
+  padding: 4px;
+}
+.hours .occupied {
+  background-color: lightgray;
+  text-decoration: line-through;
+}
+.hours .open {
+  background-color: lightyellow;
+}
+
+/* Import Google font - Poppins */
+.wrapper {
+  width: 650px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+}
+
+.wrapper header {
+  display: flex;
+  align-items: center;
+  padding: 25px 30px 10px;
+  justify-content: space-between;
+}
+
+header .icons {
+  display: flex;
+}
+
+.icon {
+  height: 38px;
+  width: 38px;
+  margin: 0 1px;
+  cursor: pointer;
+  color: #878787;
+  text-align: center;
+  line-height: 38px;
+  font-size: 1.9rem;
+  user-select: none;
+  border-radius: 50%;
+}
+
+.icon span:last-child {
+  margin-right: -10px;
+}
+
+.icon:hover {
+  background: #f2f2f2;
+}
+
+header .current-date {
+  font-size: 1.45rem;
+  font-weight: 500;
+}
+
+.calendar {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+}
+
+/*.calendar ul {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    list-style: none;
+    text-align: center;
+}
+
+.calendar .day {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f7f7f76b;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    padding: 1.75rem;
+    color: #333;
+    font-size: 1.07rem;
+}
+
+.calendar .date-of-month {
+    font-weight: 1000;
+    cursor: default;
+}
+
+.week li.inactive {
+    color: #dbdbdb;
+}
+
+.week li.active {
+    color: #fff;
+}
+
+.calendar .week li {
+    z-index: 1;
+    cursor: pointer;
+    position: relative;
+    padding: 10px;
+}
+
+.week li:not(.active, .inactive):hover {
+    background-color: rgb(255, 217, 0);
+    transition: 0.2s;
+    cursor: pointer;
+    box-shadow: 0px 0px 6px -3px #000000;
+}*/
+.calendar ul {
+  list-style: none;
+  width: 100%;
+  box-sizing: content-box;
+}
+.calendar .inactive {
+  color: #dbdbdb;
+}
+.calendar .active {
+  background-color: rgba(205, 205, 205, 0.3);
+  border-radius: 50%;
+}
+.calendar li {
+  padding: 10px;
+  text-align: center;
+}
+
 html {
   position: relative;
   min-height: 100%;
@@ -9822,6 +9983,25 @@ a {
   color: rgba(255, 255, 255, 0.75) !important;
 }
 
+/*.image-overlay {
+    &.hidden {
+        display: none!important;
+        visibility:hidden;
+    }
+
+    &::after {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background: linear-gradient(180deg, rgb(233, 189, 18, 0.5), rgb(239, 221, 15, 0.2));
+        z-index: 1;
+    }
+}*/
 html {
   font-size: 14px;
 }

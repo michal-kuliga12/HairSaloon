@@ -1,7 +1,7 @@
-﻿using HairSaloon.DataAccess.Data;
+﻿using System.Linq.Expressions;
+using HairSaloon.DataAccess.Data;
 using HairSaloon.DataAccess.Repository.IRepository;
 using Microsoft.EntityFrameworkCore;
-using System.Linq.Expressions;
 
 namespace HairSaloon.DataAccess.Repository;
 

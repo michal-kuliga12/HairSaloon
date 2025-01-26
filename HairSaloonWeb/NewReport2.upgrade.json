@@ -1,0 +1,572 @@
+{
+  "settings": {
+    "components": {
+      "code": true,
+      "binaries": false
+    },
+    "targetId": "",
+    "targetDisplayName": ".NET 9.0"
+  },
+  "analysisStartTime": "2025-01-05T12:17:32.7426184Z",
+  "analysisEndTime": "2025-01-05T12:17:42.6728997Z",
+  "privacyModeHelpUrl": "https://go.microsoft.com/fwlink/?linkid=2270980",
+  "stats": {
+    "summary": {
+      "projects": 4,
+      "issues": 4,
+      "incidents": 21,
+      "effort": 21
+    },
+    "charts": {
+      "severity": {
+        "Mandatory": 3,
+        "Optional": 1,
+        "Potential": 17,
+        "Information": 0
+      },
+      "category": {
+        "NuGet": 9,
+        "Project": 3,
+        "Api": 9
+      }
+    }
+  },
+  "projects": [
+    {
+      "path": "D:\\Dev\\Aplikacje internetowe\\HairSaloon\\HairSaloon.DataAccess\\HairSaloon.DataAccess.csproj",
+      "startingProject": true,
+      "issues": 0,
+      "storyPoints": 0,
+      "ruleInstances": []
+    },
+    {
+      "path": "D:\\Dev\\Aplikacje internetowe\\HairSaloon\\HairSaloon.Models\\HairSaloon.Models.csproj",
+      "startingProject": true,
+      "issues": 3,
+      "storyPoints": 3,
+      "ruleInstances": [
+        {
+          "incidentId": "8613a972-307d-4ea4-aca1-864fbb3a72f3",
+          "ruleId": "NuGet.0002",
+          "projectPath": "D:\\Dev\\Aplikacje internetowe\\HairSaloon\\HairSaloon.Models\\HairSaloon.Models.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Microsoft.Extensions.Identity.Stores, 7.0.20\n\nRekomendacja:\n\nMicrosoft.Extensions.Identity.Stores 9.0.0",
+              "protected": "Microsoft.Extensions.Identity.Stores, 7.0.20\n\nRekomendacja:\n\nMicrosoft.Extensions.Identity.Stores 9.0.0"
+            },
+            "kind": "File",
+            "path": "D:\\Dev\\Aplikacje internetowe\\HairSaloon\\HairSaloon.Models\\HairSaloon.Models.csproj",
+            "snippet": "Microsoft.Extensions.Identity.Stores, 7.0.20\n\nRekomendacja:\n\nMicrosoft.Extensions.Identity.Stores 9.0.0",
+            "protectedSnippet": "Microsoft.Extensions.Identity.Stores, 7.0.20\n\nRekomendacja:\n\nMicrosoft.Extensions.Identity.Stores 9.0.0",
+            "label": "Microsoft.Extensions.Identity.Stores 7.0.20"
+          }
+        },
+        {
+          "incidentId": "448728ff-218b-4925-937c-d43dd1cdc6bc",
+          "ruleId": "NuGet.0005",
+          "projectPath": "D:\\Dev\\Aplikacje internetowe\\HairSaloon\\HairSaloon.Models\\HairSaloon.Models.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Microsoft.AspNetCore.Mvc.Core, 2.2.5\n\nRekomendacja:\n\nThis package has been deprecated as part of the .NET Package Deprecation effort. You can learn more about it from https://github.com/dotnet/announcements/issues/217",
+              "protected": "Microsoft.AspNetCore.Mvc.Core, 2.2.5\n\nRekomendacja:\n\nThis package has been deprecated as part of the .NET Package Deprecation effort. You can learn more about it from https://github.com/dotnet/announcements/issues/217"
+            },
+            "kind": "File",
+            "path": "D:\\Dev\\Aplikacje internetowe\\HairSaloon\\HairSaloon.Models\\HairSaloon.Models.csproj",
+            "snippet": "Microsoft.AspNetCore.Mvc.Core, 2.2.5\n\nRekomendacja:\n\nThis package has been deprecated as part of the .NET Package Deprecation effort. You can learn more about it from https://github.com/dotnet/announcements/issues/217",
+            "protectedSnippet": "Microsoft.AspNetCore.Mvc.Core, 2.2.5\n\nRekomendacja:\n\nThis package has been deprecated as part of the .NET Package Deprecation effort. You can learn more about it from https://github.com/dotnet/announcements/issues/217",
+            "label": "Microsoft.AspNetCore.Mvc.Core 2.2.5"
+          }
+        },
+        {
+          "incidentId": "bc32f0fe-04e4-42fe-ad50-8df36732b72c",
+          "ruleId": "Project.0002",
+          "projectPath": "D:\\Dev\\Aplikacje internetowe\\HairSaloon\\HairSaloon.Models\\HairSaloon.Models.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Bie\u017C\u0105cy: net7.0\nNowy: net9.0",
+              "protected": "Bie\u017C\u0105cy: net7.0\nNowy: net9.0"
+            },
+            "kind": "File",
+            "path": "D:\\Dev\\Aplikacje internetowe\\HairSaloon\\HairSaloon.Models\\HairSaloon.Models.csproj",
+            "snippet": "Bie\u017C\u0105cy: net7.0\nNowy: net9.0",
+            "protectedSnippet": "Bie\u017C\u0105cy: net7.0\nNowy: net9.0"
+          }
+        }
+      ]
+    },
+    {
+      "path": "D:\\Dev\\Aplikacje internetowe\\HairSaloon\\HairSaloon.Utility\\HairSaloon.Utility.csproj",
+      "startingProject": true,
+      "issues": 2,
+      "storyPoints": 2,
+      "ruleInstances": [
+        {
+          "incidentId": "657a5375-9a74-4d41-8317-d5489af8b69c",
+          "ruleId": "NuGet.0002",
+          "projectPath": "D:\\Dev\\Aplikacje internetowe\\HairSaloon\\HairSaloon.Utility\\HairSaloon.Utility.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Microsoft.AspNetCore.Identity.UI, 7.0.20\n\nRekomendacja:\n\nMicrosoft.AspNetCore.Identity.UI 9.0.0",
+              "protected": "Microsoft.AspNetCore.Identity.UI, 7.0.20\n\nRekomendacja:\n\nMicrosoft.AspNetCore.Identity.UI 9.0.0"
+            },
+            "kind": "File",
+            "path": "D:\\Dev\\Aplikacje internetowe\\HairSaloon\\HairSaloon.Utility\\HairSaloon.Utility.csproj",
+            "snippet": "Microsoft.AspNetCore.Identity.UI, 7.0.20\n\nRekomendacja:\n\nMicrosoft.AspNetCore.Identity.UI 9.0.0",
+            "protectedSnippet": "Microsoft.AspNetCore.Identity.UI, 7.0.20\n\nRekomendacja:\n\nMicrosoft.AspNetCore.Identity.UI 9.0.0",
+            "label": "Microsoft.AspNetCore.Identity.UI 7.0.20"
+          }
+        },
+        {
+          "incidentId": "78a05f2d-8df8-4ffe-ad9f-ecd1ed247fa3",
+          "ruleId": "Project.0002",
+          "projectPath": "D:\\Dev\\Aplikacje internetowe\\HairSaloon\\HairSaloon.Utility\\HairSaloon.Utility.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Bie\u017C\u0105cy: net7.0\nNowy: net9.0",
+              "protected": "Bie\u017C\u0105cy: net7.0\nNowy: net9.0"
+            },
+            "kind": "File",
+            "path": "D:\\Dev\\Aplikacje internetowe\\HairSaloon\\HairSaloon.Utility\\HairSaloon.Utility.csproj",
+            "snippet": "Bie\u017C\u0105cy: net7.0\nNowy: net9.0",
+            "protectedSnippet": "Bie\u017C\u0105cy: net7.0\nNowy: net9.0"
+          }
+        }
+      ]
+    },
+    {
+      "path": "HairSaloonWeb.csproj",
+      "startingProject": true,
+      "issues": 3,
+      "storyPoints": 16,
+      "ruleInstances": [
+        {
+          "incidentId": "6724e72c-f703-4190-805b-a01723e491b8",
+          "ruleId": "NuGet.0002",
+          "projectPath": "HairSaloonWeb.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Microsoft.AspNetCore.Identity.EntityFrameworkCore, 7.0.20\n\nRekomendacja:\n\nMicrosoft.AspNetCore.Identity.EntityFrameworkCore 9.0.0",
+              "protected": "Microsoft.AspNetCore.Identity.EntityFrameworkCore, 7.0.20\n\nRekomendacja:\n\nMicrosoft.AspNetCore.Identity.EntityFrameworkCore 9.0.0"
+            },
+            "kind": "File",
+            "path": "HairSaloonWeb.csproj",
+            "snippet": "Microsoft.AspNetCore.Identity.EntityFrameworkCore, 7.0.20\n\nRekomendacja:\n\nMicrosoft.AspNetCore.Identity.EntityFrameworkCore 9.0.0",
+            "protectedSnippet": "Microsoft.AspNetCore.Identity.EntityFrameworkCore, 7.0.20\n\nRekomendacja:\n\nMicrosoft.AspNetCore.Identity.EntityFrameworkCore 9.0.0",
+            "label": "Microsoft.AspNetCore.Identity.EntityFrameworkCore 7.0.20"
+          }
+        },
+        {
+          "incidentId": "e40663f6-de77-4e1e-bdef-f79a8f2d1cdc",
+          "ruleId": "NuGet.0002",
+          "projectPath": "HairSaloonWeb.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Microsoft.AspNetCore.Identity.UI, 7.0.20\n\nRekomendacja:\n\nMicrosoft.AspNetCore.Identity.UI 9.0.0",
+              "protected": "Microsoft.AspNetCore.Identity.UI, 7.0.20\n\nRekomendacja:\n\nMicrosoft.AspNetCore.Identity.UI 9.0.0"
+            },
+            "kind": "File",
+            "path": "HairSaloonWeb.csproj",
+            "snippet": "Microsoft.AspNetCore.Identity.UI, 7.0.20\n\nRekomendacja:\n\nMicrosoft.AspNetCore.Identity.UI 9.0.0",
+            "protectedSnippet": "Microsoft.AspNetCore.Identity.UI, 7.0.20\n\nRekomendacja:\n\nMicrosoft.AspNetCore.Identity.UI 9.0.0",
+            "label": "Microsoft.AspNetCore.Identity.UI 7.0.20"
+          }
+        },
+        {
+          "incidentId": "a1019c5b-e2d1-4cdf-af00-f3922d465e60",
+          "ruleId": "NuGet.0002",
+          "projectPath": "HairSaloonWeb.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Microsoft.EntityFrameworkCore, 7.0.20\n\nRekomendacja:\n\nMicrosoft.EntityFrameworkCore 9.0.0",
+              "protected": "Microsoft.EntityFrameworkCore, 7.0.20\n\nRekomendacja:\n\nMicrosoft.EntityFrameworkCore 9.0.0"
+            },
+            "kind": "File",
+            "path": "HairSaloonWeb.csproj",
+            "snippet": "Microsoft.EntityFrameworkCore, 7.0.20\n\nRekomendacja:\n\nMicrosoft.EntityFrameworkCore 9.0.0",
+            "protectedSnippet": "Microsoft.EntityFrameworkCore, 7.0.20\n\nRekomendacja:\n\nMicrosoft.EntityFrameworkCore 9.0.0",
+            "label": "Microsoft.EntityFrameworkCore 7.0.20"
+          }
+        },
+        {
+          "incidentId": "3628ac09-dc31-4de5-addf-b8c810395097",
+          "ruleId": "NuGet.0002",
+          "projectPath": "HairSaloonWeb.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Microsoft.EntityFrameworkCore.SqlServer, 7.0.20\n\nRekomendacja:\n\nMicrosoft.EntityFrameworkCore.SqlServer 9.0.0",
+              "protected": "Microsoft.EntityFrameworkCore.SqlServer, 7.0.20\n\nRekomendacja:\n\nMicrosoft.EntityFrameworkCore.SqlServer 9.0.0"
+            },
+            "kind": "File",
+            "path": "HairSaloonWeb.csproj",
+            "snippet": "Microsoft.EntityFrameworkCore.SqlServer, 7.0.20\n\nRekomendacja:\n\nMicrosoft.EntityFrameworkCore.SqlServer 9.0.0",
+            "protectedSnippet": "Microsoft.EntityFrameworkCore.SqlServer, 7.0.20\n\nRekomendacja:\n\nMicrosoft.EntityFrameworkCore.SqlServer 9.0.0",
+            "label": "Microsoft.EntityFrameworkCore.SqlServer 7.0.20"
+          }
+        },
+        {
+          "incidentId": "fb871e39-94ba-4667-aa88-6bcb80a16e59",
+          "ruleId": "NuGet.0002",
+          "projectPath": "HairSaloonWeb.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Microsoft.EntityFrameworkCore.Tools, 7.0.20\n\nRekomendacja:\n\nMicrosoft.EntityFrameworkCore.Tools 9.0.0",
+              "protected": "Microsoft.EntityFrameworkCore.Tools, 7.0.20\n\nRekomendacja:\n\nMicrosoft.EntityFrameworkCore.Tools 9.0.0"
+            },
+            "kind": "File",
+            "path": "HairSaloonWeb.csproj",
+            "snippet": "Microsoft.EntityFrameworkCore.Tools, 7.0.20\n\nRekomendacja:\n\nMicrosoft.EntityFrameworkCore.Tools 9.0.0",
+            "protectedSnippet": "Microsoft.EntityFrameworkCore.Tools, 7.0.20\n\nRekomendacja:\n\nMicrosoft.EntityFrameworkCore.Tools 9.0.0",
+            "label": "Microsoft.EntityFrameworkCore.Tools 7.0.20"
+          }
+        },
+        {
+          "incidentId": "5b14c015-b8d8-4de7-bb1a-4325557b9a77",
+          "ruleId": "NuGet.0002",
+          "projectPath": "HairSaloonWeb.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Microsoft.VisualStudio.Web.CodeGeneration.Design, 7.0.12\n\nRekomendacja:\n\nMicrosoft.VisualStudio.Web.CodeGeneration.Design 9.0.0",
+              "protected": "Microsoft.VisualStudio.Web.CodeGeneration.Design, 7.0.12\n\nRekomendacja:\n\nMicrosoft.VisualStudio.Web.CodeGeneration.Design 9.0.0"
+            },
+            "kind": "File",
+            "path": "HairSaloonWeb.csproj",
+            "snippet": "Microsoft.VisualStudio.Web.CodeGeneration.Design, 7.0.12\n\nRekomendacja:\n\nMicrosoft.VisualStudio.Web.CodeGeneration.Design 9.0.0",
+            "protectedSnippet": "Microsoft.VisualStudio.Web.CodeGeneration.Design, 7.0.12\n\nRekomendacja:\n\nMicrosoft.VisualStudio.Web.CodeGeneration.Design 9.0.0",
+            "label": "Microsoft.VisualStudio.Web.CodeGeneration.Design 7.0.12"
+          }
+        },
+        {
+          "incidentId": "0058138a-ee6d-4301-ad39-414058607d2c",
+          "ruleId": "Project.0002",
+          "projectPath": "HairSaloonWeb.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Bie\u017C\u0105cy: net7.0\nNowy: net9.0",
+              "protected": "Bie\u017C\u0105cy: net7.0\nNowy: net9.0"
+            },
+            "kind": "File",
+            "path": "HairSaloonWeb.csproj",
+            "snippet": "Bie\u017C\u0105cy: net7.0\nNowy: net9.0",
+            "protectedSnippet": "Bie\u017C\u0105cy: net7.0\nNowy: net9.0"
+          }
+        },
+        {
+          "incidentId": "91c9cecf-eea8-4f27-ade6-ed2e38d3e591",
+          "ruleId": "Api.0002",
+          "description": "Interfejs API jest dost\u0119pny w pakiecie Microsoft.EntityFrameworkCore, 9.0.0-preview.6.24302.4.",
+          "projectPath": "HairSaloonWeb.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "builder.Services.AddDbContext\u003CApplicationDbContext\u003E(options =\u003E\r\n\t\t\toptions.UseSqlServer(builder.Configuration.GetConnectionString(\u0022DefaultConnection\u0022)));",
+              "protected": "M:Microsoft.Extensions.DependencyInjection.EntityFrameworkServiceCollectionExtensions.AddDbContext\u0060\u00601(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Microsoft.EntityFrameworkCore.DbContextOptionsBuilder},Microsoft.Extensions.DependencyInjection.ServiceLifetime,Microsoft.Extensions.DependencyInjection.ServiceLifetime)"
+            },
+            "kind": "File",
+            "path": "Program.cs",
+            "snippet": "builder.Services.AddDbContext\u003CApplicationDbContext\u003E(options =\u003E\r\n\t\t\toptions.UseSqlServer(builder.Configuration.GetConnectionString(\u0022DefaultConnection\u0022)));",
+            "protectedSnippet": "M:Microsoft.Extensions.DependencyInjection.EntityFrameworkServiceCollectionExtensions.AddDbContext\u0060\u00601(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Microsoft.EntityFrameworkCore.DbContextOptionsBuilder},Microsoft.Extensions.DependencyInjection.ServiceLifetime,Microsoft.Extensions.DependencyInjection.ServiceLifetime)",
+            "label": "M:Microsoft.Extensions.DependencyInjection.EntityFrameworkServiceCollectionExtensions.AddDbContext\u0060\u00601(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Microsoft.EntityFrameworkCore.DbContextOptionsBuilder},Microsoft.Extensions.DependencyInjection.ServiceLifetime,Microsoft.Extensions.DependencyInjection.ServiceLifetime)",
+            "links": [
+              {
+                "title": "Dokumentacja interfejsu API",
+                "url": "https://learn.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection.entityframeworkservicecollectionextensions.adddbcontext",
+                "isCustom": false
+              }
+            ],
+            "line": 19,
+            "column": 2
+          }
+        },
+        {
+          "incidentId": "aec954ac-dae8-422a-95a8-d99cfb3e22a1",
+          "ruleId": "Api.0002",
+          "description": "Interfejs API jest dost\u0119pny w pakiecie Microsoft.EntityFrameworkCore.SqlServer, 8.0.6.",
+          "projectPath": "HairSaloonWeb.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "builder.Services.AddDbContext\u003CApplicationDbContext\u003E(options =\u003E\r\n\t\t\toptions.UseSqlServer(builder.Configuration.GetConnectionString(\u0022DefaultConnection\u0022)));",
+              "protected": "T:Microsoft.EntityFrameworkCore.SqlServerDbContextOptionsExtensions"
+            },
+            "kind": "File",
+            "path": "Program.cs",
+            "snippet": "builder.Services.AddDbContext\u003CApplicationDbContext\u003E(options =\u003E\r\n\t\t\toptions.UseSqlServer(builder.Configuration.GetConnectionString(\u0022DefaultConnection\u0022)));",
+            "protectedSnippet": "T:Microsoft.EntityFrameworkCore.SqlServerDbContextOptionsExtensions",
+            "label": "T:Microsoft.EntityFrameworkCore.SqlServerDbContextOptionsExtensions",
+            "links": [
+              {
+                "title": "Dokumentacja interfejsu API",
+                "url": "https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.sqlserverdbcontextoptionsextensions",
+                "isCustom": false
+              }
+            ],
+            "line": 19,
+            "column": 2
+          }
+        },
+        {
+          "incidentId": "04bdf085-ce94-4060-a716-df677ba781c1",
+          "ruleId": "Api.0002",
+          "description": "Interfejs API jest dost\u0119pny w pakiecie Microsoft.EntityFrameworkCore, 9.0.0-preview.6.24302.4.",
+          "projectPath": "HairSaloonWeb.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "builder.Services.AddDbContext\u003CApplicationDbContext\u003E(options =\u003E\r\n\t\t\toptions.UseSqlServer(builder.Configuration.GetConnectionString(\u0022DefaultConnection\u0022)));",
+              "protected": "T:Microsoft.Extensions.DependencyInjection.EntityFrameworkServiceCollectionExtensions"
+            },
+            "kind": "File",
+            "path": "Program.cs",
+            "snippet": "builder.Services.AddDbContext\u003CApplicationDbContext\u003E(options =\u003E\r\n\t\t\toptions.UseSqlServer(builder.Configuration.GetConnectionString(\u0022DefaultConnection\u0022)));",
+            "protectedSnippet": "T:Microsoft.Extensions.DependencyInjection.EntityFrameworkServiceCollectionExtensions",
+            "label": "T:Microsoft.Extensions.DependencyInjection.EntityFrameworkServiceCollectionExtensions",
+            "links": [
+              {
+                "title": "Dokumentacja interfejsu API",
+                "url": "https://learn.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection.entityframeworkservicecollectionextensions",
+                "isCustom": false
+              }
+            ],
+            "line": 19,
+            "column": 2
+          }
+        },
+        {
+          "incidentId": "3eb79589-ea2e-4154-874c-cc22065107f8",
+          "ruleId": "Api.0002",
+          "description": "Interfejs API jest dost\u0119pny w pakiecie Microsoft.EntityFrameworkCore.SqlServer, 8.0.6.",
+          "projectPath": "HairSaloonWeb.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "builder.Services.AddDbContext\u003CApplicationDbContext\u003E(options =\u003E\r\n\t\t\toptions.UseSqlServer(builder.Configuration.GetConnectionString(\u0022DefaultConnection\u0022)));",
+              "protected": "M:Microsoft.EntityFrameworkCore.SqlServerDbContextOptionsExtensions.UseSqlServer(Microsoft.EntityFrameworkCore.DbContextOptionsBuilder,System.String,System.Action{Microsoft.EntityFrameworkCore.Infrastructure.SqlServerDbContextOptionsBuilder})"
+            },
+            "kind": "File",
+            "path": "Program.cs",
+            "snippet": "builder.Services.AddDbContext\u003CApplicationDbContext\u003E(options =\u003E\r\n\t\t\toptions.UseSqlServer(builder.Configuration.GetConnectionString(\u0022DefaultConnection\u0022)));",
+            "protectedSnippet": "M:Microsoft.EntityFrameworkCore.SqlServerDbContextOptionsExtensions.UseSqlServer(Microsoft.EntityFrameworkCore.DbContextOptionsBuilder,System.String,System.Action{Microsoft.EntityFrameworkCore.Infrastructure.SqlServerDbContextOptionsBuilder})",
+            "label": "M:Microsoft.EntityFrameworkCore.SqlServerDbContextOptionsExtensions.UseSqlServer(Microsoft.EntityFrameworkCore.DbContextOptionsBuilder,System.String,System.Action{Microsoft.EntityFrameworkCore.Infrastructure.SqlServerDbContextOptionsBuilder})",
+            "links": [
+              {
+                "title": "Dokumentacja interfejsu API",
+                "url": "https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.sqlserverdbcontextoptionsextensions.usesqlserver",
+                "isCustom": false
+              }
+            ],
+            "line": 19,
+            "column": 2
+          }
+        },
+        {
+          "incidentId": "c8061145-37dd-47ef-acac-bf5cddc5c4f7",
+          "ruleId": "Api.0002",
+          "description": "Interfejs API jest dost\u0119pny w pakiecie Microsoft.EntityFrameworkCore, 9.0.0-preview.6.24302.4.",
+          "projectPath": "HairSaloonWeb.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "builder.Services.AddDbContext\u003CApplicationDbContext\u003E(options =\u003E\r\n\t\t\toptions.UseSqlServer(builder.Configuration.GetConnectionString(\u0022DefaultConnection\u0022)));",
+              "protected": "T:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder"
+            },
+            "kind": "File",
+            "path": "Program.cs",
+            "snippet": "builder.Services.AddDbContext\u003CApplicationDbContext\u003E(options =\u003E\r\n\t\t\toptions.UseSqlServer(builder.Configuration.GetConnectionString(\u0022DefaultConnection\u0022)));",
+            "protectedSnippet": "T:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder",
+            "label": "T:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder",
+            "links": [
+              {
+                "title": "Dokumentacja interfejsu API",
+                "url": "https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.dbcontextoptionsbuilder",
+                "isCustom": false
+              }
+            ],
+            "line": 19,
+            "column": 2
+          }
+        },
+        {
+          "incidentId": "f17e41fb-8b35-406f-ac31-ffd77a7abdbf",
+          "ruleId": "Api.0002",
+          "description": "Interfejs API jest dost\u0119pny w pakiecie Microsoft.AspNetCore.Identity.EntityFrameworkCore, 9.0.0-preview.6.24281.4.",
+          "projectPath": "HairSaloonWeb.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "builder.Services.AddIdentity\u003CApplicationUser, IdentityRole\u003E().AddEntityFrameworkStores\u003CApplicationDbContext\u003E().AddDefaultTokenProviders();",
+              "protected": "M:Microsoft.Extensions.DependencyInjection.IdentityEntityFrameworkBuilderExtensions.AddEntityFrameworkStores\u0060\u00601(Microsoft.AspNetCore.Identity.IdentityBuilder)"
+            },
+            "kind": "File",
+            "path": "Program.cs",
+            "snippet": "builder.Services.AddIdentity\u003CApplicationUser, IdentityRole\u003E().AddEntityFrameworkStores\u003CApplicationDbContext\u003E().AddDefaultTokenProviders();",
+            "protectedSnippet": "M:Microsoft.Extensions.DependencyInjection.IdentityEntityFrameworkBuilderExtensions.AddEntityFrameworkStores\u0060\u00601(Microsoft.AspNetCore.Identity.IdentityBuilder)",
+            "label": "M:Microsoft.Extensions.DependencyInjection.IdentityEntityFrameworkBuilderExtensions.AddEntityFrameworkStores\u0060\u00601(Microsoft.AspNetCore.Identity.IdentityBuilder)",
+            "links": [
+              {
+                "title": "Dokumentacja interfejsu API",
+                "url": "https://learn.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection.identityentityframeworkbuilderextensions.addentityframeworkstores",
+                "isCustom": false
+              }
+            ],
+            "line": 22,
+            "column": 2
+          }
+        },
+        {
+          "incidentId": "bb334860-fed7-40f0-9855-746cfc7d03ad",
+          "ruleId": "Api.0002",
+          "description": "Interfejs API jest dost\u0119pny w pakiecie Microsoft.AspNetCore.Identity.EntityFrameworkCore, 9.0.0-preview.6.24281.4.",
+          "projectPath": "HairSaloonWeb.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "builder.Services.AddIdentity\u003CApplicationUser, IdentityRole\u003E().AddEntityFrameworkStores\u003CApplicationDbContext\u003E().AddDefaultTokenProviders();",
+              "protected": "T:Microsoft.Extensions.DependencyInjection.IdentityEntityFrameworkBuilderExtensions"
+            },
+            "kind": "File",
+            "path": "Program.cs",
+            "snippet": "builder.Services.AddIdentity\u003CApplicationUser, IdentityRole\u003E().AddEntityFrameworkStores\u003CApplicationDbContext\u003E().AddDefaultTokenProviders();",
+            "protectedSnippet": "T:Microsoft.Extensions.DependencyInjection.IdentityEntityFrameworkBuilderExtensions",
+            "label": "T:Microsoft.Extensions.DependencyInjection.IdentityEntityFrameworkBuilderExtensions",
+            "links": [
+              {
+                "title": "Dokumentacja interfejsu API",
+                "url": "https://learn.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection.identityentityframeworkbuilderextensions",
+                "isCustom": false
+              }
+            ],
+            "line": 22,
+            "column": 2
+          }
+        },
+        {
+          "incidentId": "24145066-dfd8-41f2-b90a-9f0d70008d90",
+          "ruleId": "Api.0002",
+          "description": "Interfejs API jest dost\u0119pny w pakiecie Microsoft.EntityFrameworkCore, 9.0.0-preview.6.24302.4.",
+          "projectPath": "HairSaloonWeb.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "_db.SaveChanges();",
+              "protected": "M:Microsoft.EntityFrameworkCore.DbContext.SaveChanges"
+            },
+            "kind": "File",
+            "path": "Areas\\Admin\\Controllers\\UserController.cs",
+            "snippet": "_db.SaveChanges();",
+            "protectedSnippet": "M:Microsoft.EntityFrameworkCore.DbContext.SaveChanges",
+            "label": "M:Microsoft.EntityFrameworkCore.DbContext.SaveChanges",
+            "links": [
+              {
+                "title": "Dokumentacja interfejsu API",
+                "url": "https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.dbcontext.savechanges",
+                "isCustom": false
+              }
+            ],
+            "line": 127,
+            "column": 2
+          }
+        },
+        {
+          "incidentId": "5c518966-9489-449f-bd23-7f43ba4ec547",
+          "ruleId": "Api.0002",
+          "description": "Interfejs API jest dost\u0119pny w pakiecie Microsoft.EntityFrameworkCore, 9.0.0-preview.6.24302.4.",
+          "projectPath": "HairSaloonWeb.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "_db.SaveChanges();",
+              "protected": "M:Microsoft.EntityFrameworkCore.DbContext.SaveChanges"
+            },
+            "kind": "File",
+            "path": "Areas\\Admin\\Controllers\\UserController.cs",
+            "snippet": "_db.SaveChanges();",
+            "protectedSnippet": "M:Microsoft.EntityFrameworkCore.DbContext.SaveChanges",
+            "label": "M:Microsoft.EntityFrameworkCore.DbContext.SaveChanges",
+            "links": [
+              {
+                "title": "Dokumentacja interfejsu API",
+                "url": "https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.dbcontext.savechanges",
+                "isCustom": false
+              }
+            ],
+            "line": 174,
+            "column": 2
+          }
+        }
+      ]
+    }
+  ],
+  "rules": {
+    "NuGet.0002": {
+      "id": "NuGet.0002",
+      "description": "Uaktualnienie pakietu NuGet jest rekomendowane dla wybranej platformy docelowej.\n\nRekomendowane jest, aby standardowe pakiety .NET mia\u0142y wersje zgodne z wersj\u0105 platformy .NET przeznaczon\u0105 dla projektu.\n\nWiadomo r\u00F3wnie\u017C, \u017Ce niekt\u00F3re inne pakiety dzia\u0142aj\u0105 lepiej w przypadku wybranych platform docelowych.",
+      "label": "Rekomendowane jest uaktualnienie pakietu NuGet",
+      "severity": "Potential",
+      "effort": 1,
+      "links": [
+        {
+          "url": "https://go.microsoft.com/fwlink/?linkid=2262530",
+          "isCustom": false
+        }
+      ]
+    },
+    "NuGet.0005": {
+      "id": "NuGet.0005",
+      "description": "Pakiet NuGet jest przestarza\u0142y.\n\nPrzejd\u017A do jego dokumentacji i sprawd\u017A czy istniej\u0105 wskaz\u00F3wki dotycz\u0105ce zamiany funkcji dostarczanej przez ten pakiet.",
+      "label": "Pakiet NuGet jest przestarza\u0142y",
+      "severity": "Optional",
+      "effort": 1,
+      "links": [
+        {
+          "url": "https://go.microsoft.com/fwlink/?linkid=2262531",
+          "isCustom": false
+        }
+      ]
+    },
+    "Project.0002": {
+      "id": "Project.0002",
+      "description": "Project\u0027s target framework(s) needs to be changed to the new target framework that you selected for this upgrade.\n\nDuring upgrade target framework will be adjusted to corresponding platform when applicable. In some cases project would result in multiple target frameworks after the upgrade if it was using features that now have their own platforms in moderrn .NET frameworks (windows, iOS, Android etc).",
+      "label": "Project\u0027s target framework(s) needs to be changed",
+      "severity": "Mandatory",
+      "effort": 1,
+      "links": [
+        {
+          "title": "Overview of porting from .NET Framework to .NET",
+          "url": "https://go.microsoft.com/fwlink/?linkid=2265227",
+          "isCustom": false
+        },
+        {
+          "title": ".NET project SDKs",
+          "url": "https://go.microsoft.com/fwlink/?linkid=2265226",
+          "isCustom": false
+        }
+      ]
+    },
+    "Api.0002": {
+      "id": "Api.0002",
+      "description": "Niekt\u00F3re interfejsy API, kt\u00F3re istnia\u0142y w starszych wersjach platform .NET, zosta\u0142y przeniesione do autonomicznych pakiet\u00F3w NuGet, kt\u00F3re mo\u017Cna by\u0142o jawnie doda\u0107 do projekt\u00F3w.",
+      "label": "Interfejs API dost\u0119pny w pakiecie NuGet",
+      "severity": "Potential",
+      "effort": 1,
+      "links": [
+        {
+          "title": "Zmiany powoduj\u0105ce niezgodno\u015B\u0107 na platformie .NET",
+          "url": "https://go.microsoft.com/fwlink/?linkid=2262679",
+          "isCustom": false
+        }
+      ]
+    }
+  }
+}

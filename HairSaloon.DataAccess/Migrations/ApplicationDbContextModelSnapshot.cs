@@ -17,7 +17,7 @@ namespace HairSaloon.DataAccess.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.20")
+                .HasAnnotation("ProductVersion", "9.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -124,16 +124,10 @@ namespace HairSaloon.DataAccess.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("EmployeeId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<int>("ServiceId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("EmployeeId");
 
                     b.HasIndex("ServiceId");
 
@@ -146,8 +140,7 @@ namespace HairSaloon.DataAccess.Migrations
                             CustomerEmail = "test@gmail.com",
                             CustomerFirstName = "Michal",
                             CustomerPhoneNumber = 222666111,
-                            Date = new DateTime(2024, 12, 9, 21, 20, 39, 807, DateTimeKind.Local).AddTicks(3505),
-                            EmployeeId = "b9fd838c-5e26-49f9-953a-c00e3b34b9da",
+                            Date = new DateTime(2025, 1, 11, 12, 35, 36, 36, DateTimeKind.Local).AddTicks(5815),
                             ServiceId = 6
                         },
                         new
@@ -156,8 +149,7 @@ namespace HairSaloon.DataAccess.Migrations
                             CustomerEmail = "test1@gmail.com",
                             CustomerFirstName = "Michal1",
                             CustomerPhoneNumber = 222666111,
-                            Date = new DateTime(2024, 12, 9, 21, 20, 39, 807, DateTimeKind.Local).AddTicks(3541),
-                            EmployeeId = "ae06c675-dbfb-4f62-b546-02cc6e8a1d09",
+                            Date = new DateTime(2025, 1, 11, 12, 35, 36, 38, DateTimeKind.Local).AddTicks(1172),
                             ServiceId = 5
                         },
                         new
@@ -166,8 +158,7 @@ namespace HairSaloon.DataAccess.Migrations
                             CustomerEmail = "test2@gmail.com",
                             CustomerFirstName = "Michal2",
                             CustomerPhoneNumber = 222666111,
-                            Date = new DateTime(2024, 12, 9, 21, 20, 39, 807, DateTimeKind.Local).AddTicks(3542),
-                            EmployeeId = "ae06c675-dbfb-4f62-b546-02cc6e8a1d09",
+                            Date = new DateTime(2025, 1, 11, 12, 35, 36, 38, DateTimeKind.Local).AddTicks(1187),
                             ServiceId = 2
                         });
                 });
@@ -189,8 +180,7 @@ namespace HairSaloon.DataAccess.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
-                    b.Property<int?>("DurationInMinutes")
-                        .IsRequired()
+                    b.Property<int>("DurationInMinutes")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -198,8 +188,7 @@ namespace HairSaloon.DataAccess.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int?>("Price")
-                        .IsRequired()
+                    b.Property<int>("Price")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -524,19 +513,11 @@ namespace HairSaloon.DataAccess.Migrations
 
             modelBuilder.Entity("HairSaloon.Models.Appointment", b =>
                 {
-                    b.HasOne("HairSaloon.Models.ApplicationUser", "Employee")
-                        .WithMany()
-                        .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("HairSaloon.Models.Service", "Service")
                         .WithMany()
                         .HasForeignKey("ServiceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Employee");
 
                     b.Navigation("Service");
                 });

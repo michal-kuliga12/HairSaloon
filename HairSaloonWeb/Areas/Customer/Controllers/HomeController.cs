@@ -1,7 +1,7 @@
-﻿using HairSaloon.Models;
+﻿using System.Diagnostics;
+using HairSaloon.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
 
 namespace HairSaloonWeb.Areas.Customer.Controllers;
 [Area("Customer")]

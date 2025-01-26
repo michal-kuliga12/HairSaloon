@@ -6,36 +6,46 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HairSaloonWeb.Areas.Customer.Controllers;
+
 [Area("Customer")]
 public class AppointmentController : Controller
 {
-	private readonly IUnitOfWork _unitOfWork;
-	//private readonly UserManager<ApplicationUser> _userManager; TODO
-	private readonly UserManager<ApplicationUser> _userManager;
-	private readonly ApplicationDbContext _db;
+    private readonly IUnitOfWork _unitOfWork;
 
-	public AppointmentController(IUnitOfWork unitOfWork, /*UserManager<ApplicationUser> userManager,*/UserManager<ApplicationUser> userManager, ApplicationDbContext db)
-	{
-		_unitOfWork = unitOfWork;
-		_userManager = userManager;
-		_db = db;
-	}
+    //private readonly UserManager<ApplicationUser> _userManager; TODO
+    private readonly UserManager<ApplicationUser> _userManager;
 
-	public async Task<IActionResult> Index()
-	{
-		IEnumerable<Service> services = _unitOfWork.Services.GetAll();
-		//IEnumerable<ApplicationUser> employees = _db.Users.ToList(); // TODO - możliwa zamiana wszystkich IdentityUser na ApplicationUser?
-		IEnumerable<ApplicationUser> employees = await _userManager.GetUsersInRoleAsync("Employee"); // Możliwe usunięcie wszystkich rekordów z bazy danych
-		CombinedAppointmentVM appointmentVM = new()
-		{
-			Services = services,
-			Employees = employees,
-		};
-		return View(appointmentVM);
-	}
+    private readonly ApplicationDbContext _db;
 
-	//public IActionResult Create()
-	//{
-	//    return View();
-	//}
+    public AppointmentController(IUnitOfWork unitOfWork, /*UserManager<ApplicationUser> userManager,*/UserManager<ApplicationUser> userManager, ApplicationDbContext db)
+    {
+        _unitOfWork = unitOfWork;
+        _userManager = userManager;
+        _db = db;
+    }
+
+    public async Task<IActionResult> Index()
+    {
+        IEnumerable<Service> services = _unitOfWork.Services.GetAll();
+        //IEnumerable<ApplicationUser> employees = _db.Users.ToList(); // TODO - możliwa zamiana wszystkich IdentityUser na ApplicationUser?
+        IEnumerable<ApplicationUser> employees = await _userManager.GetUsersInRoleAsync("Employee"); // Możliwe usunięcie wszystkich rekordów z bazy danych
+        CombinedAppointmentVM appointmentVM = new()
+        {
+            Services = services,
+            Employees = employees,
+        };
+        return View(appointmentVM);
+    }
+
+    [HttpPost, ActionName("Create")]
+    public IActionResult Create(CombinedAppointmentVM obj)
+    {
+        Console.WriteLine(obj.Appointment.Date);
+        return RedirectToAction("Index");
+    }
+
+    //public IActionResult Create()
+    //{
+    //    return View();
+    //}
 }

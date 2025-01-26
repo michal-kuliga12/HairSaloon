@@ -2,6 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 #nullable disable
 
+using System.ComponentModel.DataAnnotations;
+using System.Text;
 using HairSaloon.Models;
 using HairSaloon.Utility;
 using Microsoft.AspNetCore.Authentication;
@@ -12,8 +14,6 @@ using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.WebUtilities;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace HairSaloonWeb.Areas.Identity.Pages.Account
 {

@@ -10,9 +10,11 @@ body {
     font-family: $font-family-sans-serif;
     margin-bottom: 0 !important;
 }
+
 .flex-1 {
-    flex:1;
+    flex: 1;
 }
+
 a {
     cursor: pointer;
 }
@@ -24,7 +26,7 @@ a {
 .bg-register-custom {
     background-image: url('/images/register.jpg');
     background-color: rgba(30, 28, 0, 0.65);
-    overflow:hidden;
+    overflow: hidden;
     background-blend-mode: overlay;
     background-size: cover;
     background-position: center;
@@ -33,7 +35,7 @@ a {
 
 /*Navbar*/
 .navbar-light .navbar-nav .nav-link:hover {
-    color: gold!important;
+    color: gold !important;
     cursor: pointer;
 }
 
@@ -45,6 +47,7 @@ a {
 .header-1 {
     font-size: 1.1rem;
 }
+
 .text-gray {
     opacity: 0.75 !important;
 }
@@ -53,11 +56,12 @@ a {
     font-size: 0.9rem;
 }
 
-.font-aboreto{
+.font-aboreto {
     font-family: "Aboreto", system-ui;
     font-weight: 400;
     font-style: normal;
 }
+
 .font-labella {
     font-family: "Lavishly Yours", cursive;
     font-weight: 400;
@@ -68,15 +72,34 @@ a {
     color: $special-font-color;
 }
 
-.link-primary{
+.link-primary {
     color: black;
-    cursor:pointer;
+    cursor: pointer;
 }
 
 .text-white-75 {
     --bs-text-opacity: 1;
     color: rgba(255, 255, 255, 0.75) !important;
 }
+/*.image-overlay {
+    &.hidden {
+        display: none!important;
+        visibility:hidden;
+    }
+
+    &::after {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background: linear-gradient(180deg, rgb(233, 189, 18, 0.5), rgb(239, 221, 15, 0.2));
+        z-index: 1;
+    }
+}*/
 
 html {
     font-size: 14px;
@@ -91,7 +114,3 @@ html {
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
     box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
-
-
-
-
