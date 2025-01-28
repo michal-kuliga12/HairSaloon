@@ -169,9 +169,9 @@
 </div>
 
 @section Scripts {
+	<script src="~/js/calendar.js"></script>
 	<script>
 		$(document).ready(() => {
-
 			const selectedEmployeeId = localStorage.getItem('selectedEmployeeId');
 			if (selectedEmployeeId) {
 				$(`.employee-select[data-employee-id="${selectedEmployeeId}"]`).addClass('selected-employee');
@@ -191,27 +191,11 @@
 				event.preventDefault();
 				toggleModal();
 			})
-
-		const daySelectors = document.querySelectorAll('.day-selector');
-		daySelectors.forEach((day) => {
-			day.addEventListener('click', (event) => {
-				let date = new Date(currYear, currMonth, event.target.innerText)
-				renderAvailableHours(date);
-			});
-		});
-
-			$(".hour").on("click", function(event) {
-				console.log("hour clicked");
-			})
-
-				const today = new Date();
-				const formattedDate = today.toISOString(); // "YYYY-MM-DDTHH:MM:SS.sssZ"
-
-			$("form").on("submit", function () {
-				$("#Appointment_Date").val(formattedDate);
-				console.log($("#Appointment_Date").val());
-				this.submit();
 				
+			$("form").on("submit", function () {
+				const formattedDate = selectedDate.toISOString(); // "YYYY-MM-DDTHH:MM:SS.sssZ"
+				$("#Appointment_Date").val(formattedDate);
+				this.submit();	
 			});
 		});
 
@@ -222,8 +206,22 @@
 				$(`.employee-select[data-employee-id="${selectedEmployeeId}"]`).addClass('selected-employee');
 			}
 		}
+
+		const selectedDate = new Date();
+
+		const handleDaySelection = (day,month,year) => {
+			selectedDate.setFullYear(year);
+			selectedDate.setMonth(month); 
+			selectedDate.setDate(day);    
+			console.log(selectedDate);
+		}
+
+		const handleHourSelection = (hour) => {
+			const [hours,minutes] = hour.split(':');
+			selectedDate.setHours(parseInt(hours) + 1, parseInt(minutes), 0, 0);
+		};
 	</script>
-	<script src="~/js/calendar.js"></script>
+	
 }
 
 

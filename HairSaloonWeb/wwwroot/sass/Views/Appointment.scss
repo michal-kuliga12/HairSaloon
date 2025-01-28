@@ -38,6 +38,10 @@
         padding: 4px;
     }
 
+    .hour:hover {
+        cursor: pointer;
+    }
+
     .occupied {
         background-color: lightgray;
         text-decoration: line-through;
