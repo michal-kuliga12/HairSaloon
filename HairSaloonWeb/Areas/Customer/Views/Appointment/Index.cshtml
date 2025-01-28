@@ -172,32 +172,37 @@
 	<script src="~/js/calendar.js"></script>
 	<script>
 		$(document).ready(() => {
-			const selectedEmployeeId = localStorage.getItem('selectedEmployeeId');
-			if (selectedEmployeeId) {
-				$(`.employee-select[data-employee-id="${selectedEmployeeId}"]`).addClass('selected-employee');
-			}
+			const selectedEmployeeId = getSelectedEmployeeIdFromLocalStorage();
 
-			$(".employee-select").on("click", function (event) {
-				event.preventDefault();
-				const employeeId = $(this).data("employee-id");
-				localStorage.setItem("selectedEmployeeId", employeeId);
-				$('.employee-select').removeClass('selected-employee');
-				$(this).addClass('selected-employee');
-				console.log(`Employee ID ${employeeId} saved in localStorage.`);
-			});
-
-			$(".service-select").on("click", function(event) {
-				const serviceName = $(this).data('service-name');
-				event.preventDefault();
-				toggleModal();
-			})
-				
-			$("form").on("submit", function () {
-				const formattedDate = selectedDate.toISOString(); // "YYYY-MM-DDTHH:MM:SS.sssZ"
-				$("#Appointment_Date").val(formattedDate);
-				this.submit();	
-			});
+			$(".employee-select").on("click", handleEmployeeSelection);
+			$(".service-select").on("click", handleServiceSelection)
+			$("form").on("submit", handleFormSubmit);
 		});
+
+		const getSelectedEmployeeIdFromLocalStorage = () => {
+			return localStorage.getItem('selectedEmployeeId');
+		};
+		
+		const highlightSelectedEmployee = (employeeId) => {
+			if (employeeId) {
+				$(`.employee-select[data-employee-id="${employeeId}"]`).addClass('selected-employee');
+			}
+		};
+
+		const handleEmployeeSelection = (event) => {
+			event.preventDefault();
+			const employeeId = $(this).data("employee-id");
+			localStorage.setItem("selectedEmployeeId", employeeId);
+			$('.employee-select').removeClass('selected-employee');
+			$(this).addClass('selected-employee');
+			console.log(`Employee ID ${employeeId} saved in localStorage.`);
+		}
+
+		const handleServiceSelection = (event) => {
+			// const serviceName = $(this).data('service-name');
+			event.preventDefault();
+			toggleModal();
+		}
 
 		const toggleModal = () => {
 			const selectedEmployeeId = localStorage.getItem('selectedEmployeeId');
@@ -205,6 +210,12 @@
 			if (selectedEmployeeId) {
 				$(`.employee-select[data-employee-id="${selectedEmployeeId}"]`).addClass('selected-employee');
 			}
+		}
+
+		const handleFormSubmit = () => {
+			const formattedDate = selectedDate.toISOString(); // "YYYY-MM-DDTHH:MM:SS.sssZ"
+			$("#Appointment_Date").val(formattedDate);
+			this.submit();
 		}
 
 		const selectedDate = new Date();
@@ -219,6 +230,7 @@
 		const handleHourSelection = (hour) => {
 			const [hours,minutes] = hour.split(':');
 			selectedDate.setHours(parseInt(hours) + 1, parseInt(minutes), 0, 0);
+			console.log(selectedDate);
 		};
 	</script>
 	
