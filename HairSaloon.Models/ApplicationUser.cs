@@ -8,9 +8,12 @@ public class ApplicationUser : IdentityUser
 {
     [Required]
     public string FirstName { get; set; }
+
     [Required]
     public string LastName { get; set; }
+
     public string? ImageUrl { get; set; }
+
     [NotMapped]
     public string Role { get; set; }
 }

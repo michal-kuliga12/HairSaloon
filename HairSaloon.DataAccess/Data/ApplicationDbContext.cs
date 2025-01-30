@@ -9,7 +9,6 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
     {
-
     }
 
     public DbSet<Appointment> Appointments { get; set; }
@@ -43,36 +42,36 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
             new Service { Id = 20, Name = "Depilacja", Category = "Pielęgnacja", Price = 50, DurationInMinutes = 30, Description = "" }
             );
 
-        modelBuilder.Entity<Appointment>().HasData(
-            new Appointment
-            {
-                Id = 1,
-                ServiceId = 6,
-                //EmployeeId = "b9fd838c-5e26-49f9-953a-c00e3b34b9da",
-                CustomerPhoneNumber = 222666111,
-                CustomerFirstName = "Michal",
-                CustomerEmail = "test@gmail.com",
-                Date = DateTime.Now
-            },
-            new Appointment
-            {
-                Id = 2,
-                ServiceId = 5,
-                //EmployeeId = "ae06c675-dbfb-4f62-b546-02cc6e8a1d09",
-                CustomerPhoneNumber = 222666111,
-                CustomerFirstName = "Michal1",
-                CustomerEmail = "test1@gmail.com",
-                Date = DateTime.Now
-            },
-            new Appointment
-            {
-                Id = 3,
-                ServiceId = 2,
-                //EmployeeId = "ae06c675-dbfb-4f62-b546-02cc6e8a1d09",
-                CustomerPhoneNumber = 222666111,
-                CustomerFirstName = "Michal2",
-                CustomerEmail = "test2@gmail.com",
-                Date = DateTime.Now
-            });
+        //modelBuilder.Entity<Appointment>().HasData(
+        //    new Appointment
+        //    {
+        //        Id = 1,
+        //        ServiceId = 6,
+        //        EmployeeId = "2fdeac81-2fb0-4301-894c-3a272e22689d",
+        //        CustomerPhoneNumber = 222666111,
+        //        CustomerFirstName = "Michal",
+        //        CustomerEmail = "test@gmail.com",
+        //        Date = DateTime.Now
+        //    },
+        //    new Appointment
+        //    {
+        //        Id = 2,
+        //        ServiceId = 5,
+        //        EmployeeId = "b5b8c889-9472-4969-b356-40f87a64d71e",
+        //        CustomerPhoneNumber = 222666111,
+        //        CustomerFirstName = "Michal1",
+        //        CustomerEmail = "test1@gmail.com",
+        //        Date = DateTime.Now
+        //    },
+        //    new Appointment
+        //    {
+        //        Id = 3,
+        //        ServiceId = 2,
+        //        EmployeeId = "b5b8c889-9472-4969-b356-40f87a64d71e",
+        //        CustomerPhoneNumber = 222666111,
+        //        CustomerFirstName = "Michal2",
+        //        CustomerEmail = "test2@gmail.com",
+        //        Date = DateTime.Now
+        //    });
     }
 }

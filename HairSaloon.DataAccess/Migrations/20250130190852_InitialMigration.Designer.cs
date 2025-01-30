@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HairSaloon.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250111113536_InitialMigration")]
+    [Migration("20250130190852_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -20,7 +20,7 @@ namespace HairSaloon.DataAccess.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.0")
+                .HasAnnotation("ProductVersion", "9.0.1")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -127,43 +127,20 @@ namespace HairSaloon.DataAccess.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("EmployeeId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<int>("ServiceId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("EmployeeId");
+
                     b.HasIndex("ServiceId");
 
                     b.ToTable("Appointments");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CustomerEmail = "test@gmail.com",
-                            CustomerFirstName = "Michal",
-                            CustomerPhoneNumber = 222666111,
-                            Date = new DateTime(2025, 1, 11, 12, 35, 36, 36, DateTimeKind.Local).AddTicks(5815),
-                            ServiceId = 6
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CustomerEmail = "test1@gmail.com",
-                            CustomerFirstName = "Michal1",
-                            CustomerPhoneNumber = 222666111,
-                            Date = new DateTime(2025, 1, 11, 12, 35, 36, 38, DateTimeKind.Local).AddTicks(1172),
-                            ServiceId = 5
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CustomerEmail = "test2@gmail.com",
-                            CustomerFirstName = "Michal2",
-                            CustomerPhoneNumber = 222666111,
-                            Date = new DateTime(2025, 1, 11, 12, 35, 36, 38, DateTimeKind.Local).AddTicks(1187),
-                            ServiceId = 2
-                        });
                 });
 
             modelBuilder.Entity("HairSaloon.Models.Service", b =>
@@ -516,11 +493,19 @@ namespace HairSaloon.DataAccess.Migrations
 
             modelBuilder.Entity("HairSaloon.Models.Appointment", b =>
                 {
+                    b.HasOne("HairSaloon.Models.ApplicationUser", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("HairSaloon.Models.Service", "Service")
                         .WithMany()
                         .HasForeignKey("ServiceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Employee");
 
                     b.Navigation("Service");
                 });

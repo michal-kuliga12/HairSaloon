@@ -78,6 +78,10 @@ header .current-date {
         cursor: pointer;
         background-color: rgba(255, 196, 0, 0.30);
     }
+    .day-selector.inactive {
+        cursor:not-allowed;
+        pointer-events: none;
+    }
 
     .day-selector:active {
         background-color: rgba(255, 196, 0, 0.50);

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -184,6 +185,7 @@ namespace HairSaloon.DataAccess.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ServiceId = table.Column<int>(type: "int", nullable: false),
+                    EmployeeId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     CustomerPhoneNumber = table.Column<int>(type: "int", nullable: false),
                     CustomerEmail = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CustomerFirstName = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
@@ -193,6 +195,12 @@ namespace HairSaloon.DataAccess.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Appointments", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Appointments_AspNetUsers_EmployeeId",
+                        column: x => x.EmployeeId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Appointments_Services_ServiceId",
                         column: x => x.ServiceId,
@@ -228,15 +236,10 @@ namespace HairSaloon.DataAccess.Migrations
                     { 20, "Pielęgnacja", "", 30, "Depilacja", 50 }
                 });
 
-            migrationBuilder.InsertData(
+            migrationBuilder.CreateIndex(
+                name: "IX_Appointments_EmployeeId",
                 table: "Appointments",
-                columns: new[] { "Id", "CustomerEmail", "CustomerFirstName", "CustomerLastName", "CustomerPhoneNumber", "Date", "ServiceId" },
-                values: new object[,]
-                {
-                    { 1, "test@gmail.com", "Michal", null, 222666111, new DateTime(2025, 1, 11, 12, 35, 36, 36, DateTimeKind.Local).AddTicks(5815), 6 },
-                    { 2, "test1@gmail.com", "Michal1", null, 222666111, new DateTime(2025, 1, 11, 12, 35, 36, 38, DateTimeKind.Local).AddTicks(1172), 5 },
-                    { 3, "test2@gmail.com", "Michal2", null, 222666111, new DateTime(2025, 1, 11, 12, 35, 36, 38, DateTimeKind.Local).AddTicks(1187), 2 }
-                });
+                column: "EmployeeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Appointments_ServiceId",

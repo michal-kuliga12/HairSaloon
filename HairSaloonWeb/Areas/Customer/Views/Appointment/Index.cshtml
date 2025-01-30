@@ -31,7 +31,8 @@
 							<button class="btn btn-secondary">Zadzwoń</button>
 						</div>
 						<div class="py-2">
-							@foreach(KeyValuePair<string,string> kvp in workingSchedule){
+							@foreach (KeyValuePair<string, string> kvp in workingSchedule)
+							{
 								<p class="d-flex justify-content-between text-gray mb-1">
 									<span>@kvp.Key</span>
 									<span>@kvp.Value</span>
@@ -42,7 +43,7 @@
 						<div class="d-flex align-items-center justify-content-center gap-3 py-3 border-top">
 							<i class="bi bi-facebook text-gray" style="font-size:32px;"></i>
 							<i class="bi bi-instagram text-gray" style="font-size:32px;"></i>
-							<i class="bi bi-twitter-x text-gray" style="font-size:32px;"></i>	
+							<i class="bi bi-twitter-x text-gray" style="font-size:32px;"></i>
 						</div>
 					</div>
 				</div>
@@ -99,15 +100,17 @@
 </div>
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Rezerwacja wizyty</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<div class="modal-body">
-				<form method="post" asp-action="Create" class="row">
+		<form method="post" asp-action="Create" class="row">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Rezerwacja wizyty</h5>
+					<button type="button" id="modal-close-btn" data-dismiss="modal" data-target="#exampleModal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+
+					<input asp-for="Appointment.EmployeeId" value="" type="hidden" />
 					<div class="d-flex gap-2">
 						@foreach (var employee in Model.Employees)
 						{
@@ -150,21 +153,14 @@
 							@* => generated hours *@
 						</div>
 					</div>
+				</div>
+				<div class="modal-footer">
 					<div class="col-6 col-md-3">
 						<button type="submit" class="btn btn-primary form-control">Zatwierdź</button>
 					</div>
-					<div class="col-6 col-md-3">
-						<a asp-controller="Appointment" asp-action="Create" asp-area="Customer" class="btn btn-outline-secondary border form-control">
-							Wstecz
-						</a>
-					</div>
-				</form>	
+				</div>
 			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Anuluj</button>
-				<button type="button" class="btn btn-primary">Zarezerwuj wizyte</button>
-			</div>
-		</div>
+		</form>
 	</div>
 </div>
 
@@ -176,26 +172,28 @@
 
 			$(".employee-select").on("click", handleEmployeeSelection);
 			$(".service-select").on("click", handleServiceSelection)
+			$("#modal-close-btn").on("click", toggleModal)
 			$("form").on("submit", handleFormSubmit);
 		});
 
 		const getSelectedEmployeeIdFromLocalStorage = () => {
 			return localStorage.getItem('selectedEmployeeId');
 		};
-		
+
 		const highlightSelectedEmployee = (employeeId) => {
 			if (employeeId) {
 				$(`.employee-select[data-employee-id="${employeeId}"]`).addClass('selected-employee');
 			}
 		};
 
-		const handleEmployeeSelection = (event) => {
+		const handleEmployeeSelection = function (event) {
 			event.preventDefault();
 			const employeeId = $(this).data("employee-id");
+			console.log(employeeId);
+			$("#Appointment_EmployeeId").val(employeeId);
 			localStorage.setItem("selectedEmployeeId", employeeId);
 			$('.employee-select').removeClass('selected-employee');
 			$(this).addClass('selected-employee');
-			console.log(`Employee ID ${employeeId} saved in localStorage.`);
 		}
 
 		const handleServiceSelection = (event) => {
@@ -205,11 +203,14 @@
 		}
 
 		const toggleModal = () => {
+			$('#exampleModal').modal('toggle')
+
+
 			const selectedEmployeeId = localStorage.getItem('selectedEmployeeId');
-			$('#exampleModal').modal('show')
 			if (selectedEmployeeId) {
 				$(`.employee-select[data-employee-id="${selectedEmployeeId}"]`).addClass('selected-employee');
 			}
+
 		}
 
 		const handleFormSubmit = () => {
@@ -222,8 +223,8 @@
 
 		const handleDaySelection = (day,month,year) => {
 			selectedDate.setFullYear(year);
-			selectedDate.setMonth(month); 
-			selectedDate.setDate(day);    
+			selectedDate.setMonth(month);
+			selectedDate.setDate(day);
 			console.log(selectedDate);
 		}
 
@@ -233,7 +234,7 @@
 			console.log(selectedDate);
 		};
 	</script>
-	
+
 }
 
 

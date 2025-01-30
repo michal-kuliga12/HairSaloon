@@ -40,7 +40,18 @@ public class AppointmentController : Controller
     [HttpPost, ActionName("Create")]
     public IActionResult Create(CombinedAppointmentVM obj)
     {
-        Console.WriteLine(obj.Appointment.Date);
+        Appointment appointment = new()
+        {
+            ServiceId = 1,
+            EmployeeId = obj.Appointment.EmployeeId,
+            CustomerPhoneNumber = 111222333,
+            CustomerEmail = "Dummy@gmail.com",
+            CustomerFirstName = "Test",
+            CustomerLastName = "Test",
+            Date = obj.Appointment.Date,
+        };
+        _unitOfWork.Appointments.Add(appointment);
+        _unitOfWork.Save();
         return RedirectToAction("Index");
     }
 

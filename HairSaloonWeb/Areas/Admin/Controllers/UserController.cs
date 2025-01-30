@@ -15,19 +15,19 @@ public class UserController : Controller
     // W tym kontrolerze nie będziemy używać _unit of work
     //private readonly IUnitOfWork _unitOfWork;
     private readonly ApplicationDbContext _db;
+
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly IEnumerable<IdentityRole> roles;
     private readonly IEnumerable<IdentityUserRole<string>> userRoles;
 
-
     public UserController(ApplicationDbContext db, UserManager<ApplicationUser> userManager)
     {
-
         _db = db;
         _userManager = userManager;
         roles = _db.Roles.ToList();
         userRoles = _db.UserRoles.ToList();
     }
+
     public IActionResult Index()
     {
         return View();
@@ -92,7 +92,6 @@ public class UserController : Controller
     [HttpGet]
     public IActionResult Update(string? id)
     {
-
         if (id == null || id == "0")
             RedirectToAction("Create");
 
@@ -135,7 +134,6 @@ public class UserController : Controller
         var roleId = userRoles.FirstOrDefault(u => u.UserId == id).RoleId;
         return roles.FirstOrDefault(u => u.Id == roleId).Name;
     }
-
 
     #region API CALLS
 
@@ -195,6 +193,5 @@ public class UserController : Controller
         }
     }
 
-    #endregion
-
+    #endregion API CALLS
 }

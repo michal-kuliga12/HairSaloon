@@ -90,9 +90,11 @@ const renderCalendar = () => {
 
     document.querySelectorAll('.day-selector').forEach((day) => {
         day.addEventListener('click', (event) => {
-            let date = new Date(currYear, currMonth, event.target.innerText);
-            handleDaySelection(event.target.innerText, currMonth, currYear);
-            renderAvailableHours(date);
+            if (!day.classList.contains("inactive")) {
+                let date = new Date(currYear, currMonth, event.target.innerText);
+                handleDaySelection(event.target.innerText, currMonth, currYear);
+                renderAvailableHours(date);
+            }            
         });
     });
 };

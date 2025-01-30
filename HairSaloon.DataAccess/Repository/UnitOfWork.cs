@@ -9,12 +9,15 @@ public class UnitOfWork : IUnitOfWork
     public IServiceRepository Services { get; }
     public IApplicationUserRepository Users { get; }
 
+    public IAppointmentRepository Appointments { get; }
+
     public UnitOfWork(ApplicationDbContext db)
     {
         _db = db;
 
         Services = new ServiceRepository(_db);
         Users = new ApplicationUserRepository(_db);
+        Appointments = new AppointmentRepository(_db);
     }
 
     public void Save()
