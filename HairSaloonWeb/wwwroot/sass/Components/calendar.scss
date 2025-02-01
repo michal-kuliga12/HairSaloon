@@ -40,7 +40,7 @@ header .icons {
     background: #f2f2f2;
 }
 
-header .current-date {
+header .month-year-header {
     font-size: 1.45rem;
     font-weight: 500;
 }
@@ -65,7 +65,7 @@ header .current-date {
         color: #dbdbdb;
     }
 
-    .active {
+    .today {
         color: rgb(8, 0, 156);
     }
 
@@ -74,16 +74,16 @@ header .current-date {
         text-align: center;
     }
 
-    .day-selector:hover {
+    .day:hover {
         cursor: pointer;
         background-color: rgba(255, 196, 0, 0.30);
     }
-    .day-selector.inactive {
-        cursor:not-allowed;
+    .day.inactive {
+        cursor:not-allowed!important;
         pointer-events: none;
     }
 
-    .day-selector:active {
+    .day:active {
         background-color: rgba(255, 196, 0, 0.50);
     }
 }

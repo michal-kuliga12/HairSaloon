@@ -1,6 +1,6 @@
 ﻿@import "../_variables.scss";
 
-.employee-select.selected .image-overlay {
+.employee.selected .image-overlay {
     background: rgba(0, 128, 255, 0.5); /* Niebieski półprzezroczysty overlay */
     width: 100%;
     height: 100%;
@@ -12,7 +12,7 @@
     border-color: rgba(0, 128, 255, 0.5); /* Podkreślenie */
 }
 
-.employee-select .image-overlay {
+.employee.image-overlay {
     display: none; /* Domyślnie ukryty overlay */
 }
 

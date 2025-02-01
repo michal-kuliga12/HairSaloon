@@ -9744,7 +9744,7 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
-.employee-select.selected .image-overlay {
+.employee.selected .image-overlay {
   background: rgba(0, 128, 255, 0.5); /* Niebieski półprzezroczysty overlay */
   width: 100%;
   height: 100%;
@@ -9756,7 +9756,7 @@ textarea.form-control-lg {
   border-color: rgba(0, 128, 255, 0.5); /* Podkreślenie */
 }
 
-.employee-select .image-overlay {
+.employee.image-overlay {
   display: none; /* Domyślnie ukryty overlay */
 }
 
@@ -9831,7 +9831,7 @@ header .icons {
   background: #f2f2f2;
 }
 
-header .current-date {
+header .month-year-header {
   font-size: 1.45rem;
   font-weight: 500;
 }
@@ -9850,22 +9850,22 @@ header .current-date {
 .calendar .inactive {
   color: #dbdbdb;
 }
-.calendar .active {
+.calendar .today {
   color: rgb(8, 0, 156);
 }
 .calendar li {
   padding: 10px;
   text-align: center;
 }
-.calendar .day-selector:hover {
+.calendar .day:hover {
   cursor: pointer;
   background-color: rgba(255, 196, 0, 0.3);
 }
-.calendar .day-selector.inactive {
-  cursor: not-allowed;
+.calendar .day.inactive {
+  cursor: not-allowed !important;
   pointer-events: none;
 }
-.calendar .day-selector:active {
+.calendar .day:active {
   background-color: rgba(255, 196, 0, 0.5);
 }
 

@@ -4,6 +4,7 @@ using HairSaloon.Models;
 using HairSaloon.Models.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace HairSaloonWeb.Areas.Customer.Controllers;
 
@@ -55,8 +56,18 @@ public class AppointmentController : Controller
         return RedirectToAction("Index");
     }
 
-    //public IActionResult Create()
-    //{
-    //    return View();
-    //}
+    #region API CALLS
+    [HttpPost]
+    public IActionResult GetAvailableHours([FromBody] AppointmentRequest request)
+    {
+        IEnumerable<Appointment> appointments = _unitOfWork.Appointments.GetAll(
+            e => e.EmployeeId == request.EmployeeId && EF.Functions.DateDiffDay(e.Date, request.Date) == 0);
+
+        var hours = appointments.Select(a => a.Date.ToString("HH:mm"));
+
+        return Json(new { data = hours });
+    }
+
+    #endregion
 }
+

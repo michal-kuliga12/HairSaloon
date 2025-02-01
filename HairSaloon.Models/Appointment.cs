@@ -43,3 +43,9 @@ public class Appointment
     [DataType(DataType.DateTime)]
     public DateTime Date { get; set; }
 }
+
+public class AppointmentRequest
+{
+    public DateTime Date { get; set; }
+    public string EmployeeId { get; set; }
+}

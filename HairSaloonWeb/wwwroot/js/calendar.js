@@ -1,13 +1,19 @@
-﻿const currentDate = document.querySelector(".current-date");
-weekTag = document.querySelector(".weeks");
-weekHeaderTag = document.querySelector(".week-header");
-prevNextIcon = document.querySelectorAll(".icons span");
+﻿$(document).ready(function () {
+    renderCalendar();
+
+    $(".hours").on("click", ".hour", handleHourSelection);
+    $(".icons span").on("click", handleMonthSelection);
+})
 
 const today = new Date();
 let date = new Date();
-currDate = date.getDate();
-currYear = date.getFullYear();
-currMonth = date.getMonth();
+
+let calendar = {
+    year: today.getFullYear(),
+    month: today.getMonth(),
+}
+
+let selectedDate = new Date(calendar.year,calendar.month,today.getDate() + 1);
 
 const months = [
     "Styczeń",
@@ -24,7 +30,7 @@ const months = [
     "Grudzień",
 ];
 
-const dummyHours = [
+const hours = [
     "8:00",
     "8:30",
     "9:00",
@@ -42,31 +48,27 @@ const dummyHours = [
     "15:00",
 ]
 
-const getCalendarHTML = () => {
-    let firstDayOfMonth = new Date(currYear, currMonth, 1).getDay();
-    let lastDateOfMonth = new Date(currYear, currMonth + 1, 0).getDate();
-    let lastDayOfMonth = new Date(currYear, currMonth, lastDateOfMonth).getDay();
-    let lastDateofLastMonth = new Date(currYear, currMonth, 0).getDate();
-    let today = new Date().getDate();
+const generateCalendar = () => {
+    let firstDayOfMonth = new Date(calendar.year, calendar.month, 1).getDay();
+    let lastDateOfMonth = new Date(calendar.year, calendar.month + 1, 0).getDate();
+    let lastDayOfMonth = new Date(calendar.year, calendar.month, lastDateOfMonth).getDay();
+    let lastDateofLastMonth = new Date(calendar.year, calendar.month, 0).getDate();
     let ulTag = `<ul class="row">`;
     let dayCounter = 0;
 
+    // Dni z poprzedniego miesiąca
     for (let i = firstDayOfMonth - 1; i > 0; i--) {
         ulTag += `<li class="inactive col">${lastDateofLastMonth - i + 1}</li>`;
         dayCounter++;
     }
 
+    // Dni z aktualnego miesiąca
     for (let i = 1; i <= lastDateOfMonth; i++) {
-        let isToday =
-            i === date.getDate() &&
-                currMonth === new Date().getMonth() &&
-                currYear === new Date().getFullYear()
-                ? "active"
-                : "";
+        let isToday = getClassIfToday(i);
 
-        i <= currDate && new Date().getMonth() == currMonth ?
-            ulTag += `<li class="${isToday} col day-selector inactive">${i}</li>` :
-            ulTag += `<li class="${isToday} col day-selector">${i}</li>`
+        i <= today.getDate() && new Date().getMonth() == calendar.month
+            ? ulTag += `<li class="${isToday} col day inactive">${i}</li>`
+            : ulTag += `<li class="${isToday} col day">${i}</li>`
 
         dayCounter++;
 
@@ -74,6 +76,7 @@ const getCalendarHTML = () => {
             ulTag += `</ul><ul class="row">`
     }
 
+    // Dni z następnego miesiąca
     for (let i = lastDayOfMonth; i < 7; i++) {
         ulTag += `<li class="inactive col">${i - lastDayOfMonth + 1}</li>`;
         dayCounter++;
@@ -81,65 +84,86 @@ const getCalendarHTML = () => {
     }
 
     ulTag += "</ul>"
-    currentDate.innerText = `${months[currMonth]} ${currYear}`;
+    $(".month-year-header").text(`${months[calendar.month]} ${calendar.year}`);
     return ulTag;
 }
 
 const renderCalendar = () => {
-    weekTag.innerHTML = getCalendarHTML();
-
-    document.querySelectorAll('.day-selector').forEach((day) => {
-        day.addEventListener('click', (event) => {
-            if (!day.classList.contains("inactive")) {
-                let date = new Date(currYear, currMonth, event.target.innerText);
-                handleDaySelection(event.target.innerText, currMonth, currYear);
-                renderAvailableHours(date);
-            }            
-        });
-    });
+    $(".weeks").html(generateCalendar());
+    $('.day').on('click', handleDaySelection);
 };
-renderCalendar();
 
-const renderAvailableHours = (date) => {
-    console.log(date)
-    let hoursTag = "";
-    dummyHours.forEach((hour) => {
-        hoursTag += `<a class="hour open" data-hour="${hour}" type="button">${hour}</a>`
-    })
+const renderHours = function() {
+    let occupiedHours = [];
+    let employeeId = getEmployeeIdFromLocalStorage();
+    let dateString = selectedDate.toISOString();
+    
+    $.ajax({
+        url: "/Customer/Appointment/GetAvailableHours",
+        type: 'POST',
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify({ date: dateString, employeeId: employeeId }),
+        dataType: "json",
+        success: (data) => {
+            occupiedHours = data.data;
+            console.log(occupiedHours);  // Sprawdź, co zwrócił serwer
 
-    document.querySelector(".hours").innerHTML = hoursTag;
+            let hoursTag = "";
+            hours.forEach((hour) => {
+                // Sprawdzamy, czy godzina jest zajęta
+                if (occupiedHours.includes(hour)) {
+                    hoursTag += `<a class="hour occupied" data-hour="${hour}" type="button">${hour}</a>`;
+                } else {
+                    hoursTag += `<a class="hour" data-hour="${hour}" type="button">${hour}</a>`;
+                }
+            });
+
+            // Wstaw godziny do DOM
+            $(".hours").html(hoursTag);
+        }
+    }) 
 }
 
-document.querySelector(".hours").addEventListener("click", (event) => {
-    if (event.target.classList.contains("hour")) {
-        const selectedHour = event.target.dataset.hour;
-        console.log(selectedHour);
-        handleHourSelection(selectedHour);
+const getClassIfToday = function (day) {
+    return day === today.getDate()
+        && calendar.month === new Date().getMonth()
+        && calendar.year === new Date().getFullYear()
+        ? "today"
+        : "";
+}
+
+const handleDaySelection = function () {
+    if (!$(this).hasClass("inactive")) {
+        selectedDate = new Date(calendar.year, calendar.month, $(this).text());
+        renderHours();
     }
-});
+}
 
-prevNextIcon.forEach((icon) => {
-    icon.addEventListener("click", () => {
-        // Oblicz nowy miesiąc
-        const newMonth = icon.id === "prev" ? currMonth - 1 : currMonth + 1;
+const handleHourSelection = function () {
+    const [hours, minutes] = $(this).data("hour");
+    selectedDate.setHours(parseInt(hours) + 1, parseInt(minutes), 0, 0);
+    console.log(selectedDate);
+}
 
-        // Sprawdź, czy nowy miesiąc nie jest wcześniejszy niż aktualny
-        if (currYear > today.getFullYear() ||
-            (currYear === today.getFullYear() && currMonth >= today.getMonth()) &&
-            newMonth - today.getMonth() < 3) {
-            if (newMonth >= 0)
-                currMonth = newMonth;
+const handleMonthSelection = function () {
+    let newMonth = $(this).attr("id") === "prev" ? calendar.month - 1 : calendar.month + 1;
 
-            // Aktualizuj rok, jeśli nowy miesiąc wykracza poza zakres
-            if (currMonth > 11) {
-                date = new Date(currYear, currMonth);
-                currYear = date.getFullYear();
-                currMonth = date.getMonth();
-            }
+    if (calendar.year > today.getFullYear() ||
+        (calendar.year === today.getFullYear() && newMonth >= today.getMonth()) &&
+        newMonth - today.getMonth() < 3) {
 
-            renderCalendar();
-        } else {
-            console.log("Nie możesz cofnąć się do przeszłego miesiąca!");
+        if (newMonth >= 0)
+            calendar.month = newMonth;
+
+        // Aktualizuj rok, jeśli nowy miesiąc wykracza poza zakres
+        if (calendar.month > 11) {
+            date = new Date(calendar.year, calendar.month);
+            calendar.year = date.getFullYear();
+            calendar.month = date.getMonth();
         }
-    });
-});
+
+        renderCalendar();
+    } else {
+        console.log("Nie możesz cofnąć się do przeszłego miesiąca!");
+    }
+}
