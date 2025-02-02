@@ -1,4 +1,4 @@
-﻿@model CombinedAppointmentVM
+﻿@model AppointmentVM
 @{
 	ViewData["Title"] = "Dashboard";
 
@@ -54,7 +54,7 @@
 				<div class="px-2">
 					<h3 class="text-gray font-aboreto px-1">Pracownicy</h3>
 					<div class="d-flex flex-wrap gap-4 p-3 justify-content-start border-top">
-						@foreach (var employee in Model.Employees)
+						@foreach (var employee in ViewBag.Employees)
 						{
 							<a data-employee-id="@employee.Id" class="d-flex flex-column employee align-items-center gap-2 text-decoration-none text-dark" style="max-width:80px;">
 								<div class="position-relative ">
@@ -76,7 +76,7 @@
 					</div>
 				</div>
 				<div>
-					@foreach (var service in Model.Services)
+					@foreach (var service in ViewBag.Services)
 					{
 						<div class="d-flex justify-content-between border-top p-3">
 							<div class="d-flex flex-column">
@@ -88,7 +88,7 @@
 									<span class="header-1">@service.Price zł</span>
 									<span class="header-2 text-gray"><i class="bi bi-clock" style="margin-right: 5px;"></i>@service.DurationInMinutes min</span>
 								</div>
-								<button data-service-name="@service.Name" class="btn btn-primary service-select">Umów</button>
+								<button data-service-id="@service.Id" class="btn btn-primary service-select">Umów</button>
 							</div>
 						</div>
 					}
@@ -101,6 +101,8 @@
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<form method="post" asp-action="Create" class="row">
+			<input asp-for="ServiceId" value="" type="hidden" />
+			<input asp-for="EmployeeId" value="" type="hidden" />
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title" id="exampleModalLabel">Rezerwacja wizyty</h5>
@@ -108,11 +110,9 @@
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
-				<div class="modal-body">
-
-					<input asp-for="Appointment.EmployeeId" value="" type="hidden" />
-					<div class="d-flex gap-2">
-						@foreach (var employee in Model.Employees)
+				<div class="modal-body p-1 p-md-2">
+					<div class="d-flex gap-2 p-2">
+						@foreach (var employee in ViewBag.Employees)
 						{
 							
 							<a data-employee-id="@employee.Id" class="d-flex flex-column employee align-items-center gap-2 text-decoration-none text-dark" role="button" style="max-width:60px;">
@@ -125,7 +125,7 @@
 						}
 					</div>
 					<div class="d-flex flex-column">
-						<div class="container">
+						<div class="container p-1 sm-p-4">
 							<header class="d-flex justify-content-between align-items-center bg-dark rounded text-white p-2">
 								<p class="month-year-header m-0"></p>
 								<div class="icons">
@@ -134,8 +134,7 @@
 								</div>
 							</header>
 							<div class="calendar d-flex flex-column align-center p-0">
-								<input asp-for="Appointment.Date" value="" type="hidden" />
-
+								<input asp-for="Date" value="" type="hidden" />
 								<ul class="row w-100 p-0 font-weight-bold">
 									<li class="col">Pn</li>
 									<li class="col">Wt</li>
@@ -150,13 +149,22 @@
 								</div>
 							</div>
 						</div>
-						<div class="hours d-flex flex-wrap gap-1 w-100">
-							@* => generated hours *@
+						<div class="container horizontal-scrollable">
+							<div class="hours row">
+								@* => generated hours *@
+							</div>
+						</div>
+						<div class="input-group gap-1 mt-2">
+							<input asp-for="CustomerFirstName" placeholder="Imie" value="" type="text" class="form-control">
+							<input asp-for="CustomerEmail" placeholder="Adres email" value="" type="text" class="form-control">
+						</div>
+						<div class="mt-1">
+							<input asp-for="CustomerPhoneNumber" placeholder="Numer telefonu" value="" type="text" class="form-control">
 						</div>
 					</div>
 				</div>
-				<div class="modal-footer">
-					<div class="col-6 col-md-3">
+				<div class="modal-footer justify-content-center">
+					<div class="col-8">
 						<button type="submit" class="btn btn-primary form-control">Zatwierdź</button>
 					</div>
 				</div>
@@ -192,6 +200,10 @@
 			return localStorage.getItem('selectedEmployeeId');
 		};
 
+		const getServiceIdFromLocalStorage = () => {
+			return localStorage.getItem('selectedServiceId');
+		};
+
 		const highlightSelectedEmployee = (employeeId) => {
 			if (employeeId) {
 				$(`.employee[data-employee-id="${employeeId}"]`).addClass('selected-employee');
@@ -214,9 +226,8 @@
 		}
 
 		const handleServiceSelection = function() {
-			const serviceName = $(this).data('service-name');
-			event.preventDefault();
-			// console.log(selectedEmployeeId)
+			let serviceId = $(this).data("service-id");
+			localStorage.setItem("selectedServiceId", serviceId);
 			toggleModal();
 		}
 
@@ -227,9 +238,13 @@
 		}
 
 		const handleFormSubmit = () => {
-			const formattedDate = selectedDate.toISOString(); // "YYYY-MM-DDTHH:MM:SS.sssZ"
-			$("#Appointment_EmployeeId").val(getSelectedEmployeeIdFromLocalStorage());
-			$("#Appointment_Date").val(formattedDate);
+			const formattedDate = getCalendarDate().toISOString(); // "YYYY-MM-DDTHH:MM:SS.sssZ"
+			$("#ServiceId").val(getServiceIdFromLocalStorage());
+			console.log(getServiceIdFromLocalStorage());
+			$("#EmployeeId").val(getEmployeeIdFromLocalStorage());
+			console.log(getEmployeeIdFromLocalStorage());
+			$("#Date").val(formattedDate);
+			console.log(formattedDate);
 			this.submit();
 		}
 	</script>

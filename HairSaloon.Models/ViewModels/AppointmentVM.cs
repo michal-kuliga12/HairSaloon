@@ -27,7 +27,6 @@ public class AppointmentVM
     [Required]
     [StringLength(20)]
     public string CustomerFirstName { get; set; }
-    public string? CustomerLastName { get; set; }
     [Required]
     [DataType(DataType.DateTime)]
     public DateTime Date { get; set; }

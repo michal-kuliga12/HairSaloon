@@ -1,5 +1,6 @@
 /* Import Google font - Poppins */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+@import "../_variables.scss";
 
 .wrapper {
     width: 650px;
@@ -69,6 +70,10 @@ header .month-year-header {
         color: rgb(8, 0, 156);
     }
 
+    .sunday {
+        color:red;
+    }
+
     li {
         padding: 10px;
         text-align: center;
@@ -78,12 +83,16 @@ header .month-year-header {
         cursor: pointer;
         background-color: rgba(255, 196, 0, 0.30);
     }
+
     .day.inactive {
-        cursor:not-allowed!important;
+        cursor: not-allowed !important;
         pointer-events: none;
     }
 
     .day:active {
         background-color: rgba(255, 196, 0, 0.50);
     }
+}
+.selected {
+    background-color: $bg-primary-light;
 }

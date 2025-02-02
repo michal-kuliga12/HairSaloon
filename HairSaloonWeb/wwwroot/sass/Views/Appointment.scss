@@ -27,27 +27,56 @@
     display: block; /* Pokazanie overlay */
     z-index: 10; /* Na wierzchu zdjęcia */
 }
+.horizontal-scrollable {
+    overflow-x: inherit;
+    white-space: nowrap;
+    padding: 0;
 
-.hours {
-    .hour {
-        width: 60px;
-        text-align: center;
-        text-decoration: none;
-        border-radius: 20px;
-        color: black;
-        padding: 4px;
+    .hours {
+        display: flex;
+        justify-content: center;
+        padding-block: 10px;
+
+        .hour {
+            white-space: nowrap;
+            display: inline-block;
+            float: none;
+            padding: 10px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            width: 70px;
+            text-align: center;
+            line-height: 100%;
+            color: rgba(0, 0, 0, 0.80);
+            border: 1px solid lightgray;
+            border-radius: 10px;
+            margin: 4px;
+            transition: 0.2s;
+        }
+
+        .hour:hover {
+            cursor: pointer;
+            background-color: $bg-primary-light;
+            transition: 0.2s;
+        }
+
+        .hour:active {
+            opacity: 0.8;
+        }
+
+        .occupied {
+            background-color: lightgray;
+            text-decoration: line-through;
+            cursor: not-allowed !important;
+            pointer-events: none;
+        }
     }
 
-    .hour:hover {
-        cursor: pointer;
-    }
+    @media (max-width: 768px) {
+        overflow-x: auto;
 
-    .occupied {
-        background-color: lightgray;
-        text-decoration: line-through;
-    }
-
-    .open {
-        background-color: lightyellow;
+        .hours {
+            display: block;
+        }
     }
 }

@@ -13,7 +13,9 @@ let calendar = {
     month: today.getMonth(),
 }
 
-let selectedDate = new Date(calendar.year,calendar.month,today.getDate() + 1);
+let selectedDate = new Date(calendar.year, calendar.month, today.getDate() + 1);
+
+const getCalendarDate = () => selectedDate;
 
 const months = [
     "Styczeń",
@@ -31,10 +33,10 @@ const months = [
 ];
 
 const hours = [
-    "8:00",
-    "8:30",
-    "9:00",
-    "9:30",
+    "08:00",
+    "08:30",
+    "09:00",
+    "09:30",
     "10:00",
     "10:30",
     "11:00",
@@ -64,11 +66,12 @@ const generateCalendar = () => {
 
     // Dni z aktualnego miesiąca
     for (let i = 1; i <= lastDateOfMonth; i++) {
-        let isToday = getClassIfToday(i);
+        let isTodayClass = getTodayClass(i);
+        let isSundayClass = getSundayClass(i);
 
         i <= today.getDate() && new Date().getMonth() == calendar.month
-            ? ulTag += `<li class="${isToday} col day inactive">${i}</li>`
-            : ulTag += `<li class="${isToday} col day">${i}</li>`
+            ? ulTag += `<li class="${isTodayClass} ${isSundayClass} col day inactive">${i}</li>`
+            : ulTag += `<li class="${isTodayClass} ${isSundayClass} col day">${i}</li>`
 
         dayCounter++;
 
@@ -86,6 +89,18 @@ const generateCalendar = () => {
     ulTag += "</ul>"
     $(".month-year-header").text(`${months[calendar.month]} ${calendar.year}`);
     return ulTag;
+}
+
+const getTodayClass = function (day) {
+    return day === today.getDate()
+        && calendar.month === new Date().getMonth()
+        && calendar.year === new Date().getFullYear()
+        ? "today"
+        : "";
+}
+
+const getSundayClass = function (day) {
+    return new Date(calendar.year, calendar.month, day).getDay() === 0 ? "sunday inactive" : "";
 }
 
 const renderCalendar = () => {
@@ -112,9 +127,9 @@ const renderHours = function() {
             hours.forEach((hour) => {
                 // Sprawdzamy, czy godzina jest zajęta
                 if (occupiedHours.includes(hour)) {
-                    hoursTag += `<a class="hour occupied" data-hour="${hour}" type="button">${hour}</a>`;
+                    hoursTag += `<a class="hour col-xs-4 occupied" data-hour="${hour}" type="button">${hour}</a>`;
                 } else {
-                    hoursTag += `<a class="hour" data-hour="${hour}" type="button">${hour}</a>`;
+                    hoursTag += `<a class="hour col-xs-4" data-hour="${hour}" type="button">${hour}</a>`;
                 }
             });
 
@@ -124,25 +139,22 @@ const renderHours = function() {
     }) 
 }
 
-const getClassIfToday = function (day) {
-    return day === today.getDate()
-        && calendar.month === new Date().getMonth()
-        && calendar.year === new Date().getFullYear()
-        ? "today"
-        : "";
-}
-
 const handleDaySelection = function () {
     if (!$(this).hasClass("inactive")) {
-        selectedDate = new Date(calendar.year, calendar.month, $(this).text());
+        let dayNumber = parseInt($(this).text(), 10);
+        selectedDate = new Date(calendar.year, calendar.month, dayNumber,12);
+        console.log(selectedDate);
+        $(".day").removeClass("selected")
+        $(this).addClass("selected");
         renderHours();
     }
 }
 
 const handleHourSelection = function () {
-    const [hours, minutes] = $(this).data("hour");
+    const [hours, minutes] = $(this).data("hour").split(":");
+    $('.hour').removeClass('selected');
+    $(this).addClass("selected");
     selectedDate.setHours(parseInt(hours) + 1, parseInt(minutes), 0, 0);
-    console.log(selectedDate);
 }
 
 const handleMonthSelection = function () {

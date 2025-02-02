@@ -28,32 +28,24 @@ public class AppointmentController : Controller
     public async Task<IActionResult> Index()
     {
         IEnumerable<Service> services = _unitOfWork.Services.GetAll();
-        //IEnumerable<ApplicationUser> employees = _db.Users.ToList(); // TODO - możliwa zamiana wszystkich IdentityUser na ApplicationUser?
-        IEnumerable<ApplicationUser> employees = await _userManager.GetUsersInRoleAsync("Employee"); // Możliwe usunięcie wszystkich rekordów z bazy danych
-        CombinedAppointmentVM appointmentVM = new()
-        {
-            Services = services,
-            Employees = employees,
-        };
-        return View(appointmentVM);
+        IEnumerable<ApplicationUser> employees = await _userManager.GetUsersInRoleAsync("Employee");
+        ViewBag.Services = services;
+        ViewBag.Employees = employees;
+        AppointmentVM vm = new AppointmentVM();
+        return View(vm);
     }
 
     [HttpPost, ActionName("Create")]
-    public IActionResult Create(CombinedAppointmentVM obj)
+    public IActionResult Create(Appointment obj)
     {
-        Appointment appointment = new()
+        if (ModelState.IsValid)
         {
-            ServiceId = 1,
-            EmployeeId = obj.Appointment.EmployeeId,
-            CustomerPhoneNumber = 111222333,
-            CustomerEmail = "Dummy@gmail.com",
-            CustomerFirstName = "Test",
-            CustomerLastName = "Test",
-            Date = obj.Appointment.Date,
-        };
-        _unitOfWork.Appointments.Add(appointment);
-        _unitOfWork.Save();
-        return RedirectToAction("Index");
+            _unitOfWork.Appointments.Add(obj);
+            _unitOfWork.Save();
+            TempData["success"] = "Appointment created successfully";
+            return RedirectToAction("Index");
+        }
+        return View();
     }
 
     #region API CALLS

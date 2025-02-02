@@ -10,6 +10,8 @@
 @import url("https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Lavishly+Yours&family=League+Spartan:wght@100..900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lavishly+Yours&family=League+Spartan:wght@100..900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Aboreto&family=Lavishly+Yours&family=League+Spartan&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Lavishly+Yours&family=League+Spartan:wght@100..900&display=swap");
@@ -9772,23 +9774,53 @@ textarea.form-control-lg {
   z-index: 10; /* Na wierzchu zdjęcia */
 }
 
-.hours .hour {
-  width: 60px;
-  text-align: center;
+.horizontal-scrollable {
+  overflow-x: inherit;
+  white-space: nowrap;
+  padding: 0;
+}
+.horizontal-scrollable .hours {
+  display: flex;
+  justify-content: center;
+  padding-block: 10px;
+}
+.horizontal-scrollable .hours .hour {
+  white-space: nowrap;
+  display: inline-block;
+  float: none;
+  padding: 10px;
   text-decoration: none;
-  border-radius: 20px;
-  color: black;
-  padding: 4px;
+  font-size: 1.1rem;
+  width: 70px;
+  text-align: center;
+  line-height: 100%;
+  color: rgba(0, 0, 0, 0.8);
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  margin: 4px;
+  transition: 0.2s;
 }
-.hours .hour:hover {
+.horizontal-scrollable .hours .hour:hover {
   cursor: pointer;
+  background-color: rgba(255, 215, 0, 0.7);
+  transition: 0.2s;
 }
-.hours .occupied {
+.horizontal-scrollable .hours .hour:active {
+  opacity: 0.8;
+}
+.horizontal-scrollable .hours .occupied {
   background-color: lightgray;
   text-decoration: line-through;
+  cursor: not-allowed !important;
+  pointer-events: none;
 }
-.hours .open {
-  background-color: lightyellow;
+@media (max-width: 768px) {
+  .horizontal-scrollable {
+    overflow-x: auto;
+  }
+  .horizontal-scrollable .hours {
+    display: block;
+  }
 }
 
 /* Import Google font - Poppins */
@@ -9853,6 +9885,9 @@ header .month-year-header {
 .calendar .today {
   color: rgb(8, 0, 156);
 }
+.calendar .sunday {
+  color: red;
+}
 .calendar li {
   padding: 10px;
   text-align: center;
@@ -9867,6 +9902,10 @@ header .month-year-header {
 }
 .calendar .day:active {
   background-color: rgba(255, 196, 0, 0.5);
+}
+
+.selected {
+  background-color: rgba(255, 215, 0, 0.7);
 }
 
 html {

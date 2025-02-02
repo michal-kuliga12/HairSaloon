@@ -37,7 +37,6 @@ public class Appointment
     [StringLength(20)]
     public string CustomerFirstName { get; set; }
 
-    public string? CustomerLastName { get; set; }
 
     [Required]
     [DataType(DataType.DateTime)]
