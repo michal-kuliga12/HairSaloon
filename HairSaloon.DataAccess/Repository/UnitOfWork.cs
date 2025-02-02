@@ -11,6 +11,8 @@ public class UnitOfWork : IUnitOfWork
 
     public IAppointmentRepository Appointments { get; }
 
+    public IBlogRepository Blogs { get; }
+
     public UnitOfWork(ApplicationDbContext db)
     {
         _db = db;
@@ -18,6 +20,7 @@ public class UnitOfWork : IUnitOfWork
         Services = new ServiceRepository(_db);
         Users = new ApplicationUserRepository(_db);
         Appointments = new AppointmentRepository(_db);
+        Blogs = new BlogRepository(_db);
     }
 
     public void Save()
