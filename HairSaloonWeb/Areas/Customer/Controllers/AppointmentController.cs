@@ -35,7 +35,7 @@ public class AppointmentController : Controller
         return View(vm);
     }
 
-    [HttpPost, ActionName("Create")]
+    [HttpPost]
     public IActionResult Create(Appointment obj)
     {
         if (ModelState.IsValid)

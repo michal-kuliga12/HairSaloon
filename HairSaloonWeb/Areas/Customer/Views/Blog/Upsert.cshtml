@@ -1,5 +1,38 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿<div class="" style="background:rgb(34,45,250);background: linear-gradient(45deg, rgba(254,225,64,45%) 0%, rgba(250,112,154,45%) 100%);">
+	<div class="container bg-white" style="max-width:995px;">
+		<div class="row justify-content-center">a</div>
+		<div class="row justify-content-center">
+			<div class="col-12 col-sm-11 col-md-9">
+				<header class="border-bottom">
+					<span> 4.8/5 - (24 głosy)</span>
+					<h1 class="h2 mb-0">Mała suszarka do włosów – suszarka podróżna - TOP5</h1>
+					<input type="type" name="name" value="" />
+					<p class="text-gray mb-0">26-01-2025</p>
+				</header>
+				<content class="">
+					<div class="" id="editor">
+						<p>Hello World!</p>
+						<p>Some initial <strong>bold</strong> text</p>
+						<p><br /></p>
+					</div>
+				</content>
+			</div>
+		</div>
+	</div>
+</div>
+
+@section scripts {
+	<script>
+		const quill = new Quill('#editor', {
+		  modules: {
+			toolbar: [
+			  [{ header: [1, 2, false] }],
+			  ['bold', 'italic', 'underline','link'],
+			  ['image'], [{ list: 'ordered' }, { list: 'bullet' }],
+			],
+		  },
+		  placeholder: 'Compose an epic...',
+		  theme: 'snow', // or 'bubble'
+		});
+	</script>
 }

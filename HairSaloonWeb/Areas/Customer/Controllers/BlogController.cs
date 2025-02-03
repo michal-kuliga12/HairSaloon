@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using HairSaloon.DataAccess.Repository.IRepository;
 using HairSaloon.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,15 +8,60 @@ namespace HairSaloonWeb.Areas.Customer.Controllers;
 public class BlogController : Controller
 {
     private readonly ILogger<BlogController> _logger;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public BlogController(ILogger<BlogController> logger)
+    public BlogController(ILogger<BlogController> logger, IUnitOfWork unitOfWork)
     {
+        _unitOfWork = unitOfWork;
         _logger = logger;
     }
 
     public IActionResult Index()
     {
-        return View();
+        IEnumerable<Blog> blogs = _unitOfWork.Blogs.GetAll();
+        return View(blogs);
+    }
+
+    [HttpGet("{id}")]
+    public IActionResult Article(int id)
+    {
+        Blog blog = _unitOfWork.Blogs.Get(x => x.Id == id);
+        return View(blog);
+    }
+
+    [HttpPost]
+    public IActionResult Upsert([FromBody] Blog blogVM)
+    {
+        if (ModelState.IsValid)
+        {
+            Blog blog = new()
+            {
+                Title = blogVM.Title,
+                Content = blogVM.Content,
+                EmployeeId = blogVM.EmployeeId,
+                Images = blogVM.Images,
+                PublicationDate = new DateOnly()
+            };
+
+            if (blogVM.Id == 0)
+            {
+                _unitOfWork.Blogs.Add(blog);
+            }
+            else
+            {
+                _unitOfWork.Blogs.Update(blog);
+            };
+
+            _unitOfWork.Save();
+            TempData["success"] = "Blog added/updated successfully";
+
+            return RedirectToAction("Index");
+        }
+        else
+        {
+            return View();
+        }
+
     }
 
     public IActionResult Privacy()
