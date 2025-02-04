@@ -179,6 +179,29 @@ namespace HairSaloon.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Blogs",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    EmployeeId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Images = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PublicationDate = table.Column<DateOnly>(type: "date", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Blogs", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Blogs_AspNetUsers_EmployeeId",
+                        column: x => x.EmployeeId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Appointments",
                 columns: table => new
                 {
@@ -189,7 +212,6 @@ namespace HairSaloon.DataAccess.Migrations
                     CustomerPhoneNumber = table.Column<int>(type: "int", nullable: false),
                     CustomerEmail = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CustomerFirstName = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    CustomerLastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -284,6 +306,11 @@ namespace HairSaloon.DataAccess.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Blogs_EmployeeId",
+                table: "Blogs",
+                column: "EmployeeId");
         }
 
         /// <inheritdoc />
@@ -306,6 +333,9 @@ namespace HairSaloon.DataAccess.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "Blogs");
 
             migrationBuilder.DropTable(
                 name: "Services");

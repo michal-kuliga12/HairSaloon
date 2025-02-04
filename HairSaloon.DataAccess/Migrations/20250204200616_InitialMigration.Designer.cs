@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HairSaloon.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250130190852_InitialMigration")]
+    [Migration("20250204200616_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -118,9 +118,6 @@ namespace HairSaloon.DataAccess.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<string>("CustomerLastName")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("CustomerPhoneNumber")
                         .HasColumnType("int");
 
@@ -141,6 +138,39 @@ namespace HairSaloon.DataAccess.Migrations
                     b.HasIndex("ServiceId");
 
                     b.ToTable("Appointments");
+                });
+
+            modelBuilder.Entity("HairSaloon.Models.Blog", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EmployeeId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.PrimitiveCollection<string>("Images")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateOnly>("PublicationDate")
+                        .HasColumnType("date");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.ToTable("Blogs");
                 });
 
             modelBuilder.Entity("HairSaloon.Models.Service", b =>
@@ -508,6 +538,17 @@ namespace HairSaloon.DataAccess.Migrations
                     b.Navigation("Employee");
 
                     b.Navigation("Service");
+                });
+
+            modelBuilder.Entity("HairSaloon.Models.Blog", b =>
+                {
+                    b.HasOne("HairSaloon.Models.ApplicationUser", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Employee");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -28,7 +28,7 @@ public class AppointmentController : Controller
     public async Task<IActionResult> Index()
     {
         IEnumerable<Service> services = _unitOfWork.Services.GetAll();
-        IEnumerable<ApplicationUser> employees = await _userManager.GetUsersInRoleAsync("Employee");
+        IEnumerable<IdentityUser> employees = await _userManager.GetUsersInRoleAsync("Employee");
         ViewBag.Services = services;
         ViewBag.Employees = employees;
         AppointmentVM vm = new AppointmentVM();

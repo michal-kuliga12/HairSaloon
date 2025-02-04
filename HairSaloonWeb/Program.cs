@@ -2,6 +2,7 @@ using HairSaloon.DataAccess.Data;
 using HairSaloon.DataAccess.DbInitializer;
 using HairSaloon.DataAccess.Repository;
 using HairSaloon.DataAccess.Repository.IRepository;
+using HairSaloon.Models;
 using HairSaloon.Utility;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
@@ -18,13 +19,14 @@ public class Program
 
         // Add services to the container.
         builder.Services.AddControllersWithViews();
+        builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
         builder.Services.AddDbContext<ApplicationDbContext>(options =>
         {
             options.ConfigureWarnings(w => w.Ignore(RelationalEventId.PendingModelChangesWarning));
             options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
         });
 
-        builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
+
         // Dodanie funkcjonalnoœci .NET idenfity, tutaj deklarujemy role i model u¿ytkownika
 
         builder.Services.ConfigureApplicationCookie(options =>

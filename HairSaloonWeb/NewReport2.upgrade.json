@@ -405,12 +405,12 @@
           "state": "Active",
           "location": {
             "snippetModel": {
-              "unrestricted": "builder.Services.AddIdentity\u003CApplicationUser, IdentityRole\u003E().AddEntityFrameworkStores\u003CApplicationDbContext\u003E().AddDefaultTokenProviders();",
+              "unrestricted": "builder.Services.AddIdentity\u003CIdentityUser, IdentityRole\u003E().AddEntityFrameworkStores\u003CApplicationDbContext\u003E().AddDefaultTokenProviders();",
               "protected": "M:Microsoft.Extensions.DependencyInjection.IdentityEntityFrameworkBuilderExtensions.AddEntityFrameworkStores\u0060\u00601(Microsoft.AspNetCore.Identity.IdentityBuilder)"
             },
             "kind": "File",
             "path": "Program.cs",
-            "snippet": "builder.Services.AddIdentity\u003CApplicationUser, IdentityRole\u003E().AddEntityFrameworkStores\u003CApplicationDbContext\u003E().AddDefaultTokenProviders();",
+            "snippet": "builder.Services.AddIdentity\u003CIdentityUser, IdentityRole\u003E().AddEntityFrameworkStores\u003CApplicationDbContext\u003E().AddDefaultTokenProviders();",
             "protectedSnippet": "M:Microsoft.Extensions.DependencyInjection.IdentityEntityFrameworkBuilderExtensions.AddEntityFrameworkStores\u0060\u00601(Microsoft.AspNetCore.Identity.IdentityBuilder)",
             "label": "M:Microsoft.Extensions.DependencyInjection.IdentityEntityFrameworkBuilderExtensions.AddEntityFrameworkStores\u0060\u00601(Microsoft.AspNetCore.Identity.IdentityBuilder)",
             "links": [
@@ -432,12 +432,12 @@
           "state": "Active",
           "location": {
             "snippetModel": {
-              "unrestricted": "builder.Services.AddIdentity\u003CApplicationUser, IdentityRole\u003E().AddEntityFrameworkStores\u003CApplicationDbContext\u003E().AddDefaultTokenProviders();",
+              "unrestricted": "builder.Services.AddIdentity\u003CIdentityUser, IdentityRole\u003E().AddEntityFrameworkStores\u003CApplicationDbContext\u003E().AddDefaultTokenProviders();",
               "protected": "T:Microsoft.Extensions.DependencyInjection.IdentityEntityFrameworkBuilderExtensions"
             },
             "kind": "File",
             "path": "Program.cs",
-            "snippet": "builder.Services.AddIdentity\u003CApplicationUser, IdentityRole\u003E().AddEntityFrameworkStores\u003CApplicationDbContext\u003E().AddDefaultTokenProviders();",
+            "snippet": "builder.Services.AddIdentity\u003CIdentityUser, IdentityRole\u003E().AddEntityFrameworkStores\u003CApplicationDbContext\u003E().AddDefaultTokenProviders();",
             "protectedSnippet": "T:Microsoft.Extensions.DependencyInjection.IdentityEntityFrameworkBuilderExtensions",
             "label": "T:Microsoft.Extensions.DependencyInjection.IdentityEntityFrameworkBuilderExtensions",
             "links": [
