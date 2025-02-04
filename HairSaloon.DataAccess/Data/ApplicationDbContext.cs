@@ -1,10 +1,11 @@
 ﻿using HairSaloon.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace HairSaloon.DataAccess.Data;
 
-public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+public class ApplicationDbContext : IdentityDbContext<IdentityUser>
 // Zamienione z DbContext, IdentityDbContext jest funkcjonalnością wymaganą do .NET identity
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)

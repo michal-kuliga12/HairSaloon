@@ -1,7 +1,7 @@
 using HairSaloon.DataAccess.Data;
+using HairSaloon.DataAccess.DbInitializer;
 using HairSaloon.DataAccess.Repository;
 using HairSaloon.DataAccess.Repository.IRepository;
-using HairSaloon.Models;
 using HairSaloon.Utility;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
@@ -24,7 +24,7 @@ public class Program
             options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
         });
 
-        builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
+        builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
         // Dodanie funkcjonalnoœci .NET idenfity, tutaj deklarujemy role i model u¿ytkownika
 
         builder.Services.ConfigureApplicationCookie(options =>
@@ -39,6 +39,7 @@ public class Program
         builder.Services.AddRazorPages(); // Add AddRazorPages i MapRazor Pages wziê³o siê z tego ¿e .NET identity obs³uguje tylko razora
                                           // Dodajemy te konfiguracje ¿eby routing zadzia³a³
 
+        builder.Services.AddScoped<IDbInitializer, DbInitializer>();
         builder.Services.AddScoped<IEmailSender, EmailSender>();
         builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
@@ -57,12 +58,22 @@ public class Program
 
         app.UseAuthentication(); // Zawsze autentykacja jest przed autoryzacj¹
         app.UseAuthorization();
+        SeedDatabase();
 
         app.MapRazorPages();
         app.MapControllerRoute(
             name: "default",
-            pattern: "{area=Customer}/{controller=Home}/{action=Index}/{id?}");
+            pattern: "/{area=Customer}/{controller=Home}/{action=Index}/{id?}");
 
         app.Run();
+
+        void SeedDatabase()
+        {
+            using (var scope = app.Services.CreateScope())
+            {
+                var dbInitializer = scope.ServiceProvider.GetRequiredService<IDbInitializer>();
+                dbInitializer.Initialize();
+            }
+        }
     }
 }

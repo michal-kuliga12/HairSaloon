@@ -16,6 +16,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HairSaloon.Models\HairSaloon.Models.csproj" />
+    <ProjectReference Include="..\HairSaloon.Utility\HairSaloon.Utility.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Migrations\" />
