@@ -1,5 +1,14 @@
 ﻿@model Blog
 
-<div>
-	@Model.Content
+<div class="container pt-2" style="max-width: 800px;">
+	<img src="~/images/Blog/szampon-z-aminokwasami.webp" class="img-fluid rounded w-100"/>
+	<div class="p-3 p-sm-4 border">
+		<header class="mb-4 font-open-sans text-break">
+			<h2 class="mb-1">@Model.Title</h2>
+			<span class="text-muted sub-sup-font-sizee"><i class="bi bi-clock mx-1"></i>@Model.PublicationDate</span>
+		</header>
+		<content class="font-open-sans lh-base text-break">
+			@Model.Content
+		</content>
+	</div>
 </div>
