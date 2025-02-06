@@ -22,15 +22,24 @@ public class BlogController : Controller
         return View(blogs);
     }
 
-    [HttpGet("{id}")]
+    [HttpGet("Article/{id}")]
     public IActionResult Article(int id)
     {
         Blog blog = _unitOfWork.Blogs.Get(x => x.Id == id);
         return View(blog);
     }
 
-    [HttpPost]
-    public IActionResult Upsert([FromBody] Blog blogVM)
+
+    [HttpGet("Upsert/{id}")]
+    public IActionResult Upsert(int id)
+    {
+        Blog blog = _unitOfWork.Blogs.Get(x => x.Id == id);
+        return View(blog);
+    }
+
+    [HttpPost("Upsert/{id}")]
+    //public IActionResult Upsert([FromBody] Blog blogVM) - Używany do jsona
+    public IActionResult Upsert(Blog blogVM)
     {
         if (ModelState.IsValid)
         {

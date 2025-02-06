@@ -1,24 +1,31 @@
-﻿<div class="" style="background:rgb(34,45,250);background: linear-gradient(45deg, rgba(254,225,64,45%) 0%, rgba(250,112,154,45%) 100%);">
-	<div class="container bg-white" style="max-width:995px;">
-		<div class="row justify-content-center">a</div>
-		<div class="row justify-content-center">
-			<div class="col-12 col-sm-11 col-md-9">
-				<header class="border-bottom">
-					<span> 4.8/5 - (24 głosy)</span>
-					<h1 class="h2 mb-0">Mała suszarka do włosów – suszarka podróżna - TOP5</h1>
-					<input type="type" name="name" value="" />
-					<p class="text-gray mb-0">26-01-2025</p>
-				</header>
-				<content class="">
-					<div class="" id="editor">
-						<p>Hello World!</p>
-						<p>Some initial <strong>bold</strong> text</p>
-						<p><br /></p>
-					</div>
-				</content>
-			</div>
+﻿@using System.Security.Claims
+@model Blog
+
+@{
+	var userId = @User.FindFirstValue(ClaimTypes.NameIdentifier);
+}
+
+<div class="container pt-2" style="max-width: 800px;">
+	<form method="post" asp-controller="Blog" asp-action="Upsert">
+		<input asp-for="EmployeeId" value="@userId" hidden />
+		<img src="~/images/Blog/szampon-z-aminokwasami.webp" class="img-fluid rounded w-100" />
+		<a asp-controller="Blog" asp-action="Article" asp-route-id="@Model.Id">Article</a>
+		<button type="submit" class="btn btn-primary form-control">Zatwierdź</button>
+		<div class="p-3 p-sm-4 border">
+			<header class="mb-4 font-open-sans text-break">
+				<textarea asp-for="Title" class="h2 w-100 p-2 border" rows="3" style="max-height:300px; min-height:100px;">@Model.Title</textarea>
+				<input asp-for="PublicationDate" hidden />
+				<span class="text-muted sub-sup-font-sizee"><i class="bi bi-clock mx-1"></i>@Model.PublicationDate</span>
+				<p>@userId</p>
+			</header>
+			<content class="font-open-sans lh-base text-break">
+				<input asp-for="Content" hidden />
+				<div class="" id="editor">
+					@Model.Content
+				</div>
+			</content>
 		</div>
-	</div>
+	</form>
 </div>
 
 @section scripts {
@@ -34,5 +41,11 @@
 		  placeholder: 'Compose an epic...',
 		  theme: 'snow', // or 'bubble'
 		});
+
+		const handleFormSubmit = function() {
+			var content = $("#editor").html();
+			$("#Content").val(content)
+			$(this).submit();
+		}
 	</script>
 }
