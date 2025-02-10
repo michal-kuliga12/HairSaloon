@@ -1,15 +1,37 @@
 ﻿@model Blog
 
-<div class="container pt-2" style="max-width: 800px;">
-	<img src="~/images/Blog/szampon-z-aminokwasami.webp" class="img-fluid rounded w-100"/>
-	<a asp-controller="Blog" asp-action="Upsert" asp-route-id="@Model.Id">Upsert</a>
+<div class="container p-0 pt-2" style="max-width: 800px;">
+	@if (Model.Images.Count >=1 && Model.Images != null)
+	{
+		<img src="@Model.Images.First().ImageUrl" class="img-fluid rounded w-100" style="max-height: 600px;" />
+	}
+	else
+	{
+		<img src="~/images/Blog/no-image.jpg" class="img-fluid rounded w-100" style="max-height: 600px;" />
+	}
+	
 	<div class="p-3 p-sm-4 border">
 		<header class="mb-4 font-open-sans text-break">
+			@if (User.IsInRole(SD.Role_Admin) || User.IsInRole(SD.Role_Employee))
+			{
+				<div class="d-flex justify-content-end gap-1">
+					<a class="btn btn-light border" asp-controller="Blog" asp-action="Upsert" asp-route-id="@Model.Id"><i class="bi bi-pencil-square me-1"></i>Edycja</a>
+				</div>
+			}
 			<h2 class="mb-1">@Model.Title</h2>
 			<span class="text-muted sub-sup-font-sizee"><i class="bi bi-clock mx-1"></i>@Model.PublicationDate</span>
 		</header>
-		<content class="font-open-sans lh-base text-break">
-			@Model.Content
+		<content class="font-open-sans lh-base text-break disabled">
+			@Html.Raw(Model.Content)
 		</content>
 	</div>
 </div>
+
+@section Scripts {
+	<script>
+		$(document).ready(()=>{
+			$(".ql-editor").attr("contenteditable",false);
+			$(".ql-editor").addClass("p-0")
+		})
+	</script>
+}

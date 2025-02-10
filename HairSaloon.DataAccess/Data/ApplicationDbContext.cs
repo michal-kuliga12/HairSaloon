@@ -16,6 +16,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<Service> Services { get; set; }
     public DbSet<ApplicationUser> ApplicationUsers { get; set; }
     public DbSet<Blog> Blogs { get; set; }
+    public DbSet<BlogImage> BlogImages { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

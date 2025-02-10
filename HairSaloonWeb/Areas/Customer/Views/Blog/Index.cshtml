@@ -1,19 +1,28 @@
 ﻿@model IEnumerable<Blog>
 
-<div class="container"/>
+<div class="container">
 	<div class="row">
-	@foreach (var article in Model)
-	{
-		<div class="col-12 col-sm-6 col-md-4">
-			<a asp-controller="Blog" asp-action="Article" asp-route-id="@article.Id">
-				<img class="img-fluid" src="~/images/Blog/szampon-z-aminokwasami.webp" alt="Alternate Text" />
-			</a>
-			<div>
-				<h4>@article.Title</h4>
-				<span class="text-gray font-sm">@article.PublicationDate</span>
+		<a asp-controller="Blog" asp-action="Upsert" asp-route-id="0">Dodaj nowy artykuł</a>
+		@foreach (var article in Model)
+		{
+			<div class="col-12 col-sm-6 col-md-4">
+				<a asp-controller="Blog" asp-action="Article" asp-route-id="@article.Id">
+					@if (article.Images.Count >= 1 && article.Images != null)
+					{
+						<img class="img-fluid rounded w-100" src="@article.Images.First().ImageUrl" alt="Alternate Text" style="max-height:200px;" />
+					}
+					else
+					{
+						<img src="~/images/Blog/no-image.jpg" class="img-fluid rounded w-100" style="max-height: 200px;" />
+					}
+					
+				</a>
+				<div>
+					<h4>@article.Title</h4>
+					<span class="text-gray font-sm">@article.PublicationDate</span>
+				</div>
 			</div>
-		</div>
-	}
+		}
 	</div>
 </div>
 

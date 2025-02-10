@@ -1,10 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using HairSaloon.Models;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 public class BlogVM
 {
+    [Required]
+    public int Id { get; set; }
     [Required]
     public string Title { get; set; }
     [Required]
@@ -12,12 +13,17 @@ public class BlogVM
     [Display(Name = "Employee Id")]
     [Required]
     public string EmployeeId { get; set; }
-
-    [ForeignKey("EmployeeId")]
-    [Display(Name = "Author")]
     [ValidateNever]
-    public ApplicationUser Employee { get; set; }
-    public string[]? Images { get; set; }
+    public List<BlogImage> Images { get; set; }
     [Required]
     public DateOnly PublicationDate { get; set; }
+
+    public BlogVM()
+    {
+        Id = 0;
+        Title = "";
+        Content = "";
+        PublicationDate = DateOnly.FromDateTime(DateTime.UtcNow);
+    }
 }
+

@@ -9824,6 +9824,10 @@ textarea.form-control-lg {
   }
 }
 
+.ql-tooltip input {
+  display: none;
+}
+
 /* Import Google font - Poppins */
 .wrapper {
   width: 650px;
@@ -9925,6 +9929,10 @@ body {
 
 a {
   cursor: pointer;
+}
+
+.small-font-size {
+  font-size: 0.875em;
 }
 
 .bg-light-primary {

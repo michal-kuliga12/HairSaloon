@@ -29,4 +29,10 @@
   <ItemGroup>
     <Folder Include="Areas\Identity\Data\" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Update="wwwroot\sass\Views\Blog.scss">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
 </Project>

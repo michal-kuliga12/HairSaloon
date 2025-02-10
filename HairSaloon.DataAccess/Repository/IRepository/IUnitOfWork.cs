@@ -6,5 +6,6 @@ public interface IUnitOfWork
     IApplicationUserRepository Users { get; }
     IAppointmentRepository Appointments { get; }
     IBlogRepository Blogs { get; }
+    IBlogImageRepository BlogImages { get; }
     void Save();
 }

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HairSaloon.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250204200616_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20250210205928_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -156,9 +156,6 @@ namespace HairSaloon.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.PrimitiveCollection<string>("Images")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateOnly>("PublicationDate")
                         .HasColumnType("date");
 
@@ -171,6 +168,28 @@ namespace HairSaloon.DataAccess.Migrations
                     b.HasIndex("EmployeeId");
 
                     b.ToTable("Blogs");
+                });
+
+            modelBuilder.Entity("HairSaloon.Models.BlogImage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("BlogId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BlogId");
+
+                    b.ToTable("BlogImages");
                 });
 
             modelBuilder.Entity("HairSaloon.Models.Service", b =>
@@ -551,6 +570,17 @@ namespace HairSaloon.DataAccess.Migrations
                     b.Navigation("Employee");
                 });
 
+            modelBuilder.Entity("HairSaloon.Models.BlogImage", b =>
+                {
+                    b.HasOne("HairSaloon.Models.Blog", "Blog")
+                        .WithMany("Images")
+                        .HasForeignKey("BlogId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Blog");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -600,6 +630,11 @@ namespace HairSaloon.DataAccess.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("HairSaloon.Models.Blog", b =>
+                {
+                    b.Navigation("Images");
                 });
 #pragma warning restore 612, 618
         }

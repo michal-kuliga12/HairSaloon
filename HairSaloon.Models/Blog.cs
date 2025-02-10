@@ -22,7 +22,8 @@ public class Blog
     [Display(Name = "Author")]
     [ValidateNever]
     public ApplicationUser Employee { get; set; }
-    public string[]? Images { get; set; }
+    [ValidateNever]
+    public List<BlogImage> Images { get; set; }
     [Required]
     public DateOnly PublicationDate { get; set; }
     //[Required]
