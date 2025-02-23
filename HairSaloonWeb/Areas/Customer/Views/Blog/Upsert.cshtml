@@ -1,14 +1,8 @@
 ﻿@using System.Security.Claims
-@model Blog
-
-@{
-	var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-}
+@model BlogVM
 
 <div class="container p-0 pt-2" style="max-width: 800px;">
 	<form method="post" asp-controller="Blog" asp-action="Upsert" enctype="multipart/form-data">
-		<input asp-for="EmployeeId" value="@userId" hidden />
-		
 		<div class="position-relative">
 			@if (Model.Images.Count >=1 && Model.Images != null)
 			{

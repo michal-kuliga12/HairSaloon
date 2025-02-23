@@ -14,7 +14,7 @@
 		<header class="mb-4 font-open-sans text-break">
 			@if (User.IsInRole(SD.Role_Admin) || User.IsInRole(SD.Role_Employee))
 			{
-				<div class="d-flex justify-content-end gap-1">
+				<div class="d-flex justify-content-end gap-1 position-absolute">
 					<a class="btn btn-light border" asp-controller="Blog" asp-action="Upsert" asp-route-id="@Model.Id"><i class="bi bi-pencil-square me-1"></i>Edycja</a>
 				</div>
 			}

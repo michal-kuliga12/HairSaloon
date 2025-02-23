@@ -10,8 +10,6 @@ public class Blog
     public int Id { get; set; }
     [Required]
     public string Title { get; set; }
-    //[Required]
-    //public string Cathegory { get; set; }
     [Required]
     public string Content { get; set; }
     [Display(Name = "Employee Id")]
@@ -26,7 +24,4 @@ public class Blog
     public List<BlogImage> Images { get; set; }
     [Required]
     public DateOnly PublicationDate { get; set; }
-    //[Required]
-    //[Range(0,5)]
-    //public int Rate { get; set; }
 }

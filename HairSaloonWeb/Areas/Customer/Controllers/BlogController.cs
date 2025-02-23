@@ -1,6 +1,8 @@
 ﻿using System.Diagnostics;
+using System.Security.Claims;
 using HairSaloon.DataAccess.Repository.IRepository;
 using HairSaloon.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HairSaloonWeb.Areas.Customer.Controllers;
@@ -32,156 +34,190 @@ public class BlogController : Controller
     }
 
 
+    [Authorize]
     [HttpGet("Upsert/{id?}")]
-    public IActionResult Upsert(int id)
+    public IActionResult Upsert(int? id)
     {
-        //BlogVM blogVM = new BlogVM();
-        //if (id != 0 || id == null)
-        //{
-        //    Blog blog = _unitOfWork.Blogs.Get(x => x.Id == id);
-        //    blogVM.Id = id;
-        //    blogVM.Title = blog.Title;
-        //    blogVM.Content = blog.Content;
-        //    blogVM.EmployeeId = blog.EmployeeId;
-        //    blogVM.Images = blog.Images;
-        //    blogVM.PublicationDate = blog.PublicationDate;
-        //}
-
-        //return View(blogVM);
+        BlogVM blogVM = new();
 
         if (id == 0 || id == null)
         {
-            return View(new Blog());
+            return View(blogVM);
         }
         else
         {
             Blog blog = _unitOfWork.Blogs.Get(x => x.Id == id, includeProperties: "Images");
-            return View(blog);
+            blogVM.Id = id;
+            blogVM.Title = blog.Title;
+            blogVM.Content = blog.Content;
+            blogVM.EmployeeId = blog.EmployeeId;
+            blogVM.Images = blog.Images;
+            blogVM.PublicationDate = blog.PublicationDate;
+            return View(blogVM);
         }
-
-
     }
 
+    [Authorize]
     [HttpPost("Upsert/{id}")]
-    public IActionResult Upsert(int id, Blog blog, IFormFile image)
+    public IActionResult Upsert(int id, BlogVM blogVM, IFormFile? image)
     {
-        if (ModelState.IsValid)
+        if (!ModelState.IsValid)
         {
-            if (blog.Id == 0)
-            {
-                _unitOfWork.Blogs.Add(blog);
-            }
-            else
-            {
-                _unitOfWork.Blogs.Update(blog);
-            };
+            return View(blogVM);
+        }
 
-            _unitOfWork.Save();
+        var blog = new Blog
+        {
+            Id = id,
+            Title = blogVM.Title,
+            Content = blogVM.Content,
+            EmployeeId = GetUserId(),
+            Images = blogVM.Images,
+            PublicationDate = blogVM.PublicationDate
+        };
 
-            string wwwRootPath = _webHostEnvironment.WebRootPath;
-            if (image != null)
-            {
-                string fileName = Guid.NewGuid().ToString() + Path.GetExtension(image.FileName);
-                string blogPath = @"images\Blog\";
-                string finalPath = Path.Combine(wwwRootPath, blogPath);
-
-                if (!Directory.Exists(finalPath))
-                    Directory.CreateDirectory(finalPath);
-
-                using (var fileStream = new FileStream(Path.Combine(finalPath, fileName), FileMode.Create))
-                {
-                    image.CopyTo(fileStream);
-                }
-
-                BlogImage blogImage = new()
-                {
-                    ImageUrl = @"\" + blogPath + @"\" + fileName,
-                    BlogId = id
-                };
-
-                if (blog.Images == null)
-                    blog.Images = new List<BlogImage>();
-
-                if (blog.Images.Count >= 1)
-                {
-                    blog.Images.Clear();
-                }
-                blog.Images.Add(blogImage);
-
-                _unitOfWork.Blogs.Update(blog);
-                _unitOfWork.Save();
-            }
-
-            TempData["success"] = "Blog added/updated successfully";
-            return RedirectToAction("Index");
+        if (id == 0)
+        {
+            _unitOfWork.Blogs.Add(blog);
         }
         else
         {
-            return View(blog);
+            _unitOfWork.Blogs.Update(blog);
+        }
+        _unitOfWork.Save();
+
+        if (image != null)
+        {
+            RemoveOldBlogImages(blog);
+            SaveBlogImage(blog, image);
+            _unitOfWork.Blogs.Update(blog);
+            _unitOfWork.Save();
         }
 
+        TempData["success"] = "Blog added/updated successfully";
+        return RedirectToAction("Index");
+    }
 
-        //if (ModelState.IsValid)
-        //{
-        //    Blog blog = new()
-        //    {
-        //        Id = id,
-        //        Title = blogVM.Title,
-        //        Content = blogVM.Content,
-        //        EmployeeId = blogVM.EmployeeId,
-        //        Images = null,
-        //        PublicationDate = DateOnly.FromDateTime(DateTime.Today)
-        //    };
+    private void SaveBlogImage(Blog blog, IFormFile image)
+    {
+        string wwwRootPath = _webHostEnvironment.WebRootPath;
+        string blogPath = Path.Combine(wwwRootPath, "images", "Blog");
 
-        //    if (blogVM.Id == 0)
-        //    {
-        //        _unitOfWork.Blogs.Add(blog);
-        //    }
-        //    else
-        //    {
-        //        _unitOfWork.Blogs.Update(blog);
-        //    };
+        if (!Directory.Exists(blogPath))
+        {
+            Directory.CreateDirectory(blogPath);
+        }
 
-        //    _unitOfWork.Save();
+        string fileName = Guid.NewGuid().ToString() + Path.GetExtension(image.FileName);
+        string finalPath = Path.Combine(blogPath, fileName);
 
-        //    string wwwRootPath = _webHostEnvironment.WebRootPath;
-        //    if (image != null)
-        //    {
-        //        string fileName = Guid.NewGuid().ToString() + Path.GetExtension(image.FileName);
-        //        string blogPath = @"images\Blog\";
-        //        string finalPath = Path.Combine(wwwRootPath, blogPath);
+        using (var fileStream = new FileStream(finalPath, FileMode.Create))
+        {
+            image.CopyTo(fileStream);
+        }
 
-        //        if (!Directory.Exists(finalPath))
-        //            Directory.CreateDirectory(finalPath);
+        var blogImage = new BlogImage
+        {
+            ImageUrl = $"/images/Blog/{fileName}",
+            BlogId = blog.Id
+        };
 
-        //        using (var fileStream = new FileStream(Path.Combine(finalPath, fileName), FileMode.Create))
-        //        {
-        //            image.CopyTo(fileStream);
-        //        }
+        blog.Images ??= new List<BlogImage>();
+        blog.Images.Clear();
+        blog.Images.Add(blogImage);
+    }
 
-        //        BlogImage blogImage = new()
-        //        {
-        //            ImageUrl = @"\" + blogPath + @"\" + fileName,
-        //            BlogId = id
-        //        };
+    private void RemoveOldBlogImages(Blog blog)
+    {
+        string wwwRootPath = _webHostEnvironment.WebRootPath;
+        IEnumerable<BlogImage> blogImages = _unitOfWork.BlogImages.GetAll(x => x.BlogId == blog.Id);
+        foreach (var blogImage in blogImages)
+        {
+            string oldImagePath = Path.Combine(wwwRootPath, blogImage.ImageUrl.TrimStart('/'));
+            if (System.IO.File.Exists(oldImagePath))
+            {
+                System.IO.File.Delete(oldImagePath);
+            }
+        }
+        _unitOfWork.BlogImages.RemoveRange(blogImages);
+    }
 
-        //        if (blog.Images == null)
-        //            blog.Images = new List<BlogImage>();
+    //[Authorize]
+    //[HttpPost("Upsert/{id}")]
+    //public IActionResult Upsert(int id, BlogVM blogVM, IFormFile image)
+    //{
+    //    Blog blog = new Blog()
+    //    {
+    //        Id = id,
+    //        Title = blogVM.Title,
+    //        Content = blogVM.Content,
+    //        EmployeeId = GetUserId(),
+    //        Images = blogVM.Images,
+    //        PublicationDate = blogVM.PublicationDate,
+    //    };
 
-        //        blog.Images.Add(blogImage);
+    //    if (ModelState.IsValid)
+    //    {
+    //        if (blog.Id == 0)
+    //        {
+    //            _unitOfWork.Blogs.Add(blog);
+    //        }
+    //        else
+    //        {
+    //            _unitOfWork.Blogs.Update(blog);
+    //        };
 
-        //        _unitOfWork.Blogs.Update(blog);
-        //        _unitOfWork.Save();
-        //    }
+    //        _unitOfWork.Save();
 
-        //    TempData["success"] = "Blog added/updated successfully";
-        //    return RedirectToAction("Index");
-        //}
-        //else
-        //{
-        //    return View(blogVM);
-        //}
+    //        string wwwRootPath = _webHostEnvironment.WebRootPath;
+    //        if (image != null)
+    //        {
+    //            string fileName = Guid.NewGuid().ToString() + Path.GetExtension(image.FileName);
+    //            string blogPath = @"images\Blog\";
+    //            string finalPath = Path.Combine(wwwRootPath, blogPath);
 
+    //            if (!Directory.Exists(finalPath))
+    //                Directory.CreateDirectory(finalPath);
+
+    //            using (var fileStream = new FileStream(Path.Combine(finalPath, fileName), FileMode.Create))
+    //            {
+    //                image.CopyTo(fileStream);
+    //            }
+
+    //            BlogImage blogImage = new()
+    //            {
+    //                ImageUrl = @"\" + blogPath + @"\" + fileName,
+    //                BlogId = id
+    //            };
+
+    //            if (blog.Images == null)
+    //                blog.Images = new List<BlogImage>();
+
+    //            if (blog.Images.Count >= 1)
+    //            {
+    //                blog.Images.Clear();
+    //            }
+    //            blog.Images.Add(blogImage);
+
+    //            _unitOfWork.Blogs.Update(blog);
+    //            _unitOfWork.Save();
+    //        }
+
+    //        TempData["success"] = "Blog added/updated successfully";
+    //        return RedirectToAction("Index");
+    //    }
+    //    else
+    //    {
+    //        return View(blogVM);
+    //    }
+
+    //}
+
+    private string GetUserId()
+    {
+        var claimsIdentity = (ClaimsIdentity)User.Identity;
+        string userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
+        return userId;
     }
 
     public IActionResult Privacy()
