@@ -36,7 +36,6 @@
 								</div>
 							</header>
 							<div class="calendar d-flex flex-column align-center p-0">
-								<input asp-for="Date" value="" type="hidden" />
 								<ul class="row w-100 p-0 font-weight-bold">
 									<li class="col">Pn</li>
 									<li class="col">Wt</li>
@@ -49,6 +48,8 @@
 								<div class="weeks row w-100">
 									@* => generated days *@
 								</div>
+								<input asp-for="Date" value="" type="hidden" required/>
+								<span asp-validation-for="Date" class="text-danger"></span>
 							</div>
 						</div>
 						<div class="container horizontal-scrollable">
@@ -56,12 +57,17 @@
 								@* => generated hours *@
 							</div>
 						</div>
-						<div class="input-group gap-1 mt-2">
+						<div class="mt-1">
 							<input asp-for="CustomerFirstName" placeholder="Imie" value="" type="text" class="form-control">
-							<input asp-for="CustomerEmail" placeholder="Adres email" value="" type="text" class="form-control">
+							<span asp-validation-for="CustomerFirstName" class="text-danger"></span>
+						</div>
+						<div class="mt-1">
+							<input asp-for="CustomerEmail" placeholder="Adres e-mail" value="" type="text" class="form-control">
+							<span asp-validation-for="CustomerEmail" class="text-danger"></span>
 						</div>
 						<div class="mt-1">
 							<input asp-for="CustomerPhoneNumber" placeholder="Numer telefonu" value="" type="text" class="form-control">
+							<span asp-validation-for="CustomerPhoneNumber" class="text-danger"></span>
 						</div>
 					</div>
 				</div>
@@ -71,6 +77,7 @@
 					</div>
 				</div>
 			</div>
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
 		</form>
 	</div>
 </div>

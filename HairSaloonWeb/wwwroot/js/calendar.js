@@ -13,7 +13,9 @@ let calendar = {
     month: today.getMonth(),
 }
 
-let selectedDate = new Date(calendar.year, calendar.month, today.getDate() + 1);
+//let selectedDate = new Date(calendar.year, calendar.month, today.getDate() + 1);
+let selectedDate = null;
+let tempDate = null;
 
 const getCalendarDate = () => selectedDate;
 
@@ -111,7 +113,7 @@ const renderCalendar = () => {
 const renderHours = function() {
     let occupiedHours = [];
     let employeeId = getEmployeeIdFromLocalStorage();
-    let dateString = selectedDate.toISOString();
+    let dateString = tempDate.toISOString();
     
     $.ajax({
         url: "/Customer/Appointment/GetAvailableHours",
@@ -142,19 +144,21 @@ const renderHours = function() {
 const handleDaySelection = function () {
     if (!$(this).hasClass("inactive")) {
         let dayNumber = parseInt($(this).text(), 10);
-        selectedDate = new Date(calendar.year, calendar.month, dayNumber,12);
-        console.log(selectedDate);
+        tempDate = new Date(calendar.year, calendar.month, dayNumber, 12);
+        renderHours();
+
         $(".day").removeClass("selected")
         $(this).addClass("selected");
-        renderHours();
     }
 }
 
 const handleHourSelection = function () {
     const [hours, minutes] = $(this).data("hour").split(":");
+    tempDate.setHours(parseInt(hours) + 1, parseInt(minutes), 0, 0);
+    selectedDate = tempDate;
+
     $('.hour').removeClass('selected');
     $(this).addClass("selected");
-    selectedDate.setHours(parseInt(hours) + 1, parseInt(minutes), 0, 0);
 }
 
 const handleMonthSelection = function () {

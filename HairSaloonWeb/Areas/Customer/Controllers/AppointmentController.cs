@@ -45,7 +45,7 @@ public class AppointmentController : Controller
             TempData["success"] = "Appointment created successfully";
             return RedirectToAction("Index");
         }
-        return View();
+        return RedirectToAction("Index");
     }
 
     #region API CALLS

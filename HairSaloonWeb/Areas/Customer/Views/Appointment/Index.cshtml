@@ -101,6 +101,9 @@
 @await Html.PartialAsync("~/Areas/Customer/Views/Appointment/_AppointmentModal.cshtml", Model);
 
 @section Scripts {
+	<script src="~/lib/jquery-validate/jquery.validate.js"></script>
+	<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+
 	<script src="~/js/calendar.js"></script>
 	<script>
 		$(document).ready(() => {
@@ -110,8 +113,15 @@
 			$(".service-select").on("click", handleServiceSelection)
 			$("#modal-close-btn").on("click", toggleModal)
 			$("form").on("submit", handleFormSubmit);
+			$("#exampleModal").on("shown.bs.modal",initializeModalValidation)
 
 		});
+
+		const initializeModalValidation = function() {
+			var form = $(this).find("form");
+			$.validator.setDefaults({ ignore: [] });
+			$.validator.unobtrusive.parse(form);
+		}
 
 		const initializeSelectedEmployee = () => {
 			let selectedEmployeeId = getEmployeeIdFromLocalStorage();
@@ -161,18 +171,47 @@
 		const toggleModal = () => {
 			$('#exampleModal').modal('toggle')
 
+			initializeModalValidation();
 			initializeSelectedEmployee();
 		}
 
-		const handleFormSubmit = () => {
+		const handleFormSubmit = function(e){
+			e.preventDefault();
+			validateDate();
+
+			if ($(this).valid()) {
+				assignCalendarValues();
+				console.log("Formularz jest poprawny, wysyłanie...");
+				this.submit();
+			} else {
+				console.log("Formularz zawiera błędy.");
+			}
+		}
+
+		const validateDate = () => {
+			const dateField = $("#Date");
+			const dateValidationMessage = $("span[data-valmsg-for='Date']");
+
+			if (!getCalendarDate()) {
+				let errorMessage = dateField.data("val-required");
+				dateValidationMessage.text(errorMessage);
+
+				dateField.addClass("input-validation-error");
+				dateValidationMessage.addClass("text-danger");
+				return;
+			} else {
+				dateField.removeClass("input-validation-error");
+				dateValidationMessage.text("");
+			}
+		}
+
+		const assignCalendarValues = () => {
 			const formattedDate = getCalendarDate().toISOString(); // "YYYY-MM-DDTHH:MM:SS.sssZ"
 			$("#ServiceId").val(getServiceIdFromLocalStorage());
 			console.log(getServiceIdFromLocalStorage());
 			$("#EmployeeId").val(getEmployeeIdFromLocalStorage());
 			console.log(getEmployeeIdFromLocalStorage());
 			$("#Date").val(formattedDate);
-			console.log(formattedDate);
-			this.submit();
 		}
 	</script>
 	
