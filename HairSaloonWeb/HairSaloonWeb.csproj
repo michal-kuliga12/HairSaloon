@@ -3,6 +3,7 @@
     <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>4e34b220-0ab3-40c4-b116-9c36f1973a76</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
     <None Include="compilerconfig.json" />

@@ -1,6 +1,6 @@
 {
-    "version": "1.0",
-    "defaultProvider": "unpkg",
+  "version": "1.0",
+  "defaultProvider": "unpkg",
     "libraries": [
         {
             "library": "bootstrap@5.0.2",
@@ -10,24 +10,21 @@
             "provider": "jsdelivr",
             "library": "bootstrap-icons@1.11.3",
             "destination": "wwwroot/lib/bootstrap-icons/"
+        },
+        {
+            "provider": "cdnjs",
+            "library": "jquery-validate@1.21.0",
+            "destination": "wwwroot/lib/jquery-validate/"
+        },
+        {
+            "provider": "cdnjs",
+            "library": "jquery-validation-unobtrusive@4.0.0",
+            "destination": "wwwroot/lib/jquery-validation-unobtrusive/"
+        },
+        {
+            "provider": "cdnjs",
+            "library": "quill@2.0.2",
+            "destination": "wwwroot/lib/quill/"
         }
-    ,
-{
-  "provider": "cdnjs",
-  "library": "jquery-validate@1.21.0",
-  "destination": "wwwroot/lib/jquery-validate/"
-}
-,
-{
-  "provider": "cdnjs",
-  "library": "jquery-validation-unobtrusive@4.0.0",
-  "destination": "wwwroot/jquery-validation-unobtrusive/"
-}
-,
-{
-  "provider": "cdnjs",
-  "library": "jquery-validation-unobtrusive@4.0.0",
-  "destination": "wwwroot/lib/jquery-validation-unobtrusive/"
-}
-]
+    ]
 }
