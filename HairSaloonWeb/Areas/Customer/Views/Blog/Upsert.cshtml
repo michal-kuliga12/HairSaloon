@@ -21,12 +21,14 @@
 					@if (Model.Id != 0)
 					{
 						<button type="submit" class="btn btn-success border text"><i class="bi bi-check2-square me-1"></i>Zatwierdź</button>
+						<a class="btn btn-danger border" asp-controller="Blog" asp-action="Article" asp-route-id="@Model.Id"><i class="bi bi-x-square me-1"></i>Odrzuć</a>
 					}
 					else
 					{
 						<button type="submit" class="btn btn-success border"><i class="bi bi-check2-square me-1"></i>Utwórz</button>
+						<a class="btn btn-danger border" asp-controller="Blog" asp-action="Index"><i class="bi bi-x-square me-1"></i>Powrót do strony głównej</a>
 					}
-					<a class="btn btn-danger border" asp-controller="Blog" asp-action="Article" asp-route-id="@Model.Id"><i class="bi bi-x-square me-1"></i>Odrzuć</a>
+					
 				</div>
 			}
 			<div class="p-3 p-sm-4">

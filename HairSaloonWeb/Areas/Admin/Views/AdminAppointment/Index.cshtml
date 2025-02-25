@@ -1,0 +1,29 @@
+﻿@model IEnumerable<Appointment>
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="py-4 m-0 p-md-4 m-md-4 bg-light shadow rounded-2">
+	<div class="p-2 d-flex justify-content-between border-bottom">
+        <h2>Lista rezerwacji</h2>
+    </div>
+    <div style="overflow-x:auto;">
+        <table id="tblData" class="table table-bordered table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Nazwa usługi</th>
+                    <th>Cena usługi</th>
+                    <th>Imie klienta</th>
+					<th>Adres email klienta</th>
+					<th>Numer telefonu klienta</th>
+					<th>Pracownik</th>
+                    <th></th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
+  @section Scripts {
+      <script src="~/js/appointment.js"></script>
+  }

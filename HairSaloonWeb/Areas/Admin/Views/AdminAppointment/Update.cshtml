@@ -1,0 +1,61 @@
+﻿@* CAŁA STRONA JEST ŹLE - DO ZMIANY *@
+
+@model ApplicationUserVM
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+
+<div class="border-0 mt-1 p-4">
+    <div class="card-header bg-dark bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">EDYTUJ DANE UŻYTKOWNIKA</h2>
+            </div>
+        </div>
+    </div>
+    <div class="p-4 bg-light shadow">
+        <form method="post" class="row">
+            <input asp-for="Id" hidden />
+            <div class="p-3">
+                @*<div asp-validation-summary="None"></div>*@
+                <div class="py-2 col-12">
+                    <label asp-for="Email" class="ms-2">Adres email</label>
+                    <input asp-for="Email" class="form-control border-1" disabled/>
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="py-2 col-12">
+                    <label asp-for="FirstName" class="ms-2">Imie</label>
+                    <input asp-for="FirstName" class="form-control border-1" />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+                <div class="py-2 col-12">
+                    <label asp-for="LastName" class="ms-2">Nazwisko</label>
+                    <input asp-for="LastName" class="form-control border-1" />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+                <div class="py-2 col-6 form-check">
+                    <input name="Role" type="radio" value="@(SD.Role_Admin)" @(Model.Role == null || Model.Role == "Employee" ? "" : "checked") class="form-check-input" />
+                    <label class="form-check-label">Admin</label>
+                    <span asp-validation-for="Role" class="text-danger"></span>
+                </div>                    
+                <div class="py-2 col-6 form-check">
+                    <input name="Role" type="radio" value="@(SD.Role_Employee)" @(Model.Role == null || Model.Role == "Admin" ? "" : "checked") class="form-check-input" />
+                    <label class="form-check-label">Pracownik</label>
+                    <span asp-validation-for="Role" class="text-danger"></span>
+                </div>
+                <div class="row pt-2">
+                    <div class="col-6 col-md-3">
+                        <button type="submit" class="btn btn-primary form-control">Zatwierdź</button>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <a asp-controller="User" asp-action="Index" asp-area="Admin" class="btn btn-outline-secondary border form-control">
+                            Wstecz
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
