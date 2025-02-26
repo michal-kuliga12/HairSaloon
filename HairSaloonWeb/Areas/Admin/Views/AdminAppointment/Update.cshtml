@@ -1,6 +1,4 @@
-﻿@* CAŁA STRONA JEST ŹLE - DO ZMIANY *@
-
-@model ApplicationUserVM
+﻿@model AppointmentVM
 @{
     ViewData["Title"] = "Dashboard";
 }
@@ -10,47 +8,80 @@
     <div class="card-header bg-dark bg-gradient ml-0 py-3">
         <div class="row">
             <div class="col-12 text-center">
-                <h2 class="text-white py-2">EDYTUJ DANE UŻYTKOWNIKA</h2>
+                <h2 class="text-white py-2">EDYCJA REZERWACJI</h2>
             </div>
         </div>
     </div>
     <div class="p-4 bg-light shadow">
+        <div class="d-flex justify-content-start gap-1">
+            <a class="btn btn-subtle" asp-controller="AdminAppointment" asp-action="Details" asp-route-id="@Model.Id"><i class="bi bi-x-square mx-1"></i>Zakończ edycje</a>
+        </div>
         <form method="post" class="row">
             <input asp-for="Id" hidden />
             <div class="p-3">
-                @*<div asp-validation-summary="None"></div>*@
+                <div asp-validation-summary="None"></div>
+
+                <div>
+                    <label asp-for="ServiceId" class="form-label">Wybierz usługę</label>
+                    <select asp-for="ServiceId" asp-items="ViewBag.Services" class="form-select">
+                        <option value="">@Model.Service.Name</option>
+                    </select>
+                    <span asp-validation-for="ServiceId" class="text-danger"></span>
+                </div>
+
                 <div class="py-2 col-12">
-                    <label asp-for="Email" class="ms-2">Adres email</label>
-                    <input asp-for="Email" class="form-control border-1" disabled/>
-                    <span asp-validation-for="Email" class="text-danger"></span>
+                    <label asp-for="CustomerFirstName" class="ms-2">Imię klienta</label>
+                    <input asp-for="CustomerFirstName" class="form-control border-1"  />
+                    <span asp-validation-for="CustomerFirstName" class="text-danger"></span>
                 </div>
+
                 <div class="py-2 col-12">
-                    <label asp-for="FirstName" class="ms-2">Imie</label>
-                    <input asp-for="FirstName" class="form-control border-1" />
-                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                    <label asp-for="CustomerPhoneNumber" class="ms-2">Numer telefonu klienta</label>
+                    <input asp-for="CustomerPhoneNumber" class="form-control border-1"  />
+                    <span asp-validation-for="CustomerPhoneNumber" class="text-danger"></span>
                 </div>
+
                 <div class="py-2 col-12">
-                    <label asp-for="LastName" class="ms-2">Nazwisko</label>
-                    <input asp-for="LastName" class="form-control border-1" />
-                    <span asp-validation-for="LastName" class="text-danger"></span>
+                    <label asp-for="CustomerEmail" class="ms-2">Adres email klienta</label>
+                    <input asp-for="CustomerEmail" class="form-control border-1"  />
+                    <span asp-validation-for="CustomerEmail" class="text-danger"></span>
                 </div>
-                <div class="py-2 col-6 form-check">
-                    <input name="Role" type="radio" value="@(SD.Role_Admin)" @(Model.Role == null || Model.Role == "Employee" ? "" : "checked") class="form-check-input" />
-                    <label class="form-check-label">Admin</label>
-                    <span asp-validation-for="Role" class="text-danger"></span>
-                </div>                    
-                <div class="py-2 col-6 form-check">
-                    <input name="Role" type="radio" value="@(SD.Role_Employee)" @(Model.Role == null || Model.Role == "Admin" ? "" : "checked") class="form-check-input" />
-                    <label class="form-check-label">Pracownik</label>
-                    <span asp-validation-for="Role" class="text-danger"></span>
+
+                <div>
+                    <label asp-for="EmployeeId" class="form-label">Pracownik</label>
+                    <select asp-for="EmployeeId" asp-items="ViewBag.Employees" class="form-select">
+                        <option value="">@Model.Employee.FirstName @Model.Employee.LastName</option>
+                    </select>
+                    <span asp-validation-for="EmployeeId" class="text-danger"></span>
                 </div>
+
+                <div class="py-2 col-12">
+                    <label for="date" class="ms-2">Data wizyty</label>
+                    <input for="date" name="date" type="date" 
+                        min="@DateTime.Now.AddDays(0).ToString("yyyy-MM-dd")"
+                        max="@DateTime.Now.AddMonths(3).ToString("yyyy-MM-dd")"
+                        value="@Model.Date.ToString("yyyy-MM-dd")"
+                        class="form-control border-1" />
+                </div>
+
+
+                <div class="py-2 col-12">
+                    <label for="time" class="ms-2">Godzina wizyty</label>
+                    <select name="time" class="form-control border-1">
+                        @foreach (var hour in ViewBag.AvailableHours)
+                        {
+                            <option value="@hour">@hour</option>
+                        }
+                    </select>
+                </div>
+
                 <div class="row pt-2">
                     <div class="col-6 col-md-3">
                         <button type="submit" class="btn btn-primary form-control">Zatwierdź</button>
                     </div>
                     <div class="col-6 col-md-3">
-                        <a asp-controller="User" asp-action="Index" asp-area="Admin" class="btn btn-outline-secondary border form-control">
-                            Wstecz
+                        <a asp-controller="AdminAppointment" asp-action="Index" asp-area="Admin" class="btn btn-outline-secondary border form-control">
+                            Powrót do listy
                         </a>
                     </div>
                 </div>
@@ -58,4 +89,32 @@
         </form>
     </div>
 </div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $("input[name='Date']").on("change", function() {
+                let selectedDate = $(this).val();
+                let employeeId = $("select[name='EmployeeId']").val();
+                if (!selectedDate) return;
+
+                $.get(`/Admin/AdminAppointment/GetAvailableHours?date=${selectedDate}&employeeId=${employeeId}`, function(data) {
+                    let timeSelect = $("select[name='Time']");
+                    timeSelect.empty(); // Czyścimy poprzednie opcje
+
+                    if (data.error) {
+                        console.error(data.error);
+                        return;
+                    }
+
+                    $.each(data.data, function (index, hour) { // <- poprawka
+                        timeSelect.append(new Option(hour, hour));
+                    });
+                }).fail(function () {
+                console.error("Błąd pobierania godzin");
+                });
+            })
+        })
+    </script>
+}
 

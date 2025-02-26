@@ -1,0 +1,58 @@
+﻿@model AppointmentVM
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+
+<div class="border-0 mt-1 p-4">
+    <div class="card-header bg-dark bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">SZCZEGÓŁY REZERWACJI</h2>
+            </div>
+        </div>
+    </div>
+    <div class="p-4 bg-light shadow">
+        <div class="d-flex justify-content-start gap-1">
+            <a class="btn btn-subtle" asp-controller="AdminAppointment" asp-action="Update" asp-route-id="@Model.Id"><i class="bi bi-pencil-square me-1"></i>Edycja</a>
+        </div>
+        <form method="post" class="row">
+            <input asp-for="Id" hidden />
+            <div class="p-3">
+                <div asp-validation-summary="None"></div>
+                <div class="py-2 col-12">
+                    <label asp-for="Service.Name" class="ms-2">Nazwa usługi</label>
+                    <input asp-for="Service.Name" class="form-control border-1" disabled />
+                </div>
+                <div class="py-2 col-12">
+                    <label asp-for="CustomerFirstName" class="ms-2">Imię klienta</label>
+                    <input asp-for="CustomerFirstName" class="form-control border-1" disabled />
+                </div>
+                <div class="py-2 col-12">
+                    <label asp-for="CustomerPhoneNumber" class="ms-2">Numer telefonu klienta</label>
+                    <input asp-for="CustomerPhoneNumber" class="form-control border-1" disabled />
+                </div>
+                <div class="py-2 col-12">
+                    <label asp-for="CustomerEmail" class="ms-2">Adres email klienta</label>
+                    <input asp-for="CustomerEmail" class="form-control border-1" disabled />
+                </div>
+                <div class="py-2 col-12">
+                    <label asp-for="Employee" class="ms-2">Pracownik</label>
+                    <input asp-for="Employee" value="@($"{Model.Employee?.FirstName} {Model.Employee?.LastName}")" class="form-control border-1" disabled />
+                </div>
+                <div class="py-2 col-12">
+                    <label asp-for="Date" class="ms-2">Data wizyty</label>
+                    <input asp-for="Date" class="form-control border-1" disabled />
+                </div>
+                <div class="row pt-2">
+                    <div class="col-6 col-md-3">
+                        <a asp-controller="AdminAppointment" asp-action="Index" asp-area="Admin" class="btn btn-outline-secondary border form-control">
+                            Powrót do listy
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+

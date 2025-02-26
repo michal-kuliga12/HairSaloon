@@ -44,4 +44,16 @@ public class AppointmentVM
     [Required(ErrorMessage = "Data i godzina jest wymagana")]
     [DataType(DataType.DateTime)]
     public DateTime Date { get; set; }
+
+    public AppointmentVM() { }
+    public AppointmentVM(Appointment obj)
+    {
+        Id = obj.Id;
+        ServiceId = obj.ServiceId;
+        EmployeeId = obj.EmployeeId;
+        CustomerPhoneNumber = obj.CustomerPhoneNumber;
+        CustomerEmail = obj.CustomerEmail;
+        CustomerFirstName = obj.CustomerFirstName;
+        Date = obj.Date;
+    }
 }

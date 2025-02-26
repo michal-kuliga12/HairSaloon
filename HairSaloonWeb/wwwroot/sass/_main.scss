@@ -20,6 +20,22 @@ a {
     cursor: pointer;
 }
 
+.btn-subtle {
+    color: black;
+    border: 1px solid lightgray;
+    padding: .375rem .75rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+        background-color: rgb(204, 204, 204)
+    }
+
+    &:active {
+        background-color: rgb(190, 190, 190)
+    }
+}
+
 .small-font-size {
     font-size: .875em;
 }
