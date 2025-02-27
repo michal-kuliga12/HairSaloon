@@ -57,8 +57,9 @@
 						@foreach (var employee in ViewBag.Employees)
 						{
 							<a data-employee-id="@employee.Id" class="d-flex flex-column employee align-items-center gap-2 text-decoration-none text-dark" style="max-width:80px;">
-								<div class="position-relative ">
-									<img src="/images/fryzjer1.jpg" class="img-fluid rounded-circle selected" style="height:80px!important;" alt="" />
+								<div class="position-relative d-flex justify-content-center align-items-center" style="width: 60px; height: 60px;">
+									<img src="/images/user-no-image.webp" class="img-fluid rounded-circle selected" style="height:60px!important;" alt="" />
+									@* <img src="/images/fryzjer1.jpg" class="img-fluid rounded-circle selected" style="height:80px!important;" alt="" /> *@
 									<div class="image-overlay"></div>
 								</div>
 								<span class="text-center" style="">@employee.FirstName</span>
